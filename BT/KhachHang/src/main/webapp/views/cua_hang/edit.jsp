@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: vuong
-  Date: 3/12/2023
-  Time: 6:56 AM
+  Date: 3/11/2023
+  Time: 11:30 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Chức vụ</title>
+    <title>Cửa Hàng</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,23 +19,47 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form method="POST" action="/KhachHang_war_exploded/chuc-vu/update?ma=${cv.ma}" >
+
+<form method="POST" action="/KhachHang_war_exploded/cua-hang/update?ma=${ch.ma}" >
     <div class="container">
+        <div class="card-group">
         <div class="card-body">
-            <center><h1>Chức Vụ</h1></center>
+            <center><h1>Cửa Hàng</h1></center>
             <br><br>
             <div class="col-md-12">
                 <label >Mã:</label>
-                <input type="text" name="ma"  class="form-control" value="${cv.ma}" disabled> <br><br>
+                <input type="text" name="ma"  class="form-control" value="${ch.ma}" disabled> <br><br>
             </div>
             <div class="col-md-12">
                 <label >Tên :</label>
-                <input type="text" name="ten"  class="form-control" value="${cv.ten}"> <br><br>
+                <input type="text" name="ten"  class="form-control" value="${ch.ten}"> <br><br>
             </div>
             <div class="col-md-12">
-                <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật Chức Vụ</button></center>
+                <label>Địa chỉ</label>
+                <input type="text" name="diaChi"  class="form-control" value="${ch.diaChi}"> <br><br>
+            </div>
+            <div class="col-md-12">
+                <label >Thành phố:</label>
+                <select class="form-control"  name="thanhPho">
+                    <option value="hn"${ch.thanhPho == "hn" ? "selected":" "}>Hà Nội</option>
+                    <option value="hcm"${ch.thanhPho == "hcm" ? "selected":" "}>HCM</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="col-md-12">
+                <label >Quốc gia:</label>
+                <select class="form-control" name="quocGia">
+                    <option value="vn"${ch.quocGia == "vn" ? "selected":" "}>Việt Nam</option>
+                    <option value="js"${ch.quocGia == "js" ? "selected":" "}>Nhật Bản</option>
+                </select><br><br>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật Cửa Hàng</button></center>
             </div>
         </div>
+    </div>
     </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

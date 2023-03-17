@@ -19,7 +19,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form method="POST" action="/KhachHang_war_exploded/khach-hang/store">
+<form method="POST" action="/KhachHang_war_exploded/khach-hang/update?ma=${kh.ma}">
     <div class="container">
         <div class="card-body">
             <center><h1>Khách Hàng</h1></center>
@@ -75,7 +75,7 @@
             </div>
             <div class="col-md-12">
                 <center>
-                    <button type="submit" style="color: white;background: greenyellow" class="form-control">Thêm khách hàng</button>
+                    <button type="submit" style="color: white;background: greenyellow" class="form-control">Cập Nhật Khách Hàng</button>
                 </center>
             </div>
 

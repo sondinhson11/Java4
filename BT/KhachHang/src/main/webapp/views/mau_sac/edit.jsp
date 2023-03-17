@@ -33,7 +33,7 @@
         <input type="text" name="ten"  class="form-control" value="${ms.ten}"> <br><br>
       </div>
       <div class="col-md-12">
-        <center><button style="color: white;background: greenyellow" class="form-control">Thêm Màu Sắc</button></center>
+        <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật Màu Sắc</button></center>
       </div>
     </div>
   </div>

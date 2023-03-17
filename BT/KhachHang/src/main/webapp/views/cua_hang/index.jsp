@@ -54,10 +54,10 @@
                     <td>${ ch.quocGia }</td>
 
                     <td>
-                        <a href="#" class="btn btn-primary">Cập nhật</a>
+                        <a href="edit?ma=${ch.ma}" class="btn btn-primary">Cập nhật</a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger">Xóa</a>
+                        <a href="delete?ma=${ch.ma}" class="btn btn-danger">Xóa</a>
                     </td>
                 </tr>
             </c:forEach>

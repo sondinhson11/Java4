@@ -28,15 +28,15 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <form  method="POST"
-               action="/DuAnMauJava4_war_exploded/nsx/store">
+               action="/DuAnMauJava4_war_exploded/nsx/update?ma=${nsx.ma}">
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Mã</label>
-                    <input type="text" name="ma" class="form-control" />
+                    <input type="text" name="ma" class="form-control" value="${nsx.ma}" disabled />
                 </div>
                 <div class="col-6">
                     <label>Tên</label>
-                    <input type="text" name="ten" class="form-control" />
+                    <input type="text" name="ten" class="form-control" value="${nsx.ten}"/>
                 </div>
             </div>
             <br>

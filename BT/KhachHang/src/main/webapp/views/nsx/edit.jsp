@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<form method="POST" action="/KhachHang_war_exploded/nsx/store">
+<form method="POST" action="/KhachHang_war_exploded/nsx/update?ma=${nsx.ma}">
     <div class="container">
         <div class="card-body">
             <center><h1>NSX</h1></center>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-md-12">
                 <center>
-                    <button style="color: white;background: greenyellow" class="form-control">Thêm NSX</button>
+                    <button style="color: white;background: greenyellow" class="form-control">Cập Nhật NSX</button>
                 </center>
             </div>
         </div>

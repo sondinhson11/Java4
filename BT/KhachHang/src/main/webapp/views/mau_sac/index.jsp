@@ -54,7 +54,7 @@
                         <a href="/KhachHang_war_exploded/mau-sac/delete?ma=${ms.ma}" class="btn btn-danger">Xóa</a>
                     </td>
                 </tr>
-            </c:forEach>x`
+            </c:forEach>
             </tbody>
         </table>
     </c:if>

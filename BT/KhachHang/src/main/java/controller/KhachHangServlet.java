@@ -21,8 +21,8 @@ public class KhachHangServlet extends HttpServlet {
 
     public KhachHangServlet() {
         this.khrp = new KhachHangRepository();
-        this.khrp.insert(new QLKhachHang("PH1", "Ng", "Van", "AA", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
-        this.khrp.insert(new QLKhachHang("PH2", "Tran", "Van", "BB", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
+//        this.khrp.insert(new QLKhachHang("PH1", "Ng", "Van", "AA", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
+//        this.khrp.insert(new QLKhachHang("PH2", "Tran", "Van", "BB", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
     }
 
     @Override
@@ -57,13 +57,20 @@ public class KhachHangServlet extends HttpServlet {
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLKhachHang  qlKhachHang = this.khrp.findByMa(ma);
-        request.setAttribute("qlKhachHang",qlKhachHang);
+        request.setAttribute("kh",qlKhachHang);
         request.getRequestDispatcher("/views/khach_hang/edit.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    this.store(request,response);
+        String uri = request.getRequestURI();
+        if(uri.contains("store")){
+            this.store(request,response);
+        }else if(uri.contains("update")){
+            update(request,response);
+        }else{
+            index(request,response);
+        }
     }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -80,6 +87,22 @@ public class KhachHangServlet extends HttpServlet {
 
         QLKhachHang qlKhachHang = new QLKhachHang(ma, ten,tenDem,ho,ngaySinh,sdt,diaChi,thanhPho,quocGia,matKhau);
         khrp.insert(qlKhachHang);
+        response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
+    }
+    protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        String tenDem = request.getParameter("tenDem");
+        String ho = request.getParameter("ho");
+        String ngaySinh = request.getParameter("ngaySinh");
+        String sdt = request.getParameter("sdt");
+        String diaChi = request.getParameter("diaChi");
+        String thanhPho =request.getParameter("thanhPho");
+        String quocGia = request.getParameter("quocGia");
+        String matKhau = request.getParameter("matKhau");
+        QLKhachHang qlKhachHang = new QLKhachHang(ma, ten,tenDem,ho,ngaySinh,sdt,diaChi,thanhPho,quocGia,matKhau);
+        khrp.update(qlKhachHang);
         response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
     }
 }

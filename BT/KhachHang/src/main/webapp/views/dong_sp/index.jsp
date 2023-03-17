@@ -47,12 +47,12 @@
                     <td>${ dsp.ma }</td>
                     <td>${ dsp.ten }</td>
 
-                    <td>
-                        <a href="edit?ma=${dsp.ma}" class="btn btn-primary">Cập nhật</a>
-                    </td>
-                    <td>
-                        <a href="delete?ma=${dsp.ma}" class="btn btn-danger">Xóa</a>
-                    </td>
+                        <td>
+                            <a href="edit?ma=${dsp.ma}" class="btn btn-primary">Cập nhật</a>
+                        </td>
+                        <td>
+                            <a href="delete?ma=${dsp.ma}" class="btn btn-danger">Xóa</a>
+                        </td>
                 </tr>
             </c:forEach>
             </tbody>

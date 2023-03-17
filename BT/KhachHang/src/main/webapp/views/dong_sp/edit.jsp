@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<form method="POST" action="/KhachHang_war_exploded/dong-sp/store" >
+<form method="POST" action="/KhachHang_war_exploded/dong-sp/update?ma=${dsp.ma}" >
   <div class="container">
     <div class="card-body">
       <center><h1>Dòng SP</h1></center>
@@ -34,7 +34,7 @@
         <input type="text" name="ten"  class="form-control" value="${dsp.ten}"> <br><br>
       </div>
       <div class="col-md-12">
-        <center><button style="color: white;background: greenyellow" class="form-control">Thêm </button></center>
+        <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật  </button></center>
       </div>
     </div>
   </div>

@@ -52,13 +52,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${ DSNSX }" var="cv">
+                <c:forEach items="${ DSNSX }" var="nsx">
                     <tr>
-                        <td>${cv.ma}</td>
-                        <td>${cv.ten}</td>
+                        <td>${nsx.ma}</td>
+                        <td>${nsx.ten}</td>
                         <td>
-                            <a href="../nsx/edit" class="btn btn-primary">Cập nhật</a>
-                            <a href="#" class="btn btn-danger">Xóa</a>
+                            <a class="btn btn-primary"
+                               href="/DuAnMauJava4_war_exploded/nsx/edit?ma=${ nsx.ma }">
+                                Cập nhật
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"
+                               href="/DuAnMauJava4_war_exploded/nsx/delete?ma=${ nsx.ma }">
+                                Xóa
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

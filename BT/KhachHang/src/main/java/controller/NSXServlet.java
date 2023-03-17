@@ -50,7 +50,7 @@ public class NSXServlet extends HttpServlet {
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLNSX qlnsx = nsxRepository.findByMa(ma);
-        request.setAttribute("qlnsx",qlnsx);
+        request.setAttribute("nsx",qlnsx);
         request.getRequestDispatcher("/views/nsx/edit.jsp").forward(request,response);
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +59,15 @@ public class NSXServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    this.store(request,response);
+        String uri = request.getRequestURI();
+        if(uri.contains("store")){
+            store(request,response);
+        }else if(uri.contains("update")){
+            update(request,response);
+        }else{
+            index(request,response);
+        }
+
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -67,6 +75,14 @@ public class NSXServlet extends HttpServlet {
         String ten = request.getParameter("ten");
         QLNSX qlnsx = new QLNSX(ma,ten);
         nsxRepository.insert(qlnsx);
+        response.sendRedirect("/KhachHang_war_exploded/nsx/index");
+
+    }
+    protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        QLNSX qlnsx = new QLNSX(ma,ten);
+        nsxRepository.update(qlnsx);
         response.sendRedirect("/KhachHang_war_exploded/nsx/index");
 
     }

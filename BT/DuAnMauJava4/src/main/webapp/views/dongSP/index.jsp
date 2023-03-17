@@ -51,13 +51,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${ DSDongSP }" var="cv">
+                <c:forEach items="${ DSDongSP }" var="dsp">
                     <tr>
-                        <td>${cv.ma}</td>
-                        <td>${cv.ten}</td>
+                        <td>${dsp.ma}</td>
+                        <td>${dsp.ten}</td>
                         <td>
-                            <a href="../dongSP/edit" class="btn btn-primary">Cập nhật</a>
-                            <a href="#" class="btn btn-danger">Xóa</a>
+                            <a class="btn btn-primary"
+                               href="/DuAnMauJava4_war_exploded/dongSP/edit?ma=${ dsp.ma }">
+                                Cập nhật
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"
+                               href="/DuAnMauJava4_war_exploded/dongSP/delete?ma=${ dsp.ma }">
+                                Xóa
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

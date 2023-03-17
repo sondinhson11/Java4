@@ -46,7 +46,7 @@ public class SanPhamServlet extends HttpServlet {
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLSanPham qlSanPham = spRepository.findByMa(ma);
-        request.setAttribute("qlSanPham",qlSanPham);
+        request.setAttribute("sp",qlSanPham);
         request.getRequestDispatcher("/views/san_pham/edit.jsp").forward(request,response);
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,13 +62,28 @@ public class SanPhamServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    this.store(request,response);
+        String uri = request.getRequestURI();
+        if(uri.contains("store")){
+            this.store(request,response);
+        }else if(uri.contains("update")) {
+            update(request, response);
+        }else{
+            this.index(request,response);
+        }
     }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         String ten = request.getParameter("ten");
         QLSanPham qlSanPham = new QLSanPham(ma,ten);
         spRepository.insert(qlSanPham);
+        response.sendRedirect("/KhachHang_war_exploded/san-pham/index");
+
+    }
+    protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        QLSanPham qlSanPham = new QLSanPham(ma,ten);
+        spRepository.update(qlSanPham);
         response.sendRedirect("/KhachHang_war_exploded/san-pham/index");
 
     }

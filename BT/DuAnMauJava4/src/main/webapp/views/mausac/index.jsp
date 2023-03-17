@@ -51,13 +51,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${ DSMauSac }" var="cv">
+                <c:forEach items="${ DSMauSac }" var="ms">
                     <tr>
-                        <td>${cv.ma}</td>
-                        <td>${cv.ten}</td>
+                        <td>${ms.ma}</td>
+                        <td>${ms.ten}</td>
                         <td>
-                            <a href="../mausac/edit" class="btn btn-primary">Cập nhật</a>
-                            <a href="#" class="btn btn-danger">Xóa</a>
+                            <a class="btn btn-primary"
+                               href="/DuAnMauJava4_war_exploded/mausac/edit?ma=${ ms.ma }">
+                                Cập nhật
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"
+                               href="/DuAnMauJava4_war_exploded/mausac/delete?ma=${ ms.ma }">
+                                Xóa
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

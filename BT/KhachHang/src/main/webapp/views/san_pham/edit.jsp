@@ -14,12 +14,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form method="POST" action="/KhachHang_war_exploded/san-pham/store" >
+<form method="POST" action="/KhachHang_war_exploded/san-pham/update?ma=${sp.ma}" >
     <div class="container">
         <div class="card-body">
             <center><h1>Sản phẩm</h1></center>
@@ -33,7 +32,7 @@
                 <input type="text" name="ten"  class="form-control" value="${sp.ten}"> <br><br>
             </div>
             <div class="col-md-12">
-                <center><button style="color: white;background: greenyellow">Thêm Sản Phẩm</button></center>
+                <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật Sản Phẩm</button></center>
             </div>
         </div>
     </div>

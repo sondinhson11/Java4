@@ -41,8 +41,8 @@
             <div class="col-md-12">
                 <label >Thành phố:</label>
                 <select class="form-control"  name="thanhPho">
-                    <option value="">Hà Nội</option>
-                    <option value="">HCM</option>
+                    <option value="hn">Hà Nội</option>
+                    <option value="hcm">HCM</option>
                 </select>
             </div>
             <br>
@@ -50,8 +50,8 @@
             <div class="col-md-12">
                 <label >Quốc gia:</label>
                 <select class="form-control" name="quocGia">
-                    <option value="">Việt Nam</option>
-                    <option value="">Nhật Bản</option>
+                    <option value="vn">Việt Nam</option>
+                    <option value="js">Nhật Bản</option>
                 </select><br><br>
             </div>
             <br>
