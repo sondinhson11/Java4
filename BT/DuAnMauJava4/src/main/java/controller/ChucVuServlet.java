@@ -3,6 +3,7 @@ package controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import repository.ChucVuRepository;
 import viewmodel.QLChucVu;
 
 import java.io.IOException;
@@ -17,40 +18,79 @@ import java.util.ArrayList;
         "/chucvu/delete", //GET
 })
 public class ChucVuServlet extends HttpServlet {
-    ArrayList<QLChucVu> list = new ArrayList<>();
+    ChucVuRepository chucVuRepository = new ChucVuRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if (uri.contains("edit")){
-            edit(request,response);
-        }else if (uri.contains("create")){
-            this.create(request,response);
-        }else{
-            this.index(request,response);
+        if (uri.contains("edit")) {
+            edit(request, response);
+        } else if (uri.contains("create")) {
+            this.create(request, response);
+        } else if (uri.contains("delete")) {
+            this.delete(request, response);
+        } else {
+            this.index(request, response);
         }
     }
+
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("DSChucVu",this.list);
-        request.getRequestDispatcher("/views/chucvu/index.jsp").forward(request,response);
+        request.setAttribute("DSChucVu", this.chucVuRepository.findAll());
+        request.getRequestDispatcher("/views/chucvu/index.jsp").forward(request, response);
     }
+
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/chucvu/create.jsp").forward(request,response);
+        request.getRequestDispatcher("/views/chucvu/create.jsp").forward(request, response);
     }
+
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/chucvu/edit.jsp").forward(request,response);
+        String ma = request.getParameter("ma");
+        QLChucVu chucVu = this.chucVuRepository.findByMa(ma);
+        request.setAttribute("cv", chucVu);
+        request.getRequestDispatcher("/views/chucvu/edit.jsp").forward(request, response);
+    }
+
+    protected void delete(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        QLChucVu cv = this.chucVuRepository.findByMa(ma);
+        this.chucVuRepository.delete(cv);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.store(request,response);
+        String uri = request.getRequestURI();
+        if (uri.contains("store")) {
+            this.store(request, response);
+        } else if (uri.contains("update")) {
+            this.update(request, response);
+        } else {
+            this.index(request, response);
+        }
     }
-    protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+
+    protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         String ten = request.getParameter("ten");
         System.out.println(ma);
         System.out.println(ten);
-        QLChucVu cv = new QLChucVu(ma,ten);
-        list.add(cv);
+        QLChucVu cv = new QLChucVu(ma, ten);
+        this.chucVuRepository.insert(cv);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
+    }
+
+    protected void update(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        String ten = request.getParameter("ten");
+        QLChucVu cv = new QLChucVu(ma, ten);
+        this.chucVuRepository.update(cv);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
+
     }
 }

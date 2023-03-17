@@ -54,8 +54,16 @@
                                 <td>${ch.thanh_pho}</td>
                                 <td>${ch.quoc_gia}</td>
                                 <td>
-                                    <a href="../cuahang/edit" class="btn btn-primary">Cập nhật</a>
-                                    <a href="#" class="btn btn-danger">Xóa</a>
+                                    <a class="btn btn-primary"
+                                       href="/DuAnMauJava4_war_exploded/cuahang/edit?ma=${ ch.ma }">
+                                        Cập nhật
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger"
+                                       href="/DuAnMauJava4_war_exploded/cuahang/delete?ma=${ ch.ma }">
+                                        Xóa
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

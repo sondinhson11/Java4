@@ -57,8 +57,16 @@
                     <td>${cv.ma}</td>
                     <td>${cv.ten}</td>
                     <td>
-                        <a href="../chucvu/edit" class="btn btn-primary">Cập nhật</a>
-                        <a href="#" class="btn btn-danger">Xóa</a>
+                        <a class="btn btn-primary"
+                           href="/DuAnMauJava4_war_exploded/chucvu/edit?ma=${ cv.ma }">
+                            Cập nhật
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"
+                           href="/DuAnMauJava4_war_exploded/chucvu/delete?ma=${ cv.ma }">
+                            Xóa
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

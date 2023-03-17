@@ -27,16 +27,16 @@
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <form  method="POST"
-               action="/DuAnMauJava4_war_exploded/chucvu/store">
+        <form method="POST"
+              action="/DuAnMauJava4_war_exploded/chucvu/update?ma=${cv.ma}">
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Mã</label>
-                    <input type="text" name="ma" class="form-control" />
+                    <input type="text" name="ma" class="form-control"  value="${ cv.ma }" disabled />
                 </div>
                 <div class="col-6">
                     <label>Tên</label>
-                    <input type="text" name="ten" class="form-control" />
+                    <input type="text" name="ten" class="form-control"  value="${ cv.ten }" />
                 </div>
             </div>
             <br>

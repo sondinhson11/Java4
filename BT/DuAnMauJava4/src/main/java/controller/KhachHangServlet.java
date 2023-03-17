@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import repository.KhachHangRepository;
 import viewmodel.QLKhachHang;
 
 import java.io.IOException;
@@ -19,78 +20,119 @@ import java.util.ArrayList;
         "/khachhang/delete", //GET
 })
 public class KhachHangServlet extends HttpServlet {
-    private ArrayList<QLKhachHang> list = new ArrayList<>();
+    private KhachHangRepository khRepo;
+
+    public KhachHangServlet()
+    {
+        this.khRepo = new KhachHangRepository();
+        this.khRepo.insert(new QLKhachHang("PH1", "Ng", "Van", "AA", "123 tô hiệu", "0123123123", "123", "HN", "VN", "12/12/2021"));
+        this.khRepo.insert(new QLKhachHang("PH2", "Tran", "Van", "BB", "435 Giảng võ", "0123123123", "123", "HN", "VN", "12/12/2021"));
+    }
 
     @Override
     protected void doGet(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        String uri = req.getRequestURI();
+        String uri = request.getRequestURI();
         if(uri.contains("create")){
-            this.create(req,resp);
-        }else if(uri.contains("edit")){
-            this.edit(req,resp);
+            this.create(request,response);
+        } else if (uri.contains("edit")) {
+            this.edit(request, response);
+        } else if (uri.contains("delete")) {
+            this.delete(request, response);
         }else{
-            this.index(req,resp);
+            this.index(request,response);
         }
 
     }
     protected void index(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        req.setAttribute("danhSachKH",this.list);
-        req.getRequestDispatcher("/views/khachhang/index.jsp").forward(req,resp);
+        request.setAttribute("danhSachKH",this.khRepo.findAll());
+        request.getRequestDispatcher("/views/khachhang/index.jsp").forward(request, response);
     }
     protected void create(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/khachhang/create.jsp").forward(req,resp);
+        request.getRequestDispatcher("/views/khachhang/create.jsp").forward(request, response);
     }
 
     protected void edit(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/khachhang/edit.jsp").forward(req,resp);
+        String ma = request.getParameter("ma");
+        QLKhachHang kh = this.khRepo.findByMa(ma);
+        request.setAttribute("kh", kh);
+        request.getRequestDispatcher("/views/khachhang/edit.jsp")
+                .forward(request, response);
     }
 
+    protected void delete(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        QLKhachHang kh = this.khRepo.findByMa(ma);
+        this.khRepo.delete(kh);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/khachhang/index");
+    }
     @Override
     protected void doPost(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        this.store(req,resp);
+        String uri = request.getRequestURI();
+        if(uri.contains("store")){
+            this.store(request, response);
+        }else if(uri.contains("update")){
+            this.update(request, response);
+        }else{
+            this.index(request, response);
+        }
     }
 
     protected void store(
-            HttpServletRequest req,
-            HttpServletResponse resp
+            HttpServletRequest request,
+            HttpServletResponse response
     ) throws ServletException, IOException {
-        String ma = req.getParameter("ma");
-        String ho = req.getParameter("ho");
-        String tenDem = req.getParameter("ten_dem");
-        String ten = req.getParameter("ten");
-        String ngaySinh = req.getParameter("ngay_sinh");
-        String sdt = req.getParameter("sdt");
-        String diaChi = req.getParameter("dia_chi");
-        String quocGia = req.getParameter("quoc_gia");
-        String thanhPho = req.getParameter("thanh_pho");
-        String matKhau = req.getParameter("mat_khau");
+        String ma = request.getParameter("ma");
+        String ho = request.getParameter("ho");
+        String ten_dem = request.getParameter("ten_dem");
+        String ten = request.getParameter("ten");
+        String sdt = request.getParameter("sdt");
+        String mat_khau = request.getParameter("mat_khau");
+        String dia_chi = request.getParameter("dia_chi");
+        String thanh_pho = request.getParameter("thanh_pho");
+        String quoc_gia = request.getParameter("quoc_gia");
+        String ngay_sinh = request.getParameter("ngay_sinh");
 
-        System.out.println(ma);
-        System.out.println(ho);
-        System.out.println(tenDem);
-        System.out.println(ten);
-        System.out.println(ngaySinh);
-        System.out.println(sdt);
-        System.out.println(diaChi);
-        System.out.println(quocGia);
-        System.out.println(thanhPho);
-        System.out.println(matKhau);
-        QLKhachHang qlkh = new QLKhachHang(ma,ho,tenDem,ten,diaChi,sdt,matKhau,thanhPho,quocGia,ngaySinh);
-        list.add(qlkh);
+        QLKhachHang vm = new QLKhachHang(ma, ho, ten_dem, ten, dia_chi,  sdt, mat_khau, thanh_pho,quoc_gia,ngay_sinh);
+        this.khRepo.insert(vm);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/khachhang/index");
+
+    }
+    protected void update(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        String ho = request.getParameter("ho");
+        String ten_dem = request.getParameter("ten_dem");
+        String ten = request.getParameter("ten");
+        String sdt = request.getParameter("sdt");
+        String mat_khau = request.getParameter("mat_khau");
+        String dia_chi = request.getParameter("dia_chi");
+        String thanh_pho = request.getParameter("thanh_pho");
+        String quoc_gia = request.getParameter("quoc_gia");
+        String ngay_sinh = request.getParameter("ngay_sinh");
+
+        QLKhachHang vm = new QLKhachHang(ma, ho, ten_dem, ten, dia_chi,  sdt, mat_khau, thanh_pho,quoc_gia,ngay_sinh);
+        this.khRepo.update(vm);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/khachhang/index");
+
     }
 }

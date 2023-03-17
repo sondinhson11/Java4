@@ -52,7 +52,10 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label>Quốc Gia</label>
-                    <input type="text" name="quoc_gia" class="form-control" />
+                    <select name="quoc_gia" class="form-select">
+                        <option value="vi">Việt Nam</option>
+                        <option value="us">Mỹ</option>
+                    </select>
                 </div>
             </div>
             <br>
