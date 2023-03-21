@@ -39,16 +39,19 @@ public class DongSPServlet extends HttpServlet {
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSDongSP",this.dongSPRepository.findAll());
-        request.getRequestDispatcher("/views/dongSP/index.jsp").forward(request,response);
+        request.setAttribute("view", "/views/dongSP/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/dongSP/create.jsp").forward(request,response);
+        request.setAttribute("view", "/views/dongSP/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLDongSP qlDongSP = dongSPRepository.findByMa(ma);
         request.setAttribute("dsp",qlDongSP);
-        request.getRequestDispatcher("/views/dongSP/edit.jsp").forward(request,response);
+        request.setAttribute("view", "/views/dongSP/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
 
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

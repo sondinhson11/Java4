@@ -34,13 +34,16 @@ public class NhanVienServlet extends HttpServlet {
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSNhanVien",this.list);
-        request.getRequestDispatcher("/views/nhanvien/index.jsp").forward(request,response);
+        request.setAttribute("view", "/views/nhanvien/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/nhanvien/create.jsp").forward(request,response);
+        request.setAttribute("view", "/views/nhanvien/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/nhanvien/edit.jsp").forward(request,response);
+        request.setAttribute("view", "/views/nhanvien/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 //    protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        request.getRequestDispatcher("/views/nhanvien/delete.jsp").forward(request,response);

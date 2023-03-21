@@ -6,13 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet"
-          href="/DuAnMauJava4_war_exploded/css/bootstrap.min.css"/>
-</head>
-<body>
+
 <div class="col-8 offset-2">
     <form method="POST"
           action="/DuAnMauJava4_war_exploded/khachhang/update?ma=${kh.ma}">
@@ -81,5 +75,3 @@
     </form>
 </div>
 <script src="/DuAnMauJava4_war_exploded/js/bootstrap.min.js"></script>
-</body>
-</html>

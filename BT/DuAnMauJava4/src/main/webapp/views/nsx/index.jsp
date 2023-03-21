@@ -8,15 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
-<html>
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/DuAnMauJava4_war_exploded/css/bootstrap.min.css">
-    <title>Nhà Sản Xuất</title>
-</head>
-<body>
+
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -76,5 +68,3 @@
     </div>
     <div class="col-md-2"></div>
 </div>
-</body>
-</html>

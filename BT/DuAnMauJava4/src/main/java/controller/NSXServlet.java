@@ -35,16 +35,19 @@ public class NSXServlet extends HttpServlet {
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSNSX",this.nsxRepository.findAll());
-        request.getRequestDispatcher("/views/nsx/index.jsp").forward(request,response);
+        request.setAttribute("view", "/views/nsx/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/nsx/create.jsp").forward(request,response);
+        request.setAttribute("view", "/views/nsx/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLNSX chucVu = this.nsxRepository.findByMa(ma);
         request.setAttribute("nsx", chucVu);
-        request.getRequestDispatcher("/views/nsx/edit.jsp").forward(request, response);
+        request.setAttribute("view", "/views/nsx/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void delete(

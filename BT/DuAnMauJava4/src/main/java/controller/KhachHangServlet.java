@@ -51,13 +51,15 @@ public class KhachHangServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         request.setAttribute("danhSachKH",this.khRepo.findAll());
-        request.getRequestDispatcher("/views/khachhang/index.jsp").forward(request, response);
+        request.setAttribute("view", "/views/khachhang/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/khachhang/create.jsp").forward(request, response);
+        request.setAttribute("view", "/views/khachhang/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void edit(
@@ -67,8 +69,8 @@ public class KhachHangServlet extends HttpServlet {
         String ma = request.getParameter("ma");
         QLKhachHang kh = this.khRepo.findByMa(ma);
         request.setAttribute("kh", kh);
-        request.getRequestDispatcher("/views/khachhang/edit.jsp")
-                .forward(request, response);
+        request.setAttribute("view", "/views/khachhang/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void delete(

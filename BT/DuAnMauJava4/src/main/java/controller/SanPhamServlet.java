@@ -34,13 +34,16 @@ public class SanPhamServlet extends HttpServlet {
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSSanPham",this.list);
-        request.getRequestDispatcher("/views/sanpham/index.jsp").forward(request,response);
+        request.setAttribute("view", "/views/cuahang/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/sanpham/create.jsp").forward(request,response);
+        request.setAttribute("view", "/views/sanpham/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/sanpham/edit.jsp").forward(request,response);
+        request.setAttribute("view", "/views/sanpham/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     @Override

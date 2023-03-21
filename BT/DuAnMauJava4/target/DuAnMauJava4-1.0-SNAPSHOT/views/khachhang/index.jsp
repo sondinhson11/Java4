@@ -8,12 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="/DuAnMauJava4_war_exploded/css/bootstrap.min.css">
-</head>
-<body>
+
 <div class="col-8 offset-2 mt-5 table-responsive">
     <div class="row">
         <div class="col-6">
@@ -71,7 +66,3 @@
     </c:if>
 
 </div>
-
-<script src="/DuAnMauJava4_war_exploded/js/bootstrap.min.js"></script>
-</body>
-</html>

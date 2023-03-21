@@ -36,18 +36,22 @@ public class ChucVuServlet extends HttpServlet {
 
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSChucVu", this.chucVuRepository.findAll());
-        request.getRequestDispatcher("/views/chucvu/index.jsp").forward(request, response);
+        request.setAttribute("view", "/views/chucvu/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
+
     }
 
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/chucvu/create.jsp").forward(request, response);
+        request.setAttribute("view", "/views/chucvu/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLChucVu chucVu = this.chucVuRepository.findByMa(ma);
         request.setAttribute("cv", chucVu);
-        request.getRequestDispatcher("/views/chucvu/edit.jsp").forward(request, response);
+        request.setAttribute("view", "/views/chucvu/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void delete(

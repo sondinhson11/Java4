@@ -37,16 +37,19 @@ public class MauSacServlet extends HttpServlet {
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("DSMauSac",this.mauSacRepository.findAll());
-        request.getRequestDispatcher("/views/mausac/index.jsp").forward(request,response);
+        request.setAttribute("view", "/views/mausac/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/mausac/create.jsp").forward(request,response);
+        request.setAttribute("view", "/views/mausac/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         QLMauSac chucVu = this.mauSacRepository.findByMa(ma);
         request.setAttribute("ms", chucVu);
-        request.getRequestDispatcher("/views/mausac/edit.jsp").forward(request, response);
+        request.setAttribute("view", "/views/mausac/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void delete(
