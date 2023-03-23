@@ -8,8 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
-
-<div class="col-8 offset-2 mt-5 table-responsive">
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <center>
+            <h1>Khách Hàng</h1>
+        </center>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<br>
+<div>
     <div class="row">
         <div class="col-6">
             <a href="/DuAnMauJava4_war_exploded/khachhang/create" class="btn btn-success">Thêm mới</a>
@@ -64,5 +73,4 @@
             </tbody>
         </table>
     </c:if>
-
 </div>

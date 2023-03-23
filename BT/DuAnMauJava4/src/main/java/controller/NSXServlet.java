@@ -19,7 +19,12 @@ import java.util.ArrayList;
         "/nsx/delete", //GET
 })
 public class NSXServlet extends HttpServlet {
-    NsxRepository nsxRepository = new NsxRepository();
+    NsxRepository nsxRepository ;
+    public NSXServlet(){
+        nsxRepository = new NsxRepository();
+        this.nsxRepository.insert(new QLNSX("NSX1","Nhà Sản Xuất 1"));
+        this.nsxRepository.insert(new QLNSX("NSX2","Nhà Sản Xuất 2"));
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();

@@ -17,7 +17,11 @@ import java.io.IOException;
         "/cuahang/delete", //GET
 })
 public class CuaHangServlet extends HttpServlet {
-    CuaHangRepository cuaHangRepository = new CuaHangRepository();
+    CuaHangRepository cuaHangRepository;
+    public CuaHangServlet(){
+        cuaHangRepository = new CuaHangRepository();
+        this.cuaHangRepository.insert(new QLCuaHang("CH1","Sơn Đình Sơn Shop","112 Đoàn Thị Điểm","Sầm Sơn","vi"));
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();

@@ -20,8 +20,13 @@ import java.util.ArrayList;
         "/dongSP/delete", //GET
 })
 public class DongSPServlet extends HttpServlet {
-    private DongSPRepository dongSPRepository = new DongSPRepository();
-
+    private DongSPRepository dongSPRepository;
+    public DongSPServlet(){
+        dongSPRepository = new DongSPRepository();
+        this.dongSPRepository.insert(new QLDongSP("DSP1","Đồng Hồ"));
+        this.dongSPRepository.insert(new QLDongSP("DSP2","Giày Dép"));
+        this.dongSPRepository.insert(new QLDongSP("DSP3","Quần Áo"));
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

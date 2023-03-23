@@ -18,7 +18,13 @@ import java.util.ArrayList;
         "/chucvu/delete", //GET
 })
 public class ChucVuServlet extends HttpServlet {
-    ChucVuRepository chucVuRepository = new ChucVuRepository();
+    ChucVuRepository chucVuRepository;
+    public ChucVuServlet()
+    {
+        this.chucVuRepository = new ChucVuRepository();
+        this.chucVuRepository.insert(new QLChucVu("CV1","Admin"));
+        this.chucVuRepository.insert(new QLChucVu("CV2","Nhân Viên"));
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

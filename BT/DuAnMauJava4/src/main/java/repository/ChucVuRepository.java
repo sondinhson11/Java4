@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class ChucVuRepository {
     private ArrayList<QLChucVu> listChucVu;
 
+
     public ChucVuRepository() {
         listChucVu = new ArrayList<>();
     }

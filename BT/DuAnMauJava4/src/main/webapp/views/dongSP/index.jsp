@@ -20,16 +20,13 @@
 </div>
 <br>
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <a href="../dongSP/create" class="btn btn-success">Thêm mới</a>
     </div>
     <div class="col-md-2"></div>
 </div>
 <div class="row">
-    <div class="col-md-2"></div>
-
-    <div class="col-md-8">
+    <div class="col-md-12">
         <c:if test="${f:length(DSDongSP)==0 }">
             <h3 class="alert-warning">Không có dữ liệu</h3>
         </c:if>
@@ -65,6 +62,5 @@
             </table>
         </c:if>
     </div>
-    <div class="col-md-2"></div>
 </div>
 

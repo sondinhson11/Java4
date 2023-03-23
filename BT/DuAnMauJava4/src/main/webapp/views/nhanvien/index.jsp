@@ -30,32 +30,40 @@
                 <thead class="table-primary">
                 <tr>
                     <th scope="col">Mã</th>
-                    <th scope="col">Họ Và Tên</th>
-                    <th scope="col">Giới Tính</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Tên Đệm</th>
+                    <th scope="col">Họ</th>
+                    <th scope="col">Giới tính</th>
                     <th scope="col">Ngày Sinh</th>
                     <th scope="col">Địa Chỉ</th>
                     <th scope="col">Số Điện Thoại</th>
                     <th scope="col">Mật Khẩu</th>
-                    <th scope="col">IDCH</th>
-                    <th scope="col">IDCV</th>
-                    <th scope="col">IDGuiBC</th>
+                    <th scope="col">IdCH</th>
+                    <th scope="col">IdCV</th>
+                    <th scope="col">IdGuiBC</th>
+                    <th scope="col">TrangThai</th>
                     <th colspan="2">Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${ DSNhanVien }" var="kh">
+                <c:forEach items="${ DSNhanVien }" var="nv">
                     <tr>
-                        <th scope="row">${kh.ma}</th>
-                        <td>${kh.ho} ${kh.ten_dem} ${kh.ten} </td>
-                        <td>${kh.ngay_sinh}</td>
-                        <td>${kh.dia_chi}</td>
-                        <td>${kh.sdt}</td>
-                        <td>${kh.mat_khau}</td>
-                        <td>${kh.thanh_pho}</td>
-                        <td>${kh.quoc_gia}</td>
+                        <td>${ nv.ma }</td>
+                        <td>${ nv.ten }</td>
+                        <td>${ nv.tendem }</td>
+                        <td>${ nv.ho }</td>
+                        <td>${ nv.gioitinh }</td>
+                        <td>${ nv.ngaysinh }</td>
+                        <td>${ nv.diachi }</td>
+                        <td>${ nv.sdt }</td>
+                        <td>${ nv.mk }</td>
+                        <td>${ nv.idCH }</td>
+                        <td>${ nv.idCV }</td>
+                        <td>${ nv.idGuiBC }</td>
+                        <td>${ nv.trangThai }</td>
                         <td>
-                            <a href="../nhanvien/edit" class="btn btn-primary">Cập nhật</a>
-                            <a href="#" class="btn btn-danger">Xóa</a>
+                            <a href="../nhanvien/edit?ma=${nv.ma}" class="btn btn-primary">Cập nhật</a>
+                            <a href="../nhanvien/delete?ma=${nv.ma}" class="btn btn-danger">Xóa</a>
                         </td>
                     </tr>
                 </c:forEach>

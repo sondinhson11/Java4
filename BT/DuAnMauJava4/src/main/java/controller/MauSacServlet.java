@@ -21,7 +21,12 @@ import java.util.ArrayList;
         "/mausac/delete", //GET
 })
 public class MauSacServlet extends HttpServlet {
-    MauSacRepository mauSacRepository = new MauSacRepository();
+    MauSacRepository mauSacRepository;
+    public MauSacServlet(){
+        mauSacRepository = new MauSacRepository();
+        this.mauSacRepository.insert(new QLMauSac("MS1","Đỏ"));
+        this.mauSacRepository.insert(new QLMauSac("MS2","Vàng"));
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();

@@ -49,8 +49,16 @@
                         <td>${cv.ma}</td>
                         <td>${cv.ten}</td>
                         <td>
-                            <a href="../sanpham/edit" class="btn btn-primary">Cập nhật</a>
-                            <a href="#" class="btn btn-danger">Xóa</a>
+                            <a class="btn btn-primary"
+                               href="/DuAnMauJava4_war_exploded/sanpham/edit?ma=${ cv.ma }">
+                                Cập nhật
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"
+                               href="/DuAnMauJava4_war_exploded/sanpham/delete?ma=${ cv.ma }">
+                                Xóa
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -59,15 +67,5 @@
         </c:if>
     </div>
     <div class="col-md-2"></div>
-</div>
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <center>
-            <a href="../sanpham/create">Thêm</a> |
-            <a href="../sanpham/edit">Sửa</a>
-        </center>
-    </div>
-    <div class="col-md-4"></div>
 </div>
 
