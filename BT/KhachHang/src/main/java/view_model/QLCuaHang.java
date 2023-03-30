@@ -3,19 +3,20 @@ package view_model;
 public class QLCuaHang {
     private String ma;
     private String ten;
-    private String diaChi;
-    private String thanhPho;
-    private String quocGia;
+    private String diachi;
+    private String thanhpho;
+    private String quocgia;
 
     public QLCuaHang() {
     }
 
-    public QLCuaHang(String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+    public QLCuaHang(String ma, String ten, String diachi, String thanhpho, String quocgia) {
+
         this.ma = ma;
         this.ten = ten;
-        this.diaChi = diaChi;
-        this.thanhPho = thanhPho;
-        this.quocGia = quocGia;
+        this.diachi = diachi;
+        this.thanhpho = thanhpho;
+        this.quocgia = quocgia;
     }
 
     public String getMa() {
@@ -34,27 +35,27 @@ public class QLCuaHang {
         this.ten = ten;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getDiachi() {
+        return diachi;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
     }
 
-    public String getThanhPho() {
-        return thanhPho;
+    public String getThanhpho() {
+        return thanhpho;
     }
 
-    public void setThanhPho(String thanhPho) {
-        this.thanhPho = thanhPho;
+    public void setThanhpho(String thanhpho) {
+        this.thanhpho = thanhpho;
     }
 
-    public String getQuocGia() {
-        return quocGia;
+    public String getQuocgia() {
+        return quocgia;
     }
 
-    public void setQuocGia(String quocGia) {
-        this.quocGia = quocGia;
+    public void setQuocgia(String quocgia) {
+        this.quocgia = quocgia;
     }
 }

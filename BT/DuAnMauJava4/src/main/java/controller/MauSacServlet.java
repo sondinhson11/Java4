@@ -1,16 +1,15 @@
 package controller;
 
+import domain_model.MauSacDomain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
 import repository.MauSacRepository;
-import viewmodel.QLMauSac;
-import viewmodel.QLNSX;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "MauSacServlet", value = {
         "/mausac/index", //GET
@@ -24,8 +23,7 @@ public class MauSacServlet extends HttpServlet {
     MauSacRepository mauSacRepository;
     public MauSacServlet(){
         mauSacRepository = new MauSacRepository();
-        this.mauSacRepository.insert(new QLMauSac("MS1","Đỏ"));
-        this.mauSacRepository.insert(new QLMauSac("MS2","Vàng"));
+
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,8 +49,8 @@ public class MauSacServlet extends HttpServlet {
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLMauSac chucVu = this.mauSacRepository.findByMa(ma);
-        request.setAttribute("ms", chucVu);
+        MauSacDomain ms = this.mauSacRepository.findByMa(ma);
+        request.setAttribute("ms", ms);
         request.setAttribute("view", "/views/mausac/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
@@ -62,8 +60,8 @@ public class MauSacServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLMauSac cv = this.mauSacRepository.findByMa(ma);
-        this.mauSacRepository.delete(cv);
+        MauSacDomain ms = this.mauSacRepository.findByMa(ma);
+        this.mauSacRepository.delete(ms);
         response.sendRedirect("/DuAnMauJava4_war_exploded/mausac/index");
     }
 
@@ -80,18 +78,25 @@ public class MauSacServlet extends HttpServlet {
         }
     }
     protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLMauSac ms = new QLMauSac(ma,ten);
-        this.mauSacRepository.insert(ms);
+        try{
+            MauSacDomain vm = new MauSacDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.mauSacRepository.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/mausac/index");
 
     }
     protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLMauSac ms = new QLMauSac(ma,ten);
-        this.mauSacRepository.update(ms);
+        try{
+            String ma = request.getParameter("ma");
+            MauSacDomain mauSacDomain = this.mauSacRepository.findByMa(ma);
+            BeanUtils.populate(mauSacDomain,request.getParameterMap());
+            this.mauSacRepository.update(mauSacDomain);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/mausac/index");
     }
 }

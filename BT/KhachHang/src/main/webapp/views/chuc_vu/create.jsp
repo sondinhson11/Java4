@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/12/2023
-  Time: 6:56 AM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,14 +26,14 @@
             <br><br>
             <div class="col-md-12">
                 <label >Mã:</label>
-                <input type="text" name="ma"  class="form-control"> <br><br>
+                <input type="text" name="ma"  class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label >Tên :</label>
-                <input type="text" name="ten"  class="form-control"> <br><br>
+                <input type="text" name="ten"  class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
-                <center><button style="color: white;background: greenyellow" class="form-control">Thêm Chức Vụ</button></center>
+                <center><button style="color: white;background: greenyellow" class="form-control" >Thêm Chức Vụ</button></center>
             </div>
         </div>
     </div>

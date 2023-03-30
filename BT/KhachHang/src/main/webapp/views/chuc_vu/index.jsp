@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/14/2023
-  Time: 8:19 PM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -48,10 +48,10 @@
                     <td>${ cv.ten }</td>
 
                     <td>
-                        <a href="edit?ma=${cv.ma}" class="btn btn-primary">Cập nhật</a>
+                        <a href="/KhachHang_war_exploded/chuc-vu/edit?ma=${cv.ma}" class="btn btn-primary">Cập nhật</a>
                     </td>
                     <td>
-                        <a href="delete?ma=${cv.ma}" class="btn btn-danger">Xóa</a>
+                        <a href="/KhachHang_war_exploded/chuc-vu/delete?ma=${cv.ma}" class="btn btn-danger">Xóa</a>
                     </td>
                 </tr>
             </c:forEach>

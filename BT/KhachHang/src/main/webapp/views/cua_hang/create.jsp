@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/11/2023
-  Time: 11:30 PM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -28,30 +28,30 @@
             <br><br>
             <div class="col-md-12">
                 <label >Mã:</label>
-                <input type="text" name="ma"  class="form-control"> <br><br>
+                <input type="text" name="ma"  class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label >Tên :</label>
-                <input type="text" name="ten"  class="form-control"> <br><br>
+                <input type="text" name="ten"  class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label>Địa chỉ</label>
-                <input type="text" name="diaChi"  class="form-control"> <br><br>
+                <input type="text" name="diachi"  class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label >Thành phố:</label>
-                <select class="form-control"  name="thanhPho">
-                    <option value="hn">Hà Nội</option>
-                    <option value="hcm">HCM</option>
+                <select class="form-control"  name="thanhpho">
+                    <option value="">Hà Nội</option>
+                    <option value="">HCM</option>
                 </select>
             </div>
             <br>
 
             <div class="col-md-12">
                 <label >Quốc gia:</label>
-                <select class="form-control" name="quocGia">
-                    <option value="vn">Việt Nam</option>
-                    <option value="js">Nhật Bản</option>
+                <select class="form-control" name="quocgia">
+                    <option value="">Việt Nam</option>
+                    <option value="">Nhật Bản</option>
                 </select><br><br>
             </div>
             <br>

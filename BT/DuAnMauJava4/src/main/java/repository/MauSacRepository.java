@@ -1,49 +1,68 @@
 package repository;
 
+import domain_model.MauSacDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 import viewmodel.QLMauSac;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MauSacRepository {
-    private ArrayList<QLMauSac> listMauSac;
+    private Session hsession;
 
     public MauSacRepository() {
-        this.listMauSac = new ArrayList<>();
+        this.hsession = HibernateUtil.getFACTORY().openSession();
     }
 
-    public void insert(QLMauSac ms) {
-        listMauSac.add(ms);
-    }
-
-    public void update(QLMauSac ms) {
-        for (int i = 0; i < listMauSac.size(); i++) {
-            QLMauSac item = listMauSac.get(i);
-            if (item.getMa().equals(ms.getMa())) {
-                listMauSac.set(i, ms);
-            }
+    public void insert(MauSacDomain qlms) {
+        Transaction transaction = this.hsession.getTransaction();
+        try {
+            transaction.begin();
+            this.hsession.persist(qlms);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public void delete(QLMauSac ms) {
-        for (int i = 0; i < listMauSac.size(); i++) {
-            QLMauSac item = listMauSac.get(i);
-            if (item.getMa().equals(ms.getMa())) {
-                listMauSac.remove(i);
-            }
+    public void update(MauSacDomain qlms) {
+        Transaction transaction = this.hsession.getTransaction();
+        try {
+            transaction.begin();
+            this.hsession.merge(qlms);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public ArrayList<QLMauSac> findAll() {
-        return listMauSac;
+    public void delete(MauSacDomain qlms) {
+        Transaction transaction = this.hsession.getTransaction();
+        try {
+            transaction.begin();
+            this.hsession.delete(qlms);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
     }
 
-    public QLMauSac findByMa(String ma) {
-        for (int i = 0; i < listMauSac.size(); i++) {
-            QLMauSac item = listMauSac.get(i);
-            if (item.getMa().equals(ma)) {
-                return listMauSac.get(i);
-            }
-        }
-        return null;
+    public List<MauSacDomain> findAll() {
+        String hql = "SELECT obj FROM MauSacDomain obj";
+        TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql, MauSacDomain.class);
+        return query.getResultList();
     }
+
+    public MauSacDomain findByMa(String ma) {
+        String hql = "SELECT obj FROM MauSacDomain obj where obj.Ma=?1";
+        TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql, MauSacDomain.class);
+        query.setParameter(1, ma);
+        return query.getSingleResult();
+    }
+
 }

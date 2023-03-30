@@ -14,7 +14,6 @@ public class QLKhachHang {
     private String matKhau;
 
     public QLKhachHang() {
-
     }
 
     public QLKhachHang(String ma, String ten, String tenDem, String ho, String ngaySinh, String sdt, String diaChi, String thanhPho, String quocGia, String matKhau) {

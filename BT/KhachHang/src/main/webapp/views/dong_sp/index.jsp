@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/14/2023
-  Time: 8:13 PM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -47,12 +47,12 @@
                     <td>${ dsp.ma }</td>
                     <td>${ dsp.ten }</td>
 
-                        <td>
-                            <a href="edit?ma=${dsp.ma}" class="btn btn-primary">Cập nhật</a>
-                        </td>
-                        <td>
-                            <a href="delete?ma=${dsp.ma}" class="btn btn-danger">Xóa</a>
-                        </td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Cập nhật</a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-danger">Xóa</a>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

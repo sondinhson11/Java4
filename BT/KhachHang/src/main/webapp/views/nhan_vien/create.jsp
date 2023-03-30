@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/11/2023
-  Time: 11:10 PM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,51 +26,51 @@
         <div class="row mt-3">
             <div class="col-6">
                 <label>Mã</label>
-                <input type="text" name="ma" class="form-control" />
+                <input type="text" name="ma" class="form-control"  required/>
             </div>
             <div class="col-6">
                 <label>Tên</label>
-                <input type="text" name="ten" class="form-control" />
+                <input type="text" name="ten" class="form-control" required/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
                 <label>Tên đệm</label>
-                <input type="text" name="tenDem" class="form-control" />
+                <input type="text" name="tenDem" class="form-control" required/>
             </div>
             <div class="col-6">
                 <label>Họ</label>
-                <input type="text" name="ho" class="form-control" />
+                <input type="text" name="ho" class="form-control" required/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
                 <label>Giới tính</label>
-                <input type="date" name="gioiTinh" class="form-control" />
+                <input type="text" name="gioiTinh" class="form-control" required/>
             </div>
             <div class="col-6">
                 <label>Ngày Sinh</label>
-                <input type="tel" name="ngaySinh" class="form-control" />
+                <input type="date" name="ngaySinh" class="form-control" required/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
                 <label>Địa chỉ</label>
-                <input type="text" name="diaChi" class="form-control" />
+                <input type="text" name="diaChi" class="form-control" required/>
             </div>
             <div class="col-6">
                 <label>Sdt</label>
-                <input type="text" name="sdt" class="form-control" />
+                <input type="text" name="sdt" class="form-control" required/>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
                 <label>Mật khẩu</label>
-                <input type="password" name="matKhau" class="form-control" />
+                <input type="password" name="matkhau" class="form-control" required/>
             </div>
             <div class="col-6">
                 <label>Trạng Thái</label>
-                <input type="text" name="trangThai" class="form-control" />
+                <input type="text" name="trangThai" class="form-control" required/>
             </div>
         </div>
         <div class="row mt-3">

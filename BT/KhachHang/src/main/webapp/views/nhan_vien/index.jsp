@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/15/2023
-  Time: 8:47 AM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -21,45 +21,62 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="col-8 offset-2 mt-5 table-responsive">
-  <div class="row">
-    <div class="col-6">
-      <a href="create" class="btn btn-success">Thêm mới</a>
-    </div>
+<div class="row">
+  <div class="col-6">
+    <a href="create" class="btn btn-success">Thêm mới</a>
   </div>
-  <c:if test="${ f:length(danhSachDongSP) == 0 }">
+</div>
+<c:if test="${ f:length(danhSachNV) == 0 }">
   <h3 class="alert alert-warning">Không có dữ liệu</h3>
-  </c:if>
-  <c:if test="${ f:length(danhSachDongSP) != 0 }">
-  <table class="table table-striped mt-3">
-    <thead class="table-primary">
+</c:if>
+<c:if test="${ f:length(danhSachNV) != 0 }">
+
+<table class="table">
+  <thead>
+  <tr>
+
+    <th>Mã</th>
+    <th>Tên</th>
+    <th>Tên đệm</th>
+    <th>Họ </th>
+    <th>Giới Tính</th>
+    <th>Ngày Sinh</th>
+    <th>Địa chỉ</th>
+    <th>Số điện thoại</th>
+    <th>Mật khẩu</th>
+    <th>Trạng Thái</th>
+    <th>Thao Tác</th>
+  </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${ danhSachNV }" var="nv">
     <tr>
-      <th>Mã</th>
-      <th>Tên</th>
+      <td>${ nv.ma }</td>
+      <td>${ nv.ten }</td>
+      <td>${ nv.ho }</td>
+      <td>${ nv.tenDem }</td>
+      <td>${ nv.gioiTinh }</td>
+      <td>${ nv.ngaySinh }</td>
+      <td>${ nv.diaChi }</td>
+      <td>${ nv.sdt }</td>
+      <td>${ nv.matkhau}</td>
+      <td>${ nv.trangThai  == 1 ? "Đang Làm" : "Đã Nghỉ"}</td>
+      <td>
+        <a href="/KhachHang_war_exploded/nhan-vien/edit?ma=${nv.ma}" class="btn btn-primary">Cập nhật</a>
+      </td>
+      <td>
+        <a href="/KhachHang_war_exploded/nhan-vien/delete?ma=${nv.ma}" class="btn btn-danger">Xóa</a>
+      </td>
 
-      <th colspan="2">Thao tác</th>
     </tr>
-    </thead>
-    <tbody>
-
-    <c:forEach items="${ danhSachDongSP }" var="dsp">
-      <tr>
-        <td>${ dsp.ma }</td>
-        <td>${ dsp.ten }</td>
-
-        <td>
-          <a href="#" class="btn btn-primary">Cập nhật</a>
-        </td>
-        <td>
-          <a href="#" class="btn btn-danger">Xóa</a>
-        </td>
-      </tr>
-    </c:forEach>
-    </tbody>
-  </table>
-  </c:if>
+  </c:forEach>
+  </tbody>
+</table
+</c:if>
 
 
+        <!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

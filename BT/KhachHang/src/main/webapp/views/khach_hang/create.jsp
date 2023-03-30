@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/9/2023
-  Time: 9:17 PM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -26,56 +26,56 @@
             <br><br>
             <div class="col-md-12">
                 <label>Mã:</label>
-                <input type="text" name="ma" class="form-control"> <br><br>
+                <input type="text" name="ma" class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label>Tên :</label>
-                <input type="text" name="ten" class="form-control"> <br><br>
+                <input type="text" name="ten" class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label>Tên đệm:</label>
-                <input type="text" name="tenDem" class="form-control"> <br><br>
+                <input type="text" name="tenDem" class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label>Họ:</label>
-                <input type="text" name="ho" class="form-control"> <br><br>
+                <input type="text" name="ho" class="form-control" required> <br><br>
             </div>
             <div class="col-md-12">
                 <label>Ngày sinh:</label>
-                <input type="date" name="ngaySinh" class="form-control"> <br><br>
+                <input type="date" name="ngaySinh" class="form-control" required> <br><br>
             </div>
 
             <div class="col-md-12">
                 <label>Số điện thoại:</label>
-                <input type="text" name="sdt" class="form-control"><br><br>
+                <input type="text" name="sdt" class="form-control" required><br><br>
             </div>
 
             <div class="col-md-12">
                 <label>Địa chỉ:</label>
-                <input type="text" name="diaChi" class="form-control"><br><br>
+                <input type="text" name="diaChi" class="form-control" required><br><br>
             </div>
             <div class="col-md-12">
                 <label>Thành phố:</label>
                 <select class="form-control" name="thanhPho">
-                    <option value="hn">Hà Nội</option>
-                    <option value="hcm">HCM</option>
+                    <option >Hà Nội</option>
+                    <option >HCM</option>
                 </select>
-            </div><br><br>
+            </div>
 
             <div class="col-md-12">
                 <label>Quốc gia:</label>
                 <select class="form-control" name="quocGia">
-                    <option value="vn">Việt Nam</option>
-                    <option value="jp">Nhật Bản</option>
-                </select>
-            </div> <br><br>
+                    <option >Việt Nam</option>
+                    <option >Nhật Bản</option>
+                </select><br><br>
+            </div>
             <div class="col-md-12">
                 <label>Mật khẩu</label>
-                <input type="text" class="form-control" name="matKhau"> <br><br>
+                <input type="text" class="form-control" name="matKhau" required> <br><br>
             </div>
             <div class="col-md-12">
                 <center>
-                    <button type="submit" style="color: white;background: greenyellow" class="form-control">Thêm khách hàng</button>
+                    <button type="submit" style="color: white;background: greenyellow">Thêm khách hàng</button>
                 </center>
             </div>
 

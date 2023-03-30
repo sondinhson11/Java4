@@ -1,14 +1,12 @@
 package controller;
 
+import domain_model.NSXDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.beanutils.BeanUtils;
 import repository.NsxRepository;
-import viewmodel.QLChucVu;
-import viewmodel.QLNSX;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "NSXServlet", value = {
         "/nsx/index", //GET
@@ -22,8 +20,6 @@ public class NSXServlet extends HttpServlet {
     NsxRepository nsxRepository ;
     public NSXServlet(){
         nsxRepository = new NsxRepository();
-        this.nsxRepository.insert(new QLNSX("NSX1","Nhà Sản Xuất 1"));
-        this.nsxRepository.insert(new QLNSX("NSX2","Nhà Sản Xuất 2"));
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,8 +45,8 @@ public class NSXServlet extends HttpServlet {
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLNSX chucVu = this.nsxRepository.findByMa(ma);
-        request.setAttribute("nsx", chucVu);
+        NSXDomain nsx = this.nsxRepository.findByMa(ma);
+        request.setAttribute("nsx", nsx);
         request.setAttribute("view", "/views/nsx/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
@@ -60,8 +56,8 @@ public class NSXServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLNSX cv = this.nsxRepository.findByMa(ma);
-        this.nsxRepository.delete(cv);
+        NSXDomain nsx = this.nsxRepository.findByMa(ma);
+        this.nsxRepository.delete(nsx);
         response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/index");
     }
 
@@ -78,17 +74,24 @@ public class NSXServlet extends HttpServlet {
         }
     }
     protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLNSX nsx = new QLNSX(ma,ten);
-        this.nsxRepository.insert(nsx);
+        try{
+            NSXDomain vm = new NSXDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.nsxRepository.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/index");
     }
     protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLNSX nsx = new QLNSX(ma,ten);
-        this.nsxRepository.update(nsx);
+        try{
+            String ma = request.getParameter("ma");
+            NSXDomain vm = this.nsxRepository.findByMa(ma);
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.nsxRepository.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/index");
     }
 }

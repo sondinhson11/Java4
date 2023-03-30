@@ -9,6 +9,7 @@
 <%--</h1>--%>
 <br/>
 
-<center><a href="/khach-hang/store">Khách Hàng</a></center>
+<center><a href="/KhachHang_war_exploded//views/layout.jsp">....</a></center>
+
 </body>
 </html>

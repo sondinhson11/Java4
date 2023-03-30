@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/12/2023
-  Time: 7:02 AM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Dong SP</title>
+  <title>Dòng sản Phẩm</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,26 +19,26 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-
-<form method="POST" action="/KhachHang_war_exploded/dong-sp/update?ma=${dsp.ma}" >
+<form method="POST" action="/KhachHang_war_exploded/mau-sac/update?ma=${ dsp.ma }" >
   <div class="container">
     <div class="card-body">
-      <center><h1>Dòng SP</h1></center>
+      <center><h1>Dòng sản phẩm</h1></center>
       <br><br>
       <div class="col-md-12">
         <label >Mã:</label>
-        <input type="text" name="ma"  class="form-control" value="${dsp.ma}"> <br><br>
+        <input type="text" name="ma"  class="form-control" value="${ dsp.ma }" disabled> <br><br>
       </div>
       <div class="col-md-12">
         <label >Tên :</label>
-        <input type="text" name="ten"  class="form-control" value="${dsp.ten}"> <br><br>
+        <input type="text" name="ten"  class="form-control" value="${ dsp.ten }" > <br><br>
       </div>
       <div class="col-md-12">
-        <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật  </button></center>
+        <center><button style="color: white;background: greenyellow" class="form-control">Sửa</button></center>
       </div>
     </div>
   </div>
 </form>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

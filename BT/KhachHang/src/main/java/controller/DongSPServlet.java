@@ -3,10 +3,11 @@ package controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import repositories.DongSPRepository;
+import org.apache.commons.beanutils.BeanUtils;
 import view_model.QLChucVu;
+import view_model.QLCuaHang;
 import view_model.QLDongSP;
-
+import repostory.dongsprepostory;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,12 +20,12 @@ import java.util.ArrayList;
         "/dong-sp/update", //POST
 })
 public class DongSPServlet extends HttpServlet {
-    private DongSPRepository dongSPRepository;
-
+    private dongsprepostory dsprepo;
     public DongSPServlet(){
-        dongSPRepository = new DongSPRepository();
-    }
+        this.dsprepo= new dongsprepostory();
+        this.dsprepo.insert(new QLDongSP("pha","anh"));
 
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
@@ -32,58 +33,67 @@ public class DongSPServlet extends HttpServlet {
             this.create(request,response);
 
         } else if (uri.contains("edit")) {
-            edit(request,response);
+            this.edit(request, response);
+
         }else if (uri.contains("delete")){
-            delete(request,response);
+            this.delete(request, response);
+
         }else{
             this.index(request,response);
         }
     }
-    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/dong_sp/create.jsp").forward(request,response);
-
-    }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLDongSP qlDongSP = dongSPRepository.findByMa(ma);
-        request.setAttribute("dsp",qlDongSP);
-        request.getRequestDispatcher("/views/dong_sp/edit.jsp").forward(request,response);
-
+        QLDongSP dsp = this.dsprepo.findByMa(ma);
+        request.setAttribute("dsp",dsp);
+        request.setAttribute("view","/views/dong_sp/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLDongSP qlDongSP = dongSPRepository.findByMa(ma);
-        dongSPRepository.delete(qlDongSP);
+        QLDongSP dsp = this.dsprepo.findByMa(ma);
+        this.dsprepo.delete(dsp);
         response.sendRedirect("/KhachHang_war_exploded/dong-sp/index");
-
+    }
+    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view","/views/dong_sp/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       request.setAttribute("danhSachDongSP",this.dongSPRepository.findAll());
-        request.getRequestDispatcher("/views/dong_sp/index.jsp").forward(request,response);
+       request.setAttribute("danhSachDongSP",this.dsprepo.findAll());
+        request.setAttribute("view","/views/dong_sp/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
 
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if(uri.contains("store")){
-            store(request,response);
+            this.store(request,response);
+        }else if(uri.contains("update")){
+            this.update(request,response);
+        }else {
+            response.sendRedirect("/KhachHang_war_exploded/dong-sp/index");
 
-        }else{
-            update(request,response);
-        }
-    }
+        }    }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLDongSP qlDong = new QLDongSP(ma,ten);
-        dongSPRepository.insert(qlDong);
+        try {
+            QLDongSP vm = new QLDongSP();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.dsprepo.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/dong-sp/index");
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLDongSP qlDong = new QLDongSP(ma,ten);
-        dongSPRepository.update(qlDong);
+        try {
+            QLDongSP vm = new QLDongSP();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.dsprepo.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/dong-sp/index");
     }
 }

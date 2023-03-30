@@ -3,6 +3,8 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu/edit.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/khach_hang/create.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/khach_hang" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/khach_hang/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/khach_hang" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/views/mau_sac/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/mau_sac" />

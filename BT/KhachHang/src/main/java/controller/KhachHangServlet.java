@@ -1,12 +1,15 @@
 package controller;
 
+import domain_model.KhachHangDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import repositories.KhachHangRepository;
+import org.apache.commons.beanutils.BeanUtils;
 import view_model.QLKhachHang;
+import repostory.khachhangrepostory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet({
         "/khach-hang/index", //GET
@@ -17,19 +20,18 @@ import java.io.IOException;
         "/khach-hang/update", //POST
 })
 public class KhachHangServlet extends HttpServlet {
-    private KhachHangRepository khrp;
 
-    public KhachHangServlet() {
-        this.khrp = new KhachHangRepository();
-//        this.khrp.insert(new QLKhachHang("PH1", "Ng", "Van", "AA", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
-//        this.khrp.insert(new QLKhachHang("PH2", "Tran", "Van", "BB", "12/12/2021", "0123123123", "HN", "123", "VN", "HN"));
+    private khachhangrepostory khachhangrepostory;
+    public KhachHangServlet(){
+        this.khachhangrepostory = new khachhangrepostory();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if(uri.contains("create")){
-            this.creat(request,response);
+            this.create(request,response);
+
         }else if(uri.contains("edit")){
             this.edit(request,response);
         }else if(uri.contains("delete")){
@@ -38,71 +40,70 @@ public class KhachHangServlet extends HttpServlet {
             this.index(request,response);
         }
     }
-    protected void creat(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/khach_hang/create.jsp").forward(request,response);
+
+    protected void delete(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        KhachHangDomain kh = this.khachhangrepostory.findByMa(ma);
+        this.khachhangrepostory.delete(kh);
+        response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
+    }
+    protected void edit(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        KhachHangDomain kh = this.khachhangrepostory.findByMa(ma);
+        request.setAttribute("kh", kh);
+        request.setAttribute("view","/views/khach_hang/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
+    }
+    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view","/views/khach_hang/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
 
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-        request.setAttribute("danhSachKH",this.khrp.findAll());
-        request.getRequestDispatcher("/views/khach_hang/index.jsp").forward(request,response);
+        request.setAttribute("danhSachKH",this.khachhangrepostory.findAll());
+        request.setAttribute("view","/views/khach_hang/index.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
 
-    }
-    protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        QLKhachHang  qlKhachHang = this.khrp.findByMa(ma);
-        this.khrp.delete(qlKhachHang);
-        response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
-        }
-    protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        QLKhachHang  qlKhachHang = this.khrp.findByMa(ma);
-        request.setAttribute("kh",qlKhachHang);
-        request.getRequestDispatcher("/views/khach_hang/edit.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if(uri.contains("store")){
-            this.store(request,response);
+        this.store(request,response);
         }else if(uri.contains("update")){
-            update(request,response);
-        }else{
-            index(request,response);
+            this.update(request,response);
+        }else {
+            response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
+
         }
     }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String tenDem = request.getParameter("tenDem");
-        String ho = request.getParameter("ho");
-        String ngaySinh = request.getParameter("ngaySinh");
-        String sdt = request.getParameter("sdt");
-        String diaChi = request.getParameter("diaChi");
-        String thanhPho =request.getParameter("thanhPho");
-        String quocGia = request.getParameter("quocGia");
-        String matKhau = request.getParameter("matKhau");
-
-        QLKhachHang qlKhachHang = new QLKhachHang(ma, ten,tenDem,ho,ngaySinh,sdt,diaChi,thanhPho,quocGia,matKhau);
-        khrp.insert(qlKhachHang);
+        try {
+            KhachHangDomain vm = new KhachHangDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.khachhangrepostory.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String tenDem = request.getParameter("tenDem");
-        String ho = request.getParameter("ho");
-        String ngaySinh = request.getParameter("ngaySinh");
-        String sdt = request.getParameter("sdt");
-        String diaChi = request.getParameter("diaChi");
-        String thanhPho =request.getParameter("thanhPho");
-        String quocGia = request.getParameter("quocGia");
-        String matKhau = request.getParameter("matKhau");
-        QLKhachHang qlKhachHang = new QLKhachHang(ma, ten,tenDem,ho,ngaySinh,sdt,diaChi,thanhPho,quocGia,matKhau);
-        khrp.update(qlKhachHang);
+        try {
+            String ma = request.getParameter("ma");
+            KhachHangDomain khachHangDomain = this.khachhangrepostory.findByMa(ma);
+            BeanUtils.populate(khachHangDomain,request.getParameterMap());
+            this.khachhangrepostory.update(khachHangDomain);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/khach-hang/index");
     }
 }

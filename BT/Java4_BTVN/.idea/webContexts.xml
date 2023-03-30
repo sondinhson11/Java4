@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/chitiet_sp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/chitiet_sp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu/create.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu/edit.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/chuc_vu" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/cua_hang/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/cua_hang" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/n_sx/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/n_sx" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/nhan_vien/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/nhan_vien" />
+      </map>
+    </option>
+  </component>
+</project>

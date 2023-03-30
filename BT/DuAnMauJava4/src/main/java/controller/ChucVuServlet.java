@@ -1,13 +1,12 @@
 package controller;
 
+import domain_model.ChucVuDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.beanutils.BeanUtils;
 import repository.ChucVuRepository;
-import viewmodel.QLChucVu;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet({
         "/chucvu/index", //GET
@@ -22,8 +21,6 @@ public class ChucVuServlet extends HttpServlet {
     public ChucVuServlet()
     {
         this.chucVuRepository = new ChucVuRepository();
-        this.chucVuRepository.insert(new QLChucVu("CV1","Admin"));
-        this.chucVuRepository.insert(new QLChucVu("CV2","Nhân Viên"));
     }
 
     @Override
@@ -54,7 +51,7 @@ public class ChucVuServlet extends HttpServlet {
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLChucVu chucVu = this.chucVuRepository.findByMa(ma);
+        ChucVuDomain chucVu = this.chucVuRepository.findByMa(ma);
         request.setAttribute("cv", chucVu);
         request.setAttribute("view", "/views/chucvu/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -65,7 +62,7 @@ public class ChucVuServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLChucVu cv = this.chucVuRepository.findByMa(ma);
+        ChucVuDomain cv = this.chucVuRepository.findByMa(ma);
         this.chucVuRepository.delete(cv);
         response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
@@ -83,12 +80,13 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        System.out.println(ma);
-        System.out.println(ten);
-        QLChucVu cv = new QLChucVu(ma, ten);
-        this.chucVuRepository.insert(cv);
+        try {
+            ChucVuDomain vm = new ChucVuDomain();
+            BeanUtils.populate(vm, request.getParameterMap());
+            this.chucVuRepository.insert(vm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
 
@@ -96,11 +94,14 @@ public class ChucVuServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLChucVu cv = new QLChucVu(ma, ten);
-        this.chucVuRepository.update(cv);
+        try {
+            String ma = request.getParameter("ma");
+            ChucVuDomain vm = this.chucVuRepository.findByMa(ma);
+            BeanUtils.populate(vm, request.getParameterMap());
+            this.chucVuRepository.update(vm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
-
     }
 }

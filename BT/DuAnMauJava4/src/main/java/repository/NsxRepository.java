@@ -1,51 +1,64 @@
 package repository;
-
-import viewmodel.QLNSX;
-
-import java.util.ArrayList;
+import domain_model.NSXDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
+import org.hibernate.Session;
+import java.util.List;
 
 public class NsxRepository {
-    private ArrayList<QLNSX> listNSX;
+    private Session hsession;
+
 
     public NsxRepository() {
-        listNSX = new ArrayList<>();
+        this.hsession= HibernateUtil.getFACTORY().openSession();
     }
 
-    public void insert(QLNSX nsx) {
-        listNSX.add(nsx);
-    }
-
-    public void update(QLNSX nsx) {
-        for (int i = 0; i < listNSX.size(); i++) {
-            QLNSX item = listNSX.get(i);
-            if (item.getMa().equals(nsx.getMa())) {
-                listNSX.set(i, nsx);
-            }
+    public void insert(NSXDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.persist(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public void delete(QLNSX nsx) {
-        for (int i = 0; i < listNSX.size(); i++) {
-            QLNSX item = listNSX.get(i);
-            if (item.getMa().equals(nsx.getMa())) {
-                listNSX.remove(i);
-            }
+    public void update(NSXDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.merge(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public ArrayList<QLNSX> findAll() {
-        return listNSX;
+    public void delete(NSXDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
     }
 
-    public QLNSX findByMa(String ma) {
-        for (int i = 0; i < listNSX.size(); i++) {
-            QLNSX item = listNSX.get(i);
-            if (item.getMa().equals(ma)) {
-                return listNSX.get(i);
-            }
-
-        }
-        return null;
+    public List<NSXDomain> findAll(){
+        String hql="SELECT obj FROM NSXDomain obj";
+        TypedQuery<NSXDomain> query = this.hsession.createQuery(hql,NSXDomain.class);
+        return query.getResultList();    }
+    public NSXDomain findByMa(String ma){
+        String hql =" SELECT obj FROM NSXDomain obj where obj.Ma=?1";
+        TypedQuery<NSXDomain> query=this.hsession.createQuery(hql,NSXDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 }
 

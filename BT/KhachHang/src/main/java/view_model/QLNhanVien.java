@@ -10,13 +10,13 @@ public class QLNhanVien {
     private String ngaySinh;
     private String diaChi;
     private String sdt;
-    private String matKhau;
+    private String matkhau;
     private Integer trangThai;
 
     public QLNhanVien() {
     }
 
-    public QLNhanVien(String ma, String ten, String tenDem, String ho, String gioiTinh, String ngaySinh, String diaChi, String sdt, String matKhau, Integer trangThai) {
+    public QLNhanVien(String ma, String ten, String tenDem, String ho, String gioiTinh, String ngaySinh, String diaChi, String sdt, String matkhau, Integer trangThai) {
         this.ma = ma;
         this.ten = ten;
         this.tenDem = tenDem;
@@ -25,7 +25,7 @@ public class QLNhanVien {
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
         this.sdt = sdt;
-        this.matKhau = matKhau;
+        this.matkhau = matkhau;
         this.trangThai = trangThai;
     }
 
@@ -53,11 +53,11 @@ public class QLNhanVien {
         this.tenDem = tenDem;
     }
 
-    public String getHo() {
+    public String getho() {
         return ho;
     }
 
-    public void setHo(String ho) {
+    public void setho(String ho) {
         this.ho = ho;
     }
 
@@ -93,12 +93,12 @@ public class QLNhanVien {
         this.sdt = sdt;
     }
 
-    public String getMatKhau() {
-        return matKhau;
+    public String getMatkhau() {
+        return matkhau;
     }
 
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
+    public void setMatkhau(String matkhau) {
+        this.matkhau = matkhau;
     }
 
     public Integer getTrangThai() {

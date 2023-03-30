@@ -1,51 +1,68 @@
 package repository;
 
-import viewmodel.QLChucVu;
+import domain_model.ChucVuDomain;
+import domain_model.NSXDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChucVuRepository {
-    private ArrayList<QLChucVu> listChucVu;
-
+    private Session hsession;
 
     public ChucVuRepository() {
-        listChucVu = new ArrayList<>();
+        this.hsession = HibernateUtil.getFACTORY().openSession();
     }
 
-    public void insert(QLChucVu cv) {
-        listChucVu.add(cv);
-    }
-
-    public void update(QLChucVu cv) {
-        for (int i = 0; i < listChucVu.size(); i++) {
-            QLChucVu item = listChucVu.get(i);
-            if (item.getMa().equals(cv.getMa())) {
-                listChucVu.set(i, cv);
-            }
+    public void insert(ChucVuDomain cv) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.persist(cv);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public void delete(QLChucVu cv) {
-        for (int i = 0; i < listChucVu.size(); i++) {
-            QLChucVu item = listChucVu.get(i);
-            if (item.getMa().equals(cv.getMa())) {
-                listChucVu.remove(i);
-            }
+    public void update(ChucVuDomain cv) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.merge(cv);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public ArrayList<QLChucVu> findAll() {
-        return listChucVu;
+    public void delete(ChucVuDomain cv) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(cv);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
     }
 
-    public QLChucVu findByMa(String ma) {
-        for (int i = 0; i < listChucVu.size(); i++) {
-            QLChucVu item = listChucVu.get(i);
-            if (item.getMa().equals(ma)) {
-                return listChucVu.get(i);
-            }
-        }
-        return null;
+    public List<ChucVuDomain> findAll() {
+        String hql="SELECT obj FROM ChucVuDomain obj";
+        TypedQuery<ChucVuDomain> query = this.hsession.createQuery(hql,ChucVuDomain.class);
+        return query.getResultList();
+    }
+
+    public ChucVuDomain findByMa(String ma) {
+        String hql =" SELECT obj FROM ChucVuDomain obj where obj.Ma=?1";
+        TypedQuery<ChucVuDomain> query=this.hsession.createQuery(hql,ChucVuDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 
 }

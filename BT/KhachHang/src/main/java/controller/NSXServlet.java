@@ -1,9 +1,11 @@
 package controller;
 
+import domain_model.NSXDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import repositories.NsxRepository;
+import org.apache.commons.beanutils.BeanUtils;
+import repostory.nsxrepostory;
 import view_model.QLNSX;
 
 import java.io.IOException;
@@ -18,72 +20,86 @@ import java.util.ArrayList;
         "/nsx/update", //POST
 })
 public class NSXServlet extends HttpServlet {
-    private NsxRepository nsxRepository;
-    public NSXServlet(){
-        nsxRepository = new NsxRepository();
-    }
 
+    private nsxrepostory nsxrepo;
 
-    @Override
+    public NSXServlet() {
+        this.nsxrepo = new nsxrepostory();
+    }    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if(uri.contains("create")){
             this.create(request,response);
         }else if(uri.contains("edit")){
-            edit(request,response);
+            this.edit(request, response);
+
         }else  if (uri.contains("delete")) {
-            delete(request,response);
+            this.delete(request, response);
+
         }else{
             this.index(request,response);
         }
     }
-    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/nsx/create.jsp").forward(request,response);
+    protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        NSXDomain nsx = this.nsxrepo.findByMa(ma);
+        request.setAttribute("nsx",nsx);
+        request.setAttribute("view","/views/nsx/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLNSX qlnsx = nsxRepository.findByMa(ma);
-        nsxRepository.delete(qlnsx);
+        NSXDomain nsx = this.nsxrepo.findByMa(ma);
+        this.nsxrepo.delete(nsx);
         response.sendRedirect("/KhachHang_war_exploded/nsx/index");
-
     }
-    protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        QLNSX qlnsx = nsxRepository.findByMa(ma);
-        request.setAttribute("nsx",qlnsx);
-        request.getRequestDispatcher("/views/nsx/edit.jsp").forward(request,response);
+    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view","/views/nsx/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("danhSachNSX",this.nsxRepository.findAll());
-        request.getRequestDispatcher("/views/nsx/index.jsp").forward(request,response);
+        request.setAttribute("danhSachNSX",this.nsxrepo.findAll());
+        request.setAttribute("view","/views/nsx/index.jsp");
+
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if(uri.contains("store")){
-            store(request,response);
-        }else if(uri.contains("update")){
-            update(request,response);
-        }else{
-            index(request,response);
-        }
+        if(uri.contains("update")){
+            this.update(request,response);
+        }else if(uri.contains("store")){
+            this.store(request,response);
+        }else {
+            response.sendRedirect("/KhachHang_war_exploded/mau-sac/index");
 
-    }
+        }    }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLNSX qlnsx = new QLNSX(ma,ten);
-        nsxRepository.insert(qlnsx);
+        try{
+            NSXDomain vm = new NSXDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.nsxrepo.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/nsx/index");
+        ;
+
 
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLNSX qlnsx = new QLNSX(ma,ten);
-        nsxRepository.update(qlnsx);
+        try{
+            String ma = request.getParameter("ma");
+            NSXDomain vm = this.nsxrepo.findByMa(ma);
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.nsxrepo.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/nsx/index");
+        ;
+
 
     }
 }

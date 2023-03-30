@@ -3,8 +3,10 @@ package controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import repositories.SanPhamRepository;
+import org.apache.commons.beanutils.BeanUtils;
+import repostory.sanphamrepostory;
 import view_model.QLKhachHang;
+import view_model.QLMauSac;
 import view_model.QLSanPham;
 
 import java.io.IOException;
@@ -19,10 +21,11 @@ import java.util.ArrayList;
         "/san-pham/update", //POST
 })
 public class SanPhamServlet extends HttpServlet {
-    private SanPhamRepository spRepository;
+    private sanphamrepostory sprepo;
 
-    public SanPhamServlet(){
-        spRepository = new SanPhamRepository();
+    public SanPhamServlet() {
+        this.sprepo = new sanphamrepostory();
+        this.sprepo.insert(new QLSanPham("pha","anh"));
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,60 +34,76 @@ public class SanPhamServlet extends HttpServlet {
             this.create(request,response);
 
         }else if(uri.contains("edit")){
-            edit(request,response);
+            this.edit(request,response);
         }else if(uri.contains("delete")){
-            delete(request,response);
+            this.delete(request,response);
+
         }else{
             this.index(request,response);
         }
 
 
     }
-    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/views/san_pham/create.jsp").forward(request,response);
-    }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLSanPham qlSanPham = spRepository.findByMa(ma);
-        request.setAttribute("sp",qlSanPham);
-        request.getRequestDispatcher("/views/san_pham/edit.jsp").forward(request,response);
+        QLSanPham sp = this.sprepo.findByMa(ma);
+        request.setAttribute("sp",sp);
+        request.setAttribute("view","/views/san_pham/edit.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLSanPham qlSanPham = spRepository.findByMa(ma);
-        spRepository.delete(qlSanPham);
+        QLSanPham sp = this.sprepo.findByMa(ma);
+        this.sprepo.delete(sp);
         response.sendRedirect("/KhachHang_war_exploded/san-pham/index");
     }
+
+    protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view","/views/san_pham/create.jsp");
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
+    }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("danhSachSP",this.spRepository.findAll());
-        request.getRequestDispatcher("/views/san_pham/index.jsp").forward(request,response);
+//        this.litsSanPhams.add(new QLSanPham("PH1","AAAA"));
+//        this.litsSanPhams.add(new QLSanPham("PH2","BBBB"));
+        request.setAttribute("danhSachSP",this.sprepo.findAll());
+        request.setAttribute("view","/views/san_pham/index.jsp");
+
+        request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if(uri.contains("store")){
+        if(uri.contains("update")){
+            this.update(request,response);
+        }else if(uri.contains("store")){
             this.store(request,response);
-        }else if(uri.contains("update")) {
-            update(request, response);
-        }else{
-            this.index(request,response);
-        }
-    }
+        }else {
+            response.sendRedirect("/KhachHang_war_exploded/mau-sac/index");
+
+        }    }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLSanPham qlSanPham = new QLSanPham(ma,ten);
-        spRepository.insert(qlSanPham);
+        try{
+            QLSanPham vm = new QLSanPham();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.sprepo.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/san-pham/index");
+
 
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLSanPham qlSanPham = new QLSanPham(ma,ten);
-        spRepository.update(qlSanPham);
+        try{
+            QLSanPham vm = new QLSanPham();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.sprepo.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/KhachHang_war_exploded/san-pham/index");
+
 
     }
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: vuong
-  Date: 3/12/2023
-  Time: 6:56 AM
+  User: thean
+  Date: 14/03/2023
+  Time: 8:55 SA
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,30 +10,27 @@
 <html lang="en">
 <head>
     <title>Chức vụ</title>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form method="POST" action="/KhachHang_war_exploded/chuc-vu/update?ma=${cv.ma}" >
+<form method="POST" action="/KhachHang_war_exploded/chuc-vu/update?ma=${ cv.ma }" >
     <div class="container">
         <div class="card-body">
             <center><h1>Chức Vụ</h1></center>
             <br><br>
             <div class="col-md-12">
                 <label >Mã:</label>
-                <input type="text" name="ma"  class="form-control" value="${cv.ma}" disabled> <br><br>
+                <input type="text" name="ma"  class="form-control" value="${ cv.ma }" disabled/> <br><br>
             </div>
             <div class="col-md-12">
                 <label >Tên :</label>
-                <input type="text" name="ten"  class="form-control" value="${cv.ten}"> <br><br>
+                <input type="text" name="ten"  class="form-control" value="${ cv.ten }"/> <br><br>
             </div>
             <div class="col-md-12">
-                <center><button style="color: white;background: greenyellow" class="form-control">Cập Nhật Chức Vụ</button></center>
+                <center><button style="color: white;background: greenyellow" class="form-control">Sửa</button></center>
             </div>
         </div>
     </div>
