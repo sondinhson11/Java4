@@ -30,7 +30,9 @@
                 <div class="col-6">
                     <label>idSP</label>
                     <select name="idSP" class="form-select">
-
+                        <c:forEach items="${ dssp }" var="sp">
+                            <option value="${sp.ma}">${sp.ma}</option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -38,14 +40,15 @@
                 <div class="col-6">
                     <label>idNsx</label>
                     <select name="idNsx" class="form-select">
-                        <%--                        <option value="vi">Việt Nam</option>--%>
-                        <%--                        <option value="us">Mỹ</option>--%>
+                        <c:forEach items="${ dsnxs }" var="nxs">
+                            <option value="${nxs.ma}">${nxs.ma}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="col-6">
                     <label>idMauSac</label>
                     <select name="idMauSac" class="form-select">
-                        <c:forEach items="${ SLMS }" var="ms">
+                        <c:forEach items="${ dsms }" var="ms">
                             <option value="${ms.ma}">${ms.ma}</option>
                         </c:forEach>
                     </select>
@@ -55,16 +58,14 @@
                 <div class="col-6">
                     <label>idDongSP</label>
                     <select name="idDongSP" class="form-select">
-                        <%--                        <option value="vi">Việt Nam</option>--%>
-                        <%--                        <option value="us">Mỹ</option>--%>
+                        <c:forEach items="${ dsdsp }" var="dsp">
+                            <option value="${dsp.ma}">${dsp.ma}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="col-6">
                     <label>namBH</label>
-                    <select name="namBH" class="form-select">
-                        <%--                        <option value="vi">Việt Nam</option>--%>
-                        <%--                        <option value="us">Mỹ</option>--%>
-                    </select>
+                    <input type="text" name="namBH" class="form-control" />
                 </div>
             </div>
             <div class="row mt-3">

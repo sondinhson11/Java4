@@ -1,15 +1,14 @@
 package controller;
 
+import domain_model.DongSPDomain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
 import repository.DongSPRepository;
-import viewmodel.QLDongSP;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "DongSPServlet", value = {
         "/dongSP/index", //GET
@@ -23,9 +22,6 @@ public class DongSPServlet extends HttpServlet {
     private DongSPRepository dongSPRepository;
     public DongSPServlet(){
         dongSPRepository = new DongSPRepository();
-        this.dongSPRepository.insert(new QLDongSP("DSP1","Đồng Hồ"));
-        this.dongSPRepository.insert(new QLDongSP("DSP2","Giày Dép"));
-        this.dongSPRepository.insert(new QLDongSP("DSP3","Quần Áo"));
     }
 
     @Override
@@ -53,7 +49,7 @@ public class DongSPServlet extends HttpServlet {
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLDongSP qlDongSP = dongSPRepository.findByMa(ma);
+        DongSPDomain qlDongSP = dongSPRepository.findByMa(ma);
         request.setAttribute("dsp",qlDongSP);
         request.setAttribute("view", "/views/dongSP/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -61,7 +57,7 @@ public class DongSPServlet extends HttpServlet {
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLDongSP qlDongSP = dongSPRepository.findByMa(ma);
+        DongSPDomain qlDongSP = dongSPRepository.findByMa(ma);
         dongSPRepository.delete(qlDongSP);
         response.sendRedirect("/DuAnMauJava4_war_exploded/dongSP/index");
 
@@ -70,25 +66,33 @@ public class DongSPServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        if(uri.contains("store")){
-            this.store(request,response);
-
-        }else{
-            this.update(request,response);
+        if (uri.contains("store")) {
+            this.store(request, response);
+        } else if (uri.contains("update")) {
+            this.update(request, response);
+        } else {
+            this.index(request, response);
         }
     }
     protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLDongSP dsp = new QLDongSP(ma,ten);
-        this.dongSPRepository.insert(dsp);
+        try{
+            DongSPDomain vm = new DongSPDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.dongSPRepository.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/dongSP/index");
     }
     protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        QLDongSP dsp = new QLDongSP(ma,ten);
-        this.dongSPRepository.update(dsp);
+        try{
+            String ma = request.getParameter("ma");
+            DongSPDomain vm = this.dongSPRepository.findByMa(ma);
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.dongSPRepository.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/dongSP/index");
     }
 }

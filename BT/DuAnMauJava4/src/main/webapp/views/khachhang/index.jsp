@@ -32,12 +32,11 @@
             <thead class="table-primary">
             <tr>
                 <th>Mã</th>
-                <th>Họ</th>
-                <th>Đệm</th>
-                <th>Tên</th>
+                <th>Họ Và Tên</th>
                 <th>Ngày sinh</th>
                 <th>SDT</th>
                 <th>Địa chỉ</th>
+                <th>Mật Khẩu</th>
                 <th>Thành phố</th>
                 <th>Quốc gia</th>
                 <th colspan="2">Thao tác</th>
@@ -48,14 +47,13 @@
             <c:forEach items="${ danhSachKH }" var="kh">
                 <tr>
                     <td>${ kh.ma }</td>
-                    <td>${ kh.ho }</td>
-                    <td>${ kh.ten_dem }</td>
-                    <td>${ kh.ten }</td>
-                    <td>${ kh.ngay_sinh }</td>
+                    <td>${ kh.ho } ${ kh.tenDem } ${ kh.ten }</td>
+                    <td>${ kh.ngaySinh }</td>
                     <td>${ kh.sdt }</td>
-                    <td>${ kh.dia_chi }</td>
-                    <td>HN</td>
-                    <td>VN</td>
+                    <td>${ kh.diaChi }</td>
+                    <td>${ kh.matKhau }</td>
+                    <td>${ kh.thanhPho }</td>
+                    <td>${ kh.quocGia }</td>
                     <td>
                         <a class="btn btn-primary"
                            href="/DuAnMauJava4_war_exploded/khachhang/edit?ma=${ kh.ma }">

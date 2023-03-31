@@ -34,19 +34,22 @@
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Địa Chỉ</label>
-                    <input type="text" name="dia_chi" class="form-control" value="${ch.dia_chi}"/>
+                    <input type="text" name="diaChi" class="form-control" value="${ch.diaChi}"/>
                 </div>
                 <div class="col-6">
-                    <label>Thành Phố</label>
-                    <input type="text" name="thanh_pho" class="form-control" value="${ch.thanh_pho}"/>
+                    <label>Thành phố</label>
+                    <select name="thanhPho" class="form-select">
+                        <option value="Hà Nội"${ kh.thanhPho == "Hà Nội" ? "selected" : "" }>Hà Nội</option>
+                        <option value="Thanh Hóa"${ kh.thanhPho == "Thanh Hóa" ? "selected" : "" }>Thanh Hóa</option>
+                    </select>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
                     <label>Quốc gia</label>
-                    <select name="quoc_gia" class="form-select">
-                        <option value="vi" ${ kh.quoc_gia == "vi" ? "selected" : "" }>Việt Nam</option>
-                        <option value="us" ${ kh.quoc_gia == "us" ? "selected" : "" }>Mỹ</option>
+                    <select name="quocGia" class="form-select">
+                        <option value="Việt Nam" ${ kh.quocGia == "Việt Nam" ? "selected" : "" }>Việt Nam</option>
+                        <option value="Mỹ" ${ kh.quocGia == "Mỹ" ? "selected" : "" }>Mỹ</option>
                     </select>
                 </div>
             </div>

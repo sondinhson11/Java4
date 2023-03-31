@@ -2,13 +2,15 @@ package domain_model;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "CuaHang")
 public class CuaHangDomain {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @Column(name="Ma")
     private String Ma;
@@ -28,7 +30,7 @@ public class CuaHangDomain {
     public CuaHangDomain() {
     }
 
-    public CuaHangDomain(String id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+    public CuaHangDomain(UUID id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
         this.id = id;
         Ma = ma;
         Ten = ten;
@@ -37,11 +39,11 @@ public class CuaHangDomain {
         QuocGia = quocGia;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

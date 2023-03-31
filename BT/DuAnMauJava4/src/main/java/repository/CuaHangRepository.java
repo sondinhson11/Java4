@@ -1,44 +1,65 @@
 package repository;
 
-import viewmodel.QLCuaHang;
+import domain_model.CuaHangDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class CuaHangRepository {
-    ArrayList<QLCuaHang> list = new ArrayList<>();
-    public void insert(QLCuaHang cv) {
-        list.add(cv);
+    private Session hsession;
+
+
+    public CuaHangRepository() {
+        this.hsession= HibernateUtil.getFACTORY().openSession();
     }
-    public void update(QLCuaHang cv) {
-        for (int i = 0; i < list.size(); i++) {
-            QLCuaHang item = list.get(i);
-            if (item.getMa().equals(cv.getMa())) {
-                list.set(i, cv);
-            }
+
+    public void insert(CuaHangDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.persist(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public void delete(QLCuaHang cv) {
-        for (int i = 0; i < list.size(); i++) {
-            QLCuaHang item = list.get(i);
-            if (item.getMa().equals(cv.getMa())) {
-                list.remove(i);
-            }
+    public void update(CuaHangDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.merge(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
 
-    public ArrayList<QLCuaHang> findAll() {
-        return list;
-    }
-
-    public QLCuaHang findByMa(String ma) {
-        for (int i = 0; i < list.size(); i++) {
-            QLCuaHang item = list.get(i);
-            if (item.getMa().equals(ma)) {
-                return list.get(i);
-            }
+    public void delete(CuaHangDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
-        return null;
     }
 
+    public List<CuaHangDomain> findAll(){
+        String hql="SELECT obj FROM CuaHangDomain obj";
+        TypedQuery<CuaHangDomain> query = this.hsession.createQuery(hql,CuaHangDomain.class);
+        return query.getResultList();    }
+    public CuaHangDomain findByMa(String ma){
+        String hql =" SELECT obj FROM CuaHangDomain obj where obj.Ma=?1";
+        TypedQuery<CuaHangDomain> query=this.hsession.createQuery(hql,CuaHangDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
+    }
 }

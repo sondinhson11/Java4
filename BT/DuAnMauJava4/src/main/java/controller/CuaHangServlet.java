@@ -1,10 +1,12 @@
 package controller;
 
+import domain_model.CuaHangDomain;
+import domain_model.NSXDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.beanutils.BeanUtils;
 import repository.CuaHangRepository;
-import viewmodel.QLCuaHang;
 
 import java.io.IOException;
 
@@ -20,7 +22,6 @@ public class CuaHangServlet extends HttpServlet {
     CuaHangRepository cuaHangRepository;
     public CuaHangServlet(){
         cuaHangRepository = new CuaHangRepository();
-        this.cuaHangRepository.insert(new QLCuaHang("CH1","Sơn Đình Sơn Shop","112 Đoàn Thị Điểm","Sầm Sơn","vi"));
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +58,7 @@ public class CuaHangServlet extends HttpServlet {
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLCuaHang cuaHang = this.cuaHangRepository.findByMa(ma);
+        CuaHangDomain cuaHang = this.cuaHangRepository.findByMa(ma);
         request.setAttribute("ch", cuaHang);
         request.setAttribute("view", "/views/cuahang/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -68,7 +69,7 @@ public class CuaHangServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLCuaHang ch = this.cuaHangRepository.findByMa(ma);
+        CuaHangDomain ch = this.cuaHangRepository.findByMa(ma);
         this.cuaHangRepository.delete(ch);
         response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/index");
     }
@@ -89,33 +90,26 @@ public class CuaHangServlet extends HttpServlet {
         }
     }
 
-    protected void store(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String diaChi = request.getParameter("dia_chi");
-        String thanhPho = request.getParameter("thanh_pho");
-        String quocGia = request.getParameter("quoc_gia");
-
-        this.cuaHangRepository.insert(new QLCuaHang(ma,ten,diaChi,thanhPho,quocGia));
+    protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        try{
+            CuaHangDomain vm = new CuaHangDomain();
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.cuaHangRepository.insert(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/index");
-
     }
 
-    protected void update(
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws ServletException, IOException {
-        String ma = request.getParameter("ma");
-        String ten = request.getParameter("ten");
-        String diaChi = request.getParameter("dia_chi");
-        String thanhPho = request.getParameter("thanh_pho");
-        String quocGia = request.getParameter("quoc_gia");
-
-        this.cuaHangRepository.update(new QLCuaHang(ma,ten,diaChi,thanhPho,quocGia));
+    protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        try{
+            String ma = request.getParameter("ma");
+            CuaHangDomain vm = this.cuaHangRepository.findByMa(ma);
+            BeanUtils.populate(vm,request.getParameterMap());
+            this.cuaHangRepository.update(vm);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/index");
-
     }
 }

@@ -1,44 +1,64 @@
 package repository;
 
-import viewmodel.QLSanPham;
-
-import java.util.ArrayList;
+import domain_model.SanPhamDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
+import java.util.List;
 
 public class SanPhamRepository {
-   private ArrayList<QLSanPham> litsSanPhams ;
-   public SanPhamRepository() {
-       litsSanPhams = new ArrayList<>();
-   }
-   public  void insert(QLSanPham sp){
-       litsSanPhams.add(sp);
-   }
+    private Session hsession;
 
-   public void update(QLSanPham sp){
-       for (int i = 0; i < litsSanPhams.size(); i++) {
-           QLSanPham item = litsSanPhams.get(i);
-           if(item.getMa().equals(sp.getMa())){
-               litsSanPhams.set(i,sp);
-           }
-       }
-   }
-    public void delete(QLSanPham sp){
-        for (int i = 0; i < litsSanPhams.size(); i++) {
-            QLSanPham item = litsSanPhams.get(i);
-            if(item.getMa().equals(sp.getMa())){
-                litsSanPhams.remove(i);
-            }
+
+    public SanPhamRepository() {
+        this.hsession= HibernateUtil.getFACTORY().openSession();
+    }
+
+    public void insert(SanPhamDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.persist(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
-    public  ArrayList<QLSanPham > findAll(){
-       return litsSanPhams;
+
+    public void update(SanPhamDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.merge(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
     }
-    public  QLSanPham findByMa(String ma){
-       for (int i = 0; i < litsSanPhams.size(); i++) {
-           QLSanPham item = litsSanPhams.get(i);
-           if(item.getMa().equals(ma)){
-               return litsSanPhams.get(i);
-           }
-       }
-       return null;
+
+    public void delete(SanPhamDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public List<SanPhamDomain> findAll(){
+        String hql="SELECT obj FROM SanPhamDomain obj";
+        TypedQuery<SanPhamDomain> query = this.hsession.createQuery(hql,SanPhamDomain.class);
+        return query.getResultList();    }
+    public SanPhamDomain findByMa(String ma){
+        String hql =" SELECT obj FROM SanPhamDomain obj where obj.Ma=?1";
+        TypedQuery<SanPhamDomain> query=this.hsession.createQuery(hql,SanPhamDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 }

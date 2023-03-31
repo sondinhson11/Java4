@@ -1,15 +1,14 @@
 package controller;
 
+import domain_model.ChiTietSPDomain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
-import repository.ChiTietSPRepository;
-import repository.MauSacRepository;
-import viewmodel.QLChiTietSP;
-import viewmodel.QLMauSac;
+import repository.*;
+
 
 import java.io.IOException;
 
@@ -24,13 +23,17 @@ import java.io.IOException;
 public class ChiTietSPServlet extends HttpServlet {
     ChiTietSPRepository chiTietSPRepository;
     MauSacRepository mauSacRepository;
+    SanPhamRepository sanPhamRepository;
+    NsxRepository nsxRepository;
+    DongSPRepository dongSPRepository;
 
 
     public  ChiTietSPServlet() {
         chiTietSPRepository = new ChiTietSPRepository();
         mauSacRepository = new MauSacRepository();
-        this.chiTietSPRepository.insert(new QLChiTietSP("CTSP1","SP1", "NSX1", "MS1", "DSP1", "2","Hàng Rất Đẹp",100, 500, 1000));
-        this.chiTietSPRepository.insert(new QLChiTietSP("CTSP2","SP2", "NSX2", "MS2", "DSP2", "1","Hàng Rất Đẹp",100, 500, 1000));
+        sanPhamRepository = new SanPhamRepository();
+        nsxRepository = new NsxRepository();
+        dongSPRepository = new DongSPRepository();
     }
 
     @Override
@@ -54,13 +57,17 @@ public class ChiTietSPServlet extends HttpServlet {
 
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("SLMS",this.chiTietSPRepository.findAll());
+        request.setAttribute("dsms",this.mauSacRepository.findAll());
+        request.setAttribute("dssp",this.sanPhamRepository.findAll());
+        request.setAttribute("dsnxs",this.nsxRepository.findAll());
+        request.setAttribute("dsdsp",this.dongSPRepository.findAll());
         request.setAttribute("view", "/views/ctsanpham/create.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLChiTietSP sp = this.chiTietSPRepository.findByMa(ma);
+        ChiTietSPDomain sp = this.chiTietSPRepository.findByMa(ma);
         request.setAttribute("sp", sp);
         request.setAttribute("view", "/views/ctsanpham/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -70,7 +77,7 @@ public class ChiTietSPServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLChiTietSP sp = this.chiTietSPRepository.findByMa(ma);
+        ChiTietSPDomain sp = this.chiTietSPRepository.findByMa(ma);
         this.chiTietSPRepository.delete(sp);
         response.sendRedirect("/DuAnMauJava4_war_exploded/ctsanpham/index");
     }
@@ -91,7 +98,7 @@ public class ChiTietSPServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         try {
-            QLChiTietSP vm = new QLChiTietSP();
+            ChiTietSPDomain vm = new ChiTietSPDomain();
             BeanUtils.populate(vm, request.getParameterMap());
             this.chiTietSPRepository.insert(vm);
         } catch (Exception e) {
@@ -105,7 +112,8 @@ public class ChiTietSPServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         try {
-            QLChiTietSP vm = new QLChiTietSP();
+            String ma = request.getParameter("ma");
+            ChiTietSPDomain vm = this.chiTietSPRepository.findByMa(ma);
             BeanUtils.populate(vm, request.getParameterMap());
             this.chiTietSPRepository.update(vm);
         } catch (Exception e) {

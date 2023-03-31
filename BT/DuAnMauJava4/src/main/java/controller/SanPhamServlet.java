@@ -1,5 +1,6 @@
 package controller;
 
+import domain_model.SanPhamDomain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,11 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.SanPhamRepository;
-import viewmodel.QLKhachHang;
-import viewmodel.QLSanPham;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "SanPhamServlet", value = {
         "/sanpham/index", //GET
@@ -26,8 +23,6 @@ public class SanPhamServlet extends HttpServlet {
 
     public SanPhamServlet() {
         sanPhamRepository = new SanPhamRepository();
-        this.sanPhamRepository.insert(new QLSanPham("SP1", "Apple Watch"));
-        this.sanPhamRepository.insert(new QLSanPham("SP2", "Áo Đá Bóng"));
     }
 
     @Override
@@ -57,7 +52,7 @@ public class SanPhamServlet extends HttpServlet {
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLSanPham sp = this.sanPhamRepository.findByMa(ma);
+        SanPhamDomain sp = this.sanPhamRepository.findByMa(ma);
         request.setAttribute("sp", sp);
         request.setAttribute("view", "/views/sanpham/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -67,7 +62,7 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLSanPham sp = this.sanPhamRepository.findByMa(ma);
+        SanPhamDomain sp = this.sanPhamRepository.findByMa(ma);
         this.sanPhamRepository.delete(sp);
         response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/index");
     }
@@ -88,7 +83,7 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         try {
-            QLSanPham vm = new QLSanPham();
+            SanPhamDomain vm = new SanPhamDomain();
             BeanUtils.populate(vm, request.getParameterMap());
             this.sanPhamRepository.insert(vm);
         } catch (Exception e) {
@@ -102,7 +97,8 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         try {
-            QLSanPham vm = new QLSanPham();
+            String ma = request.getParameter("ma");
+            SanPhamDomain vm = this.sanPhamRepository.findByMa(ma);
             BeanUtils.populate(vm, request.getParameterMap());
             this.sanPhamRepository.update(vm);
         } catch (Exception e) {

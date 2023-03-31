@@ -42,9 +42,9 @@
                     <tr>
                         <th scope="row">${ch.ma}</th>
                         <td>${ch.ten}</td>
-                        <td>${ch.dia_chi}</td>
-                        <td>${ch.thanh_pho}</td>
-                        <td>${ch.quoc_gia}</td>
+                        <td>${ch.diaChi}</td>
+                        <td>${ch.thanhPho}</td>
+                        <td>${ch.quocGia}</td>
                         <td>
                             <a class="btn btn-primary"
                                href="/DuAnMauJava4_war_exploded/cuahang/edit?ma=${ ch.ma }">

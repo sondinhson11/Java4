@@ -1,44 +1,60 @@
 package repository;
 
-import viewmodel.QLChiTietSP;
+import domain_model.ChiTietSPDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ChiTietSPRepository {
-   private ArrayList<QLChiTietSP> litsSanPhams ;
+    private Session hsession;
    public ChiTietSPRepository() {
-       litsSanPhams = new ArrayList<>();
+       this.hsession= HibernateUtil.getFACTORY().openSession();
    }
-   public  void insert(QLChiTietSP sp){
-       litsSanPhams.add(sp);
+   public  void insert(ChiTietSPDomain sp){
+       Transaction transaction = this.hsession.getTransaction();
+       try{
+           transaction.begin();
+           this.hsession.persist(sp);
+           transaction.commit();
+       }catch (Exception e){
+           e.printStackTrace();
+           transaction.rollback();
+       }
    }
 
-   public void update(QLChiTietSP sp){
-       for (int i = 0; i < litsSanPhams.size(); i++) {
-           QLChiTietSP item = litsSanPhams.get(i);
-           if(item.getMa().equals(sp.getMa())){
-               litsSanPhams.set(i,sp);
-           }
+   public void update(ChiTietSPDomain sp){
+       Transaction transaction = this.hsession.getTransaction();
+       try{
+           transaction.begin();
+           this.hsession.merge(sp);
+           transaction.commit();
+       }catch (Exception e){
+           e.printStackTrace();
+           transaction.rollback();
        }
    }
-    public void delete(QLChiTietSP sp){
-        for (int i = 0; i < litsSanPhams.size(); i++) {
-            QLChiTietSP item = litsSanPhams.get(i);
-            if(item.getMa().equals(sp.getMa())){
-                litsSanPhams.remove(i);
-            }
+    public void delete(ChiTietSPDomain sp){
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(sp);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
     }
-    public  ArrayList<QLChiTietSP > findAll(){
-       return litsSanPhams;
-    }
-    public  QLChiTietSP findByMa(String ma){
-       for (int i = 0; i < litsSanPhams.size(); i++) {
-           QLChiTietSP item = litsSanPhams.get(i);
-           if(item.getMa().equals(ma)){
-               return litsSanPhams.get(i);
-           }
-       }
-       return null;
+    public List<ChiTietSPDomain> findAll(){
+        String hql="SELECT obj FROM ChiTietSPDomain obj";
+        TypedQuery<ChiTietSPDomain> query = this.hsession.createQuery(hql,ChiTietSPDomain.class);
+        return query.getResultList();    }
+    public ChiTietSPDomain findByMa(String ma){
+        String hql =" SELECT obj FROM ChiTietSPDomain obj where obj.Ma=?1";
+        TypedQuery<ChiTietSPDomain> query=this.hsession.createQuery(hql,ChiTietSPDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 }

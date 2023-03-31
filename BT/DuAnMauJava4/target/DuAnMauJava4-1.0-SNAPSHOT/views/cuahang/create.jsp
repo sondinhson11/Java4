@@ -34,19 +34,22 @@
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Địa Chỉ</label>
-                    <input type="text" name="dia_chi" class="form-control" />
+                    <input type="text" name="diaChi" class="form-control" />
                 </div>
                 <div class="col-6">
-                    <label>Thành Phố</label>
-                    <input type="text" name="thanh_pho" class="form-control" />
+                    <label>Thành phố</label>
+                    <select name="thanhPho" class="form-select">
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="Thanh Hóa">Thanh Hóa</option>
+                    </select>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-                    <label>Quốc Gia</label>
-                    <select name="quoc_gia" class="form-select">
-                        <option value="vi">Việt Nam</option>
-                        <option value="us">Mỹ</option>
+                    <label>Quốc gia</label>
+                    <select name="quocGia" class="form-select">
+                        <option value="Việt Nam">Việt Nam</option>
+                        <option value="Mỹ">Mỹ</option>
                     </select>
                 </div>
             </div>

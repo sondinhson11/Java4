@@ -69,7 +69,7 @@ public class KhachHangServlet extends HttpServlet {
         String ma = request.getParameter("ma");
         KhachHangDomain kh = this.khRepo.findByMa(ma);
         request.setAttribute("kh", kh);
-        request.setAttribute("view", "/views/khachhang/create.jsp");
+        request.setAttribute("view", "/views/khachhang/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 

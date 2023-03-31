@@ -1,45 +1,63 @@
 package repository;
 
-import viewmodel.QLDongSP;
-
-import java.util.ArrayList;
+import domain_model.DongSPDomain;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import utils.HibernateUtil;
+import java.util.List;
 
 public class DongSPRepository {
-   private ArrayList<QLDongSP> listDongSP ;
-    public DongSPRepository(){
-       listDongSP = new ArrayList<>();
+    private Session hsession;
+
+    public DongSPRepository() {
+        this.hsession= HibernateUtil.getFACTORY().openSession();
     }
 
-    public void insert(QLDongSP dsp){
-        listDongSP.add(dsp);
-    }
-    public void update(QLDongSP dsp){
-        for (int i = 0; i < listDongSP.size(); i++) {
-            QLDongSP item = listDongSP.get(i);
-            if(item.getMa().equals(dsp.getMa())){
-                listDongSP.set(i, dsp);
-            }
+    public void insert(DongSPDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.persist(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
-    }
-    public void delete(QLDongSP dsp){
-        for (int i = 0; i < listDongSP.size(); i++) {
-            QLDongSP item = listDongSP.get(i);
-            if(item.getMa().equals(dsp.getMa())){
-                listDongSP.remove(i);
-            }
-        }
-    }
-    public ArrayList<QLDongSP> findAll(){
-        return listDongSP;
     }
 
-    public QLDongSP findByMa(String ma){
-        for (int i = 0; i < listDongSP.size(); i++) {
-            QLDongSP item = listDongSP.get(i);
-            if(item.getMa().equals(ma)){
-                return listDongSP.get(i);
-            }
+    public void update(DongSPDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.merge(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
         }
-        return null;
+    }
+
+    public void delete(DongSPDomain qlnsx) {
+        Transaction transaction = this.hsession.getTransaction();
+        try{
+            transaction.begin();
+            this.hsession.delete(qlnsx);
+            transaction.commit();
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
+    public List<DongSPDomain> findAll(){
+        String hql="SELECT obj FROM DongSPDomain obj";
+        TypedQuery<DongSPDomain> query = this.hsession.createQuery(hql,DongSPDomain.class);
+        return query.getResultList();    }
+    public DongSPDomain findByMa(String ma){
+        String hql =" SELECT obj FROM DongSPDomain obj where obj.Ma=?1";
+        TypedQuery<DongSPDomain> query=this.hsession.createQuery(hql,DongSPDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 }
