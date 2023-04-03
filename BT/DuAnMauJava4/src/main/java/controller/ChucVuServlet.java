@@ -6,6 +6,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.ChucVuRepository;
+import utils.CheckString;
+
 import java.io.IOException;
 
 @WebServlet({
@@ -18,6 +20,10 @@ import java.io.IOException;
 })
 public class ChucVuServlet extends HttpServlet {
     ChucVuRepository chucVuRepository;
+    String error ;
+    String errorTen;
+    String errorMa;
+
     public ChucVuServlet()
     {
         this.chucVuRepository = new ChucVuRepository();
@@ -38,6 +44,7 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
         request.setAttribute("DSChucVu", this.chucVuRepository.findAll());
         request.setAttribute("view", "/views/chucvu/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -45,6 +52,9 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
+        request.setAttribute("checkten", errorTen);
+        request.setAttribute("checkma", errorMa);
         request.setAttribute("view", "/views/chucvu/create.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
@@ -80,13 +90,29 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ChucVuDomain vm = new ChucVuDomain();
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        ChucVuDomain cv = chucVuRepository.findByMa(vm.getMa());
+        if (cv!=null){
+            error="Trùng mã";
+            response.sendRedirect("/chucvu/create");
+            return;
+        }else{
+            error="";
+        }
+
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/chucvu/create");
+            return;
+        }
+
         try {
-            ChucVuDomain vm = new ChucVuDomain();
             BeanUtils.populate(vm, request.getParameterMap());
-            this.chucVuRepository.insert(vm);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.chucVuRepository.insert(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
 

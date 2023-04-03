@@ -20,6 +20,9 @@ import java.io.IOException;
 })
 public class SanPhamServlet extends HttpServlet {
     SanPhamRepository sanPhamRepository;
+    String error ;
+    String errorTen;
+    String errorMa;
 
     public SanPhamServlet() {
         sanPhamRepository = new SanPhamRepository();

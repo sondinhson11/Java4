@@ -21,7 +21,9 @@ import java.io.IOException;
 })
 public class GioHangCTServlet extends HttpServlet {
     GioHangCTRepository gioHangCTRepository;
-
+    String error ;
+    String errorTen;
+    String errorMa;
     public GioHangCTServlet() {
         gioHangCTRepository = new GioHangCTRepository();
         this.gioHangCTRepository.insert(new QLGioHangChiTiet("HD1", "CTSP1", 1, 200));

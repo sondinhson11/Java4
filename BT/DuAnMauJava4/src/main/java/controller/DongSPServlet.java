@@ -20,6 +20,10 @@ import java.io.IOException;
 })
 public class DongSPServlet extends HttpServlet {
     private DongSPRepository dongSPRepository;
+
+    String error ;
+    String errorTen;
+    String errorMa;
     public DongSPServlet(){
         dongSPRepository = new DongSPRepository();
     }

@@ -20,6 +20,10 @@ import java.io.IOException;
 })
 public class CuaHangServlet extends HttpServlet {
     CuaHangRepository cuaHangRepository;
+    String error ;
+    String errorTen;
+    String errorMa;
+
     public CuaHangServlet(){
         cuaHangRepository = new CuaHangRepository();
     }

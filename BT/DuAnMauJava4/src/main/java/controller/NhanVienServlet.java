@@ -1,15 +1,15 @@
 package controller;
 
+import domain_model.NhanVienDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.apache.commons.beanutils.BeanUtils;
+import repository.ChucVuRepository;
+import repository.CuaHangRepository;
 import repository.NhanVienRepository;
-import viewmodel.QLNhanVien;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
 
 @WebServlet(name = "NhanViennServlet",value = {
         "/nhanvien/index", //GET
@@ -21,8 +21,16 @@ import java.util.ArrayList;
 })
 public class NhanVienServlet extends HttpServlet {
     NhanVienRepository nhanVienRepository;
+    ChucVuRepository chucVuRepository;
+    CuaHangRepository cuaHangRepository;
+    String error ;
+    String errorTen;
+    String errorMa;
+
     public NhanVienServlet(){
         nhanVienRepository = new NhanVienRepository();
+        chucVuRepository = new ChucVuRepository();
+        cuaHangRepository = new CuaHangRepository();
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -43,19 +51,23 @@ public class NhanVienServlet extends HttpServlet {
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("dscv",this.chucVuRepository.findAll());
+        request.setAttribute("dsch",this.cuaHangRepository.findAll());
         request.setAttribute("view", "/views/nhanvien/create.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLNhanVien nv = this.nhanVienRepository.findByMa(ma);
+        request.setAttribute("dscv",this.chucVuRepository.findAll());
+        request.setAttribute("dsch",this.cuaHangRepository.findAll());
+        NhanVienDomain nv = this.nhanVienRepository.findByMa(ma);
         request.setAttribute("nv",nv);
         request.setAttribute("view", "/views/nhanvien/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        QLNhanVien nv = this.nhanVienRepository.findByMa(ma);
+        NhanVienDomain nv = this.nhanVienRepository.findByMa(ma);
         this.nhanVienRepository.delete(nv);
         response.sendRedirect("/DuAnMauJava4_war_exploded/nhanvien/index");
     }
@@ -72,7 +84,7 @@ public class NhanVienServlet extends HttpServlet {
     }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            QLNhanVien nv = new QLNhanVien();
+            NhanVienDomain nv = new NhanVienDomain();
             BeanUtils.populate(nv,request.getParameterMap());
             nhanVienRepository.insert(nv);
         } catch (Exception e) {
@@ -83,7 +95,8 @@ public class NhanVienServlet extends HttpServlet {
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            QLNhanVien nv = new QLNhanVien();
+            String ma = request.getParameter("ma");
+            NhanVienDomain nv = this.nhanVienRepository.findByMa(ma);
             BeanUtils.populate(nv,request.getParameterMap());
             nhanVienRepository.update(nv);
         } catch (Exception e) {

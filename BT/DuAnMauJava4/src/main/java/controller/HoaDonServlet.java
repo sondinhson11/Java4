@@ -22,7 +22,9 @@ import java.sql.Date;
 })
 public class HoaDonServlet extends HttpServlet {
     HoaDonRepository hoaDonRepository;
-
+    String error ;
+    String errorTen;
+    String errorMa;
     public HoaDonServlet() {
         hoaDonRepository = new HoaDonRepository();
 //        this.hoaDonRepository.insert(new QLHoaDon("KH1","NV1", "HD1", Date.valueOf("12-12-2003"), Date.valueOf("12-12-2003"), Date.valueOf("12-12-2003"), Date.valueOf("12-12-2003"), "Đạt 09", "Số 2 tô hiệu", "0123456789", 1));

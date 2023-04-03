@@ -3,6 +3,7 @@ package domain_model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,13 +20,13 @@ public class ChucVuDomain {
     @Column(name="Ten")
     private  String Ten;
 
-    public ChucVuDomain() {
-    }
+    @OneToMany(
+            mappedBy = "cv",
+            fetch = FetchType.LAZY
+    )
+    private List<NhanVienDomain> listNv;
 
-    public ChucVuDomain(UUID id, String ma, String ten) {
-        this.id = id;
-        Ma = ma;
-        Ten = ten;
+    public ChucVuDomain() {
     }
 
     public UUID getId() {
@@ -50,5 +51,13 @@ public class ChucVuDomain {
 
     public void setTen(String ten) {
         Ten = ten;
+    }
+
+    public List<NhanVienDomain> getListNv() {
+        return listNv;
+    }
+
+    public void setListNv(List<NhanVienDomain> listNv) {
+        this.listNv = listNv;
     }
 }

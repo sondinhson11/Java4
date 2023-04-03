@@ -25,16 +25,15 @@ public class HibernateUtil {
         properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
-        conf.addAnnotatedClass(KhachHangDomain.class);
         conf.addAnnotatedClass(ChucVuDomain.class);
         conf.addAnnotatedClass(CuaHangDomain.class);
         conf.addAnnotatedClass(DongSPDomain.class);
         conf.addAnnotatedClass(MauSacDomain.class);
-        conf.addAnnotatedClass(NhanVienDomain.class);
         conf.addAnnotatedClass(NSXDomain.class);
         conf.addAnnotatedClass(SanPhamDomain.class);
         conf.addAnnotatedClass(ChiTietSPDomain.class);
-
+        conf.addAnnotatedClass(KhachHangDomain.class);
+        conf.addAnnotatedClass(NhanVienDomain.class);
 
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

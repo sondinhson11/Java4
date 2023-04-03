@@ -27,6 +27,9 @@ public class ChiTietSPServlet extends HttpServlet {
     NsxRepository nsxRepository;
     DongSPRepository dongSPRepository;
 
+    String error ;
+    String errorTen;
+    String errorMa;
 
     public  ChiTietSPServlet() {
         chiTietSPRepository = new ChiTietSPRepository();

@@ -22,7 +22,9 @@ import java.io.IOException;
 })
 public class KhachHangServlet extends HttpServlet {
     private KhachHangRepository khRepo;
-
+    String error ;
+    String errorTen;
+    String errorMa;
     public KhachHangServlet() {
         this.khRepo = new KhachHangRepository();
     }

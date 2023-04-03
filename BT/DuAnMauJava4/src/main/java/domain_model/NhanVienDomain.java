@@ -2,160 +2,178 @@ package domain_model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name="NhanVien")
 public class NhanVienDomain {
     @Id
-    @Column(name="Id")
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID Id;
-    @Column(name="Ma")
-    private String Ma;
-    @Column(name="Ten")
-    private String Ten;
-    @Column(name="TenDem")
-    private String TenDem;
-    @Column(name="Ho")
-    private String Ho;
-    @Column(name="NgaySinh")
-    private String NgaySinh;
-    @Column(name="DiaChi")
-    private String DiaChi;
-    @Column(name="Sdt")
-    private String Sdt;
-    @Column(name="MatKhau")
-    private String MatKhau;
-    @Column(name="IdCH")
-    private String IdCH;
-    @Column(name="IdCV")
-    private String IdCV;
-    @Column(name="IdGuiBC")
-    private String IdGuiBC;
-    @Column(name="TrangThai")
-    private int TrangThai;
+    private UUID id;
+
+    @Column(name = "Ma")
+    private String ma;
+
+    @Column(name = "Ho")
+    private String ho;
+
+    @Column(name = "TenDem")
+    private String tenDem;
+
+    @Column(name = "Ten")
+    private String ten;
+
+    @Column(name = "GioiTinh")
+    private String gioiTinh;
+
+    @Column(name = "NgaySinh")
+    private Date ngaySinh;
+
+    @Column(name = "DiaChi")
+    private String diaChi;
+
+    @Column(name = "Sdt")
+    private String sdt;
+
+    @Column(name = "MatKhau")
+    private String matKhau;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdCV",
+            referencedColumnName = "Id"
+    )
+    private ChucVuDomain cv;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdCH",
+            referencedColumnName = "Id"
+    )
+
+    private CuaHangDomain ch;
+
+    @Column(name = "IdGuiBC")
+    private UUID idGuiBC;
+
+    @Column(name = "TrangThai")
+    private Integer trangThai;
+
 
     public NhanVienDomain() {
     }
 
-    public NhanVienDomain(UUID id, String ma, String ten, String tenDem, String ho, String ngaySinh, String diaChi, String sdt, String matKhau, String idCH, String idCV, String idGuiBC, int trangThai) {
-        Id = id;
-        Ma = ma;
-        Ten = ten;
-        TenDem = tenDem;
-        Ho = ho;
-        NgaySinh = ngaySinh;
-        DiaChi = diaChi;
-        Sdt = sdt;
-        MatKhau = matKhau;
-        IdCH = idCH;
-        IdCV = idCV;
-        IdGuiBC = idGuiBC;
-        TrangThai = trangThai;
-    }
-
     public UUID getId() {
-        return  Id;
+        return id;
     }
 
     public void setId(UUID id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getMa() {
-        return Ma;
+        return ma;
     }
 
     public void setMa(String ma) {
-        Ma = ma;
-    }
-
-    public String getTen() {
-        return Ten;
-    }
-
-    public void setTen(String ten) {
-        Ten = ten;
-    }
-
-    public String getTenDem() {
-        return TenDem;
-    }
-
-    public void setTenDem(String tenDem) {
-        TenDem = tenDem;
+        this.ma = ma;
     }
 
     public String getHo() {
-        return Ho;
+        return ho;
     }
 
     public void setHo(String ho) {
-        Ho = ho;
+        this.ho = ho;
     }
 
-    public String getNgaySinh() {
-        return NgaySinh;
+    public String getTenDem() {
+        return tenDem;
     }
 
-    public void setNgaySinh(String ngaySinh) {
-        NgaySinh = ngaySinh;
+    public void setTenDem(String tenDem) {
+        this.tenDem = tenDem;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
     }
 
     public String getDiaChi() {
-        return DiaChi;
+        return diaChi;
     }
 
     public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
+        this.diaChi = diaChi;
     }
 
     public String getSdt() {
-        return Sdt;
+        return sdt;
     }
 
     public void setSdt(String sdt) {
-        Sdt = sdt;
+        this.sdt = sdt;
     }
 
     public String getMatKhau() {
-        return MatKhau;
+        return matKhau;
     }
 
     public void setMatKhau(String matKhau) {
-        MatKhau = matKhau;
+        this.matKhau = matKhau;
     }
 
-    public String getIdCH() {
-        return IdCH;
+    public CuaHangDomain getCh() {
+        return ch;
     }
 
-    public void setIdCH(String idCH) {
-        IdCH = idCH;
+    public void setCh(CuaHangDomain ch) {
+        this.ch = ch;
     }
 
-    public String getIdCV() {
-        return IdCV;
+    public ChucVuDomain getCv() {
+        return cv;
     }
 
-    public void setIdCV(String idCV) {
-        IdCV = idCV;
+    public void setCv(ChucVuDomain cv) {
+        this.cv = cv;
     }
 
-    public String getIdGuiBC() {
-        return IdGuiBC;
+    public UUID getIdGuiBC() {
+        return idGuiBC;
     }
 
-    public void setIdGuiBC(String idGuiBC) {
-        IdGuiBC = idGuiBC;
+    public void setIdGuiBC(UUID idGuiBC) {
+        this.idGuiBC = idGuiBC;
     }
 
-    public int getTrangThai() {
-        return TrangThai;
+    public Integer getTrangThai() {
+        return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
-        TrangThai = trangThai;
+    public void setTrangThai(Integer trangThai) {
+        this.trangThai = trangThai;
     }
 }

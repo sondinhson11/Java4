@@ -22,7 +22,9 @@ import java.sql.Date;
 })
 public class HoaDonCTServlet extends HttpServlet {
     HoaDonCTRepository hoaDonCTRepository;
-
+    String error ;
+    String errorTen;
+    String errorMa;
     public HoaDonCTServlet() {
         hoaDonCTRepository = new HoaDonCTRepository();
         this.hoaDonCTRepository.insert(new QLHoaDonChiTiet("HD1", "CTSP1", 10, 20));

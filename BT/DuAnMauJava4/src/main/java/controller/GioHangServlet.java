@@ -22,7 +22,9 @@ import java.sql.Date;
 })
 public class GioHangServlet extends HttpServlet {
     GioHangRepository gioHangRepository;
-
+    String error ;
+    String errorTen;
+    String errorMa;
     public GioHangServlet() {
         gioHangRepository = new GioHangRepository();
         this.gioHangRepository.insert(new QLGioHang("KH1", "NV1", "GH1", Date.valueOf("2023/03/23"), Date.valueOf("2023/03/23"), "Nguyện", "Tuyên Quang", "01234567789", 1));

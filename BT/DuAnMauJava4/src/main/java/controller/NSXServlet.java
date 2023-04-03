@@ -18,6 +18,9 @@ import java.io.IOException;
 })
 public class NSXServlet extends HttpServlet {
     NsxRepository nsxRepository ;
+    String error ;
+    String errorTen;
+    String errorMa;
     public NSXServlet(){
         nsxRepository = new NsxRepository();
     }

@@ -2,6 +2,7 @@ package domain_model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,6 +27,13 @@ public class CuaHangDomain {
 
     @Column(name="QuocGia")
     private String QuocGia;
+
+    @OneToMany(
+            mappedBy = "ch",
+            fetch = FetchType.LAZY
+    )
+    private List<CuaHangDomain> listCH;
+
 
     public CuaHangDomain() {
     }
@@ -85,5 +93,12 @@ public class CuaHangDomain {
 
     public void setQuocGia(String quocGia) {
         QuocGia = quocGia;
+    }
+
+    public List<CuaHangDomain> listCH() {
+        return listCH;
+    }
+    public void listCH(List<CuaHangDomain> listCH) {
+        this.listCH = listCH;
     }
 }
