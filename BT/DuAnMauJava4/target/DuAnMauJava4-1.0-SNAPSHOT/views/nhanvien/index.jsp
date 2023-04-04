@@ -53,8 +53,8 @@
                         <td>${ nv.diaChi }</td>
                         <td>${ nv.sdt }</td>
                         <td>${ nv.matKhau }</td>
-                        <td>${ nv.ch }</td>
-<%--                        <td>${ nv.cv }</td>--%>
+                        <td>${ nv.cuaHang.ten }</td>
+                        <td>${ nv.cv.ten }</td>
 <%--                        <td>${ nv.idGuiBC }</td>--%>
                         <td>${ nv.trangThai }</td>
                         <td>

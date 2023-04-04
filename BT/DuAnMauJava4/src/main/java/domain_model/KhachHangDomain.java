@@ -1,6 +1,7 @@
 package domain_model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import java.util.UUID;
 @Table(name="KhachHang")
 public class KhachHangDomain {
     @Id
-    @Column(name="Id")
+    @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID Id;
     @Column(name="Ma")

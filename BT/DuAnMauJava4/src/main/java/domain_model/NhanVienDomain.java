@@ -1,6 +1,7 @@
 package domain_model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.sql.Date;
 import java.util.UUID;
@@ -9,9 +10,10 @@ import java.util.UUID;
 @Table(name="NhanVien")
 public class NhanVienDomain {
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id" , columnDefinition="uniqueidentifier")
+    private String id;
 
     @Column(name = "Ma")
     private String ma;
@@ -53,7 +55,7 @@ public class NhanVienDomain {
             referencedColumnName = "Id"
     )
 
-    private CuaHangDomain ch;
+    private CuaHangDomain cuaHang;
 
     @Column(name = "IdGuiBC")
     private UUID idGuiBC;
@@ -65,11 +67,11 @@ public class NhanVienDomain {
     public NhanVienDomain() {
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -145,12 +147,12 @@ public class NhanVienDomain {
         this.matKhau = matKhau;
     }
 
-    public CuaHangDomain getCh() {
-        return ch;
+    public CuaHangDomain getCuaHang() {
+        return cuaHang;
     }
 
-    public void setCh(CuaHangDomain ch) {
-        this.ch = ch;
+    public void setCuaHang(CuaHangDomain cuaHang) {
+        this.cuaHang = cuaHang;
     }
 
     public ChucVuDomain getCv() {

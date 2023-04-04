@@ -9,6 +9,7 @@ import repository.ChucVuRepository;
 import utils.CheckString;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 @WebServlet({
         "/chucvu/index", //GET
@@ -90,30 +91,17 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ChucVuDomain vm = new ChucVuDomain();
-        errorTen = CheckString.checkValues(vm.getTen(),"tên");
-        errorMa = CheckString.checkValues(vm.getMa(),"mã");
-        ChucVuDomain cv = chucVuRepository.findByMa(vm.getMa());
-        if (cv!=null){
-            error="Trùng mã";
-            response.sendRedirect("/chucvu/create");
-            return;
-        }else{
-            error="";
-        }
-
-        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
-            response.sendRedirect("/chucvu/create");
-            return;
-        }
-
         try {
-            BeanUtils.populate(vm, request.getParameterMap());
-        } catch (Exception e) {
+            ChucVuDomain chucVu = new ChucVuDomain();
+            BeanUtils.populate(chucVu, request.getParameterMap());
+            chucVuRepository.insert(chucVu);
+            response.sendRedirect("../chucvu/index");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        this.chucVuRepository.insert(vm);
-        response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
+
     }
 
     protected void update(

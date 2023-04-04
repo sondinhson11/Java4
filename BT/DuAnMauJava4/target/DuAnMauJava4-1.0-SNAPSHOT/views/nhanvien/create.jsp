@@ -55,13 +55,13 @@
                 <div class="col-md-6">
                     <label>Giới Tính </label>
                     <div class="form-check">
-                        <input class="form-check-input" value="Nam" type="radio" name="gioitinh">
+                        <input class="form-check-input" value="Nam" type="radio" name="gioiTinh">
                         <label class="form-check-label">
                             Nam
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="Nữ" name="gioitinh">
+                        <input class="form-check-input" type="radio" value="Nữ" name="gioiTinh">
                         <label class="form-check-label">
                             Nữ
                         </label>
@@ -98,9 +98,9 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID cửa hàng</label>
-                        <select class="form-select" name="ch" aria-label="Default select example">
+                        <select class="form-select" name="idCH" aria-label="Default select example">
                             <c:forEach items="${ dsch }" var="ch">
-                                <option value="${ch.ma}">${ch.ten}</option>
+                                <option value="${ch.id}">${ch.ten}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -110,9 +110,9 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID Chức Vụ</label>
-                        <select name="cv" class="form-select">
+                        <select name="idCV" class="form-select">
                             <c:forEach items="${ dscv }" var="cv">
-                                <option value="${cv.ma}">${cv.ten}</option>
+                                <option value="${cv.id}">${cv.ten}</option>
                             </c:forEach>
                         </select>
                     </div>

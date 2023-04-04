@@ -9,59 +9,59 @@ import utils.HibernateUtil;
 import java.util.List;
 
 public class NhanVienRepository {
-    private Session hsession;
-
+    private Session hss;
 
     public NhanVienRepository() {
-        this.hsession = HibernateUtil.getFACTORY().openSession();
+
+        this.hss = HibernateUtil.getFACTORY().openSession();
     }
-    public void insert(NhanVienDomain qlms) {
-        Transaction transaction = this.hsession.getTransaction();
+    public void insert(NhanVienDomain nv){
+        Transaction transaction = this.hss.getTransaction();
         try {
             transaction.begin();
-            this.hsession.persist(qlms);
+            hss.persist(nv);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         }
     }
-
-    public void update(NhanVienDomain qlms) {
-        Transaction transaction = this.hsession.getTransaction();
+    public void update(NhanVienDomain nv){
+        Transaction transaction = this.hss.getTransaction();
         try {
             transaction.begin();
-            this.hsession.merge(qlms);
+            hss.merge(nv);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         }
     }
-
-    public void delete(NhanVienDomain qlms) {
-        Transaction transaction = this.hsession.getTransaction();
+    public void delete(NhanVienDomain nv){
+        Transaction transaction = this.hss.getTransaction();
         try {
             transaction.begin();
-            this.hsession.delete(qlms);
+            hss.delete(nv);
             transaction.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         }
     }
+    public NhanVienDomain findById(String id){
+        return this.hss.find(NhanVienDomain.class,id);
 
-    public List<NhanVienDomain> findAll() {
+    }
+    public List<NhanVienDomain> findAll(){
         String hql = "SELECT obj FROM NhanVienDomain obj";
-        TypedQuery<NhanVienDomain> query = this.hsession.createQuery(hql, NhanVienDomain.class);
-        return query.getResultList();
+        TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql,NhanVienDomain.class);
+        List<NhanVienDomain> list = query.getResultList();
+        return list;
     }
-
-    public NhanVienDomain findByMa(String ma) {
-        String hql = "SELECT obj FROM NhanVienDomain obj where obj.Ma=?1";
-        TypedQuery<NhanVienDomain> query = this.hsession.createQuery(hql, NhanVienDomain.class);
-        query.setParameter(1, ma);
+    public NhanVienDomain findByMa(String ma){
+        String hql = "SELECT obj FROM NhanVienDomain obj WHERE obj.ma = ?1";
+        TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql,NhanVienDomain.class);
+        query.setParameter(1,ma);
         return query.getSingleResult();
     }
-
 }

@@ -1,6 +1,8 @@
 package domain_model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,9 +11,11 @@ import java.util.UUID;
 @Table(name = "CuaHang")
 public class CuaHangDomain {
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id" , columnDefinition="uniqueidentifier")
+    private String id;
+
 
     @Column(name="Ma")
     private String Ma;
@@ -28,17 +32,13 @@ public class CuaHangDomain {
     @Column(name="QuocGia")
     private String QuocGia;
 
-    @OneToMany(
-            mappedBy = "ch",
-            fetch = FetchType.LAZY
-    )
-    private List<CuaHangDomain> listCH;
-
+    @OneToMany(mappedBy = "cuaHang", fetch = FetchType.LAZY)
+    List<NhanVienDomain> listCuaHang;
 
     public CuaHangDomain() {
     }
 
-    public CuaHangDomain(UUID id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+    public CuaHangDomain(String id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
         this.id = id;
         Ma = ma;
         Ten = ten;
@@ -47,11 +47,11 @@ public class CuaHangDomain {
         QuocGia = quocGia;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -95,10 +95,11 @@ public class CuaHangDomain {
         QuocGia = quocGia;
     }
 
-    public List<CuaHangDomain> listCH() {
-        return listCH;
+    public List<NhanVienDomain> getListCuaHang() {
+        return listCuaHang;
     }
-    public void listCH(List<CuaHangDomain> listCH) {
-        this.listCH = listCH;
+
+    public void setListCuaHang(List<NhanVienDomain> listCuaHang) {
+        this.listCuaHang = listCuaHang;
     }
 }

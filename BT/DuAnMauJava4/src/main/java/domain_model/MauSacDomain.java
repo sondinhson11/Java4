@@ -2,6 +2,7 @@ package domain_model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
 
 import java.util.UUID;
 
