@@ -1,11 +1,14 @@
 package controller;
 
+import domain_model.ChucVuDomain;
 import domain_model.NSXDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.NsxRepository;
+import utils.CheckString;
+
 import java.io.IOException;
 
 @WebServlet(name = "NSXServlet", value = {
@@ -38,16 +41,21 @@ public class NSXServlet extends HttpServlet {
         }
     }
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
         request.setAttribute("DSNSX",this.nsxRepository.findAll());
         request.setAttribute("view", "/views/nsx/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
+        request.setAttribute("checkten", errorTen);
+        request.setAttribute("checkma", errorMa);
         request.setAttribute("view", "/views/nsx/create.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
+        request.setAttribute("checkten", errorTen);
         NSXDomain nsx = this.nsxRepository.findByMa(ma);
         request.setAttribute("nsx", nsx);
         request.setAttribute("view", "/views/nsx/edit.jsp");
@@ -77,24 +85,44 @@ public class NSXServlet extends HttpServlet {
         }
     }
     protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        NSXDomain vm = new NSXDomain();
         try{
-            NSXDomain vm = new NSXDomain();
             BeanUtils.populate(vm,request.getParameterMap());
-            this.nsxRepository.insert(vm);
         }catch (Exception e){
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        NSXDomain cv = nsxRepository.findByMa(vm.getMa());
+        if (cv!=null){
+            error="Trùng mã";
+            response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/create");
+            return;
+        }else{
+            error="";
+        }
+
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/create");
+            return;
+        }
+        this.nsxRepository.insert(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/index");
     }
     protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        String ma = request.getParameter("ma");
+        NSXDomain vm = this.nsxRepository.findByMa(ma);
         try{
-            String ma = request.getParameter("ma");
-            NSXDomain vm = this.nsxRepository.findByMa(ma);
             BeanUtils.populate(vm,request.getParameterMap());
-            this.nsxRepository.update(vm);
         }catch (Exception e){
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        if (!errorTen.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/edit?ma="+vm.getMa());
+            return;
+        }
+        this.nsxRepository.update(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/nsx/index");
     }
 }

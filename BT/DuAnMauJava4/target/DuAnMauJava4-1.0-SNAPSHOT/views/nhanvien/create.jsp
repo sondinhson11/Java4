@@ -28,12 +28,15 @@
                     <div>
                         <label class="form-label">Mã</label>
                         <input type="text" class="form-control" name="ma">
+                        <div class="error mt-2"><p>${trungMa}</p></div>
+                        <div class="error mt-2"><p>${errorMa}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Họ</label>
                         <input type="text" class="form-control" name="ho">
+                        <div class="error mt-2"><p>${errorHo}</p></div>
                     </div>
                 </div>
             </div>
@@ -42,12 +45,14 @@
                     <div>
                         <label class="form-label">Tên Đệm</label>
                         <input type="text" class="form-control" name="tenDem">
+                        <div class="error mt-2"><p>${errorTenDem}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Tên</label>
                         <input type="text" class="form-control" name="ten">
+                        <div class="error mt-2"><p>${errorTen}</p></div>
                     </div>
                 </div>
             </div>
@@ -55,7 +60,7 @@
                 <div class="col-md-6">
                     <label>Giới Tính </label>
                     <div class="form-check">
-                        <input class="form-check-input" value="Nam" type="radio" name="gioiTinh">
+                        <input class="form-check-input" value="Nam" type="radio" name="gioiTinh" checked>
                         <label class="form-check-label">
                             Nam
                         </label>
@@ -70,7 +75,8 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Ngày Sinh</label>
-                        <input type="date" class="form-control" name="ngaySinh">
+                        <input type="date" class="form-control" value="2023-01-01" name="ngaySinh">
+                        <div class="error mt-2"><p>${errorNgaySinh}</p></div>
                     </div>
                 </div>
             </div>
@@ -79,12 +85,14 @@
                     <div>
                         <label class="form-label">Địa chỉ</label>
                         <input type="text" class="form-control" name="diaChi">
+                        <div class="error mt-2"><p>${errorDiaChi}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Số điện thoại</label>
                         <input type="text" class="form-control" name="sdt">
+                        <div class="error mt-2"><p>${errorSDT}</p></div>
                     </div>
                 </div>
             </div>
@@ -93,6 +101,7 @@
                     <div>
                         <label class="form-label">Mật khẩu</label>
                         <input type="password" name="matKhau" class="form-control">
+                        <div class="error mt-2"><p>${errorMK}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">

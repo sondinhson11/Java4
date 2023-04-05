@@ -63,6 +63,7 @@ public class ChucVuServlet extends HttpServlet {
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         ChucVuDomain chucVu = this.chucVuRepository.findByMa(ma);
+        request.setAttribute("checkten", errorTen);
         request.setAttribute("cv", chucVu);
         request.setAttribute("view", "/views/chucvu/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -91,31 +92,51 @@ public class ChucVuServlet extends HttpServlet {
     }
 
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ChucVuDomain chucVu = new ChucVuDomain();
         try {
-            ChucVuDomain chucVu = new ChucVuDomain();
             BeanUtils.populate(chucVu, request.getParameterMap());
-            chucVuRepository.insert(chucVu);
-            response.sendRedirect("../chucvu/index");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(chucVu.getTen(),"tên");
+        errorMa = CheckString.checkValues(chucVu.getMa(),"mã");
+        ChucVuDomain cv = chucVuRepository.findByMa(chucVu.getMa());
+        if (cv!=null){
+            error="Trùng mã";
+            response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/create");
+            return;
+        }else{
+            error="";
+        }
 
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/create");
+            return;
+        }
+
+        chucVuRepository.insert(chucVu);
+        response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
 
     protected void update(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        ChucVuDomain vm = this.chucVuRepository.findByMa(ma);
         try {
-            String ma = request.getParameter("ma");
-            ChucVuDomain vm = this.chucVuRepository.findByMa(ma);
             BeanUtils.populate(vm, request.getParameterMap());
-            this.chucVuRepository.update(vm);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        if (!errorTen.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/edit?ma="+vm.getMa());
+            return;
+        }
+        this.chucVuRepository.update(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/chucvu/index");
     }
 }

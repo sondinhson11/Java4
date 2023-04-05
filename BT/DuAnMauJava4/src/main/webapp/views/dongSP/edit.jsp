@@ -29,6 +29,7 @@
                 <div class="col-6">
                     <label>Tên</label>
                     <input type="text" name="ten"  class="form-control" value="${dsp.ten}">
+                    <div class="col error mt-2"><p>${checkten}</p></div>
                 </div>
             </div>
             <br>

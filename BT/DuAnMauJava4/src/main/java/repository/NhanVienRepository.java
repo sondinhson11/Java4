@@ -77,6 +77,11 @@ public class NhanVienRepository {
         String hql = "SELECT obj FROM NhanVienDomain obj WHERE obj.ma = ?1";
         TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql,NhanVienDomain.class);
         query.setParameter(1,ma);
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

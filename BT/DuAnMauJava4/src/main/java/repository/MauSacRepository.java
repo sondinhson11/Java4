@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.DongSPDomain;
 import domain_model.MauSacDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -63,7 +64,12 @@ public class MauSacRepository {
         String hql =" SELECT obj FROM MauSacDomain obj where obj.Ma=?1";
         TypedQuery<MauSacDomain> query=this.hsession.createQuery(hql,MauSacDomain.class);
         query.setParameter(1,ma);
-        return  query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

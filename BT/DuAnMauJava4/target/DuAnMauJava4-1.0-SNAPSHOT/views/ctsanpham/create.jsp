@@ -56,26 +56,35 @@
                 <div class="col-6">
                     <label>namBH</label>
                     <input type="text" name="namBH" class="form-control" />
+                    <div class="error mt-2"><p>${errorNamBH}</p></div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>moTa</label>
                     <input type="text" name="moTa" class="form-control" />
+                    <div class="error mt-2"><p>${errorMoTa}</p></div>
+
                 </div>
                 <div class="col-6">
                     <label>soLuongTon</label>
                     <input type="text" name="soLuongTon" class="form-control" />
+                    <div class="error mt-2"><p>${errorSoLuongTon}</p></div>
+
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>giaNhap</label>
                     <input type="number" name="giaNhap" class="form-control" />
+                    <div class="error mt-2"><p>${errorGiaNhap}</p></div>
+
                 </div>
                 <div class="col-6">
                     <label>giaBan</label>
                     <input type="number" name="giaBan" class="form-control" />
+                    <div class="error mt-2"><p>${errorGiaBan}</p></div>
+
                 </div>
             </div>
             <br>

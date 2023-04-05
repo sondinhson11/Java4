@@ -32,15 +32,15 @@
             <thead class="table-primary">
             <tr>
                 <th>ID</th>
-                <th>IdSP</th>
-                <th>IdNsx</th>
-                <th>IdMauSac</th>
-                <th>IdDongSP</th>
-                <th>NamBH</th>
-                <th>MoTa</th>
-                <th>SoLuongTon</th>
-                <th>GiaNhap</th>
-                <th>GiaBan</th>
+                <th>ID Sản Phẩm</th>
+                <th>ID NSX</th>
+                <th>ID Màu Sắc</th>
+                <th>Id Đồng SP</th>
+                <th>Năm BH</th>
+                <th>Mô Tả</th>
+                <th>Số Lượng Tồn</th>
+                <th>Giá Nhập</th>
+                <th>Giá Bán</th>
                 <th colspan="2">Thao tác</th>
             </tr>
             </thead>

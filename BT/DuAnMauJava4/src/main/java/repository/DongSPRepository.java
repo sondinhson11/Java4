@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.ChucVuDomain;
 import domain_model.DongSPDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -63,6 +64,11 @@ public class DongSPRepository {
         String hql =" SELECT obj FROM DongSPDomain obj where obj.Ma=?1";
         TypedQuery<DongSPDomain> query=this.hsession.createQuery(hql,DongSPDomain.class);
         query.setParameter(1,ma);
-        return  query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

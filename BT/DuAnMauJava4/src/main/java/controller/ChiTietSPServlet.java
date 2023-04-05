@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.*;
+import utils.CheckString;
 import viewmodel.QLChiTietSP;
 
 
@@ -29,9 +30,11 @@ public class ChiTietSPServlet extends HttpServlet {
     NsxRepository nsxRepository;
     DongSPRepository dongSPRepository;
 
-    String error ;
-    String errorTen;
-    String errorMa;
+    String errorNamBH;
+    String errorMoTa;
+    String errorSoLuongTon;
+    String errorGiaNhap;
+    String errorGiaBan;
 
     public  ChiTietSPServlet() {
         chiTietSPRepository = new ChiTietSPRepository();
@@ -62,6 +65,12 @@ public class ChiTietSPServlet extends HttpServlet {
     }
 
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("errorNamBH", errorNamBH);
+        request.setAttribute("errorMoTa", errorMoTa);
+        request.setAttribute("errorSoLuongTon", errorSoLuongTon);
+        request.setAttribute("errorGiaNhap", errorGiaNhap);
+        request.setAttribute("errorGiaBan", errorGiaBan);
+
         request.setAttribute("dsms",this.mauSacRepository.findAll());
         request.setAttribute("dssp",this.sanPhamRepository.findAll());
         request.setAttribute("dsnxs",this.nsxRepository.findAll());
@@ -77,6 +86,13 @@ public class ChiTietSPServlet extends HttpServlet {
         request.setAttribute("dssp",this.sanPhamRepository.findAll());
         request.setAttribute("dsnxs",this.nsxRepository.findAll());
         request.setAttribute("dsdsp",this.dongSPRepository.findAll());
+
+        request.setAttribute("errorNamBH", errorNamBH);
+        request.setAttribute("errorMoTa", errorMoTa);
+        request.setAttribute("errorSoLuongTon", errorSoLuongTon);
+        request.setAttribute("errorGiaNhap", errorGiaNhap);
+        request.setAttribute("errorGiaBan", errorGiaBan);
+
         request.setAttribute("kh", sp);
         request.setAttribute("view", "/views/ctsanpham/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -129,8 +145,18 @@ public class ChiTietSPServlet extends HttpServlet {
         chiTietSPDomain.setNsx(DomainModelNSx);
         chiTietSPDomain.setDsp(DomainModelDSp);
 
-        this.chiTietSPRepository.insert(chiTietSPDomain);
+        errorNamBH = CheckString.checkValues(chiTietSPDomain.getNamBH(),"Năm Bảo Hành");
+        errorMoTa = CheckString.checkValues(chiTietSPDomain.getMoTa(),"Mô Tả");
+        errorSoLuongTon = CheckString.checkValues(chiTietSPDomain.getMoTa(),"Số Lượng Tồn");
+        errorGiaNhap = CheckString.checkValues(chiTietSPDomain.getMoTa(),"Giá Nhập");
+        errorGiaBan = CheckString.checkValues(chiTietSPDomain.getMoTa(),"Giá Bán");
 
+        if (!errorNamBH.isEmpty()||!errorMoTa.isEmpty()||!errorSoLuongTon.isEmpty()||!errorGiaNhap.isEmpty()||!errorGiaBan.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/ctsanpham/create");
+            return;
+        }
+
+        this.chiTietSPRepository.insert(chiTietSPDomain);
         response.sendRedirect("/DuAnMauJava4_war_exploded/ctsanpham/index");
     }
 
@@ -161,8 +187,19 @@ public class ChiTietSPServlet extends HttpServlet {
         vm.setSp(DomainModelSP);
         vm.setNsx(DomainModelNSx);
         vm.setDsp(DomainModelDSp);
-        this.chiTietSPRepository.update(vm);
 
+        errorNamBH = CheckString.checkValues(vm.getNamBH(),"Năm Bảo Hành");
+        errorMoTa = CheckString.checkValues(vm.getMoTa(),"Mô Tả");
+        errorSoLuongTon = CheckString.checkValues(vm.getMoTa(),"Số Lượng Tồn");
+        errorGiaNhap = CheckString.checkValues(vm.getMoTa(),"Giá Nhập");
+        errorGiaBan = CheckString.checkValues(vm.getMoTa(),"Giá Bán");
+
+        if (!errorNamBH.isEmpty()||!errorMoTa.isEmpty()||!errorSoLuongTon.isEmpty()||!errorGiaNhap.isEmpty()||!errorGiaBan.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/ctsanpham/edit?ma="+vm.getId());
+            return;
+        }
+
+        this.chiTietSPRepository.update(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/ctsanpham/index");
     }
 }

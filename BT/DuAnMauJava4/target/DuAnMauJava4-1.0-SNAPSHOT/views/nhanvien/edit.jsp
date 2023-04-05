@@ -26,12 +26,14 @@
                     <div>
                         <label class="form-label">Mã</label>
                         <input type="text" class="form-control" name="ma" value="${ nv.ma }" disabled>
+                        <div class="error mt-2"><p>${errorMa}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Họ</label>
                         <input type="text" class="form-control" name="ho" value="${ nv.ho }">
+                        <div class="error mt-2"><p>${errorHo}</p></div>
                     </div>
                 </div>
             </div>
@@ -40,12 +42,14 @@
                     <div>
                         <label class="form-label">Tên Đệm</label>
                         <input type="text" class="form-control" name="tenDem" value="${ nv.tenDem }">
+                        <div class="error mt-2"><p>${errorTenDem}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Tên</label>
                         <input type="text" class="form-control" name="ten" value="${ nv.ten }">
+                        <div class="error mt-2"><p>${errorTen}</p></div>
                     </div>
                 </div>
             </div>
@@ -71,6 +75,7 @@
                     <div>
                         <label class="form-label">Ngày Sinh</label>
                         <input type="date" class="form-control" name="ngaySinh" value="${ nv.ngaySinh }">
+                        <div class="error mt-2"><p>${errorNgaySinh}</p></div>
                     </div>
                 </div>
             </div>
@@ -79,21 +84,24 @@
                     <div>
                         <label class="form-label">Địa chỉ</label>
                         <input type="text" class="form-control" name="diaChi" value="${ nv.diaChi }">
+                        <div class="error mt-2"><p>${errorDiaChi}</p></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Số điện thoại</label>
-                        <input type="text" class="form-control" name="sdt" value="${ nv.sdt }"
-                               id="exampleInputEmail145">
+                        <input type="text" class="form-control" name="sdt" value="${ nv.sdt }">
+                        <div class="error mt-2"><p>${errorSDT}</p></div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div>
-                        <label for="inputPassword" class="form-label">Mật khẩu</label>
-                        <input type="password" name="matKhau" value="${ nv.matKhau }" class="form-control" id="inputPassword">
+                        <label class="form-label">Mật khẩu</label>
+                        <input type="password" name="matKhau" value="${ nv.matKhau }" class="form-control">
+                        <div class="error mt-2"><p>${errorMK}</p></div>
+
                     </div>
                 </div>
                 <div class="col-md-6">

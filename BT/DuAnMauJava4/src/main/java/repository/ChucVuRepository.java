@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.ChucVuDomain;
 import domain_model.NSXDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -19,11 +20,11 @@ public class ChucVuRepository {
 
     public void insert(ChucVuDomain cv) {
         Transaction transaction = this.hsession.getTransaction();
-        try{
+        try {
             transaction.begin();
             this.hsession.persist(cv);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
         }
@@ -31,11 +32,11 @@ public class ChucVuRepository {
 
     public void update(ChucVuDomain cv) {
         Transaction transaction = this.hsession.getTransaction();
-        try{
+        try {
             transaction.begin();
             this.hsession.merge(cv);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
         }
@@ -43,30 +44,36 @@ public class ChucVuRepository {
 
     public void delete(ChucVuDomain cv) {
         Transaction transaction = this.hsession.getTransaction();
-        try{
+        try {
             transaction.begin();
             this.hsession.delete(cv);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             transaction.rollback();
         }
     }
+
     public ChucVuDomain findById(UUID id) {
-        return this.hsession.find(ChucVuDomain.class,id);
+        return this.hsession.find(ChucVuDomain.class, id);
     }
 
     public List<ChucVuDomain> findAll() {
-        String hql="SELECT obj FROM ChucVuDomain obj";
-        TypedQuery<ChucVuDomain> query = this.hsession.createQuery(hql,ChucVuDomain.class);
+        String hql = "SELECT obj FROM ChucVuDomain obj";
+        TypedQuery<ChucVuDomain> query = this.hsession.createQuery(hql, ChucVuDomain.class);
         return query.getResultList();
     }
 
     public ChucVuDomain findByMa(String ma) {
-        String hql =" SELECT obj FROM ChucVuDomain obj where obj.Ma=?1";
-        TypedQuery<ChucVuDomain> query=this.hsession.createQuery(hql,ChucVuDomain.class);
-        query.setParameter(1,ma);
-        return  query.getSingleResult();
+        String hql = " SELECT obj FROM ChucVuDomain obj where obj.Ma=?1";
+        TypedQuery<ChucVuDomain> query = this.hsession.createQuery(hql, ChucVuDomain.class);
+        query.setParameter(1, ma);
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

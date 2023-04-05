@@ -36,8 +36,8 @@
                     <th scope="col">Địa Chỉ</th>
                     <th scope="col">Số Điện Thoại</th>
                     <th scope="col">Mật Khẩu</th>
-                    <th scope="col">IdCH</th>
-                    <th scope="col">IdCV</th>
+                    <th scope="col">ID Cửa Hàng</th>
+                    <th scope="col">ID Chức Vụ</th>
 <%--                    <th scope="col">IdGuiBC</th>--%>
                     <th scope="col">TrangThai</th>
                     <th colspan="2">Thao tác</th>

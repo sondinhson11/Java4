@@ -24,10 +24,13 @@
                 <div class="col-6">
                     <label>Mã</label>
                     <input type="text" name="ma" class="form-control" />
+                    <div class="error mt-2"><p>${checkma}</p></div>
+                    <div class="error mt-2"><p>${trungMa}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Tên</label>
                     <input type="text" name="ten" class="form-control" />
+                    <div class="col error mt-2"><p>${checkten}</p></div>
                 </div>
             </div>
             <br>

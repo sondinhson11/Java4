@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.ChiTietSPDomain;
 import domain_model.ChucVuDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -59,6 +60,11 @@ public class ChiTietSPRepository {
         String hql =" SELECT obj FROM ChiTietSPDomain obj where obj.Id=?1";
         TypedQuery<ChiTietSPDomain> query=this.hsession.createQuery(hql,ChiTietSPDomain.class);
         query.setParameter(1,ma);
-        return  query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
