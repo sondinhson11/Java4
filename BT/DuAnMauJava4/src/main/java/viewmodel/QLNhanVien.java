@@ -1,26 +1,28 @@
 package viewmodel;
 
 
+import java.sql.Date;
+
 public class QLNhanVien {
     private String ma;
     private String ten;
     private String tendem;
     private String ho;
     private String gioitinh;
-    private String ngaysinh;
+    private Date ngaysinh;
     private String diachi;
     private String sdt;
     private String mk;
     private String idCH ;
     private String idCV ;
     private String idGuiBC ;
-    private String trangThai ;
+    private Integer trangThai ;
 
     public QLNhanVien() {
 
     }
 
-    public QLNhanVien(String ma, String ten, String tendem, String ho, String gioitinh, String ngaysinh, String diachi, String sdt, String mk, String idCH, String idCV, String idGuiBC, String trangThai) {
+    public QLNhanVien(String ma, String ten, String tendem, String ho, String gioitinh, Date ngaysinh, String diachi, String sdt, String mk, String idCH, String idCV, String idGuiBC, Integer trangThai) {
         this.ma = ma;
         this.ten = ten;
         this.tendem = tendem;
@@ -76,11 +78,11 @@ public class QLNhanVien {
         this.gioitinh = gioitinh;
     }
 
-    public String getNgaysinh() {
+    public Date getNgaysinh() {
         return ngaysinh;
     }
 
-    public void setNgaysinh(String ngaysinh) {
+    public void setNgaysinh(Date ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
@@ -132,11 +134,11 @@ public class QLNhanVien {
         this.idGuiBC = idGuiBC;
     }
 
-    public String getTrangThai() {
+    public Integer getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(String trangThai) {
+    public void setTrangThai(Integer trangThai) {
         this.trangThai = trangThai;
     }
 }
