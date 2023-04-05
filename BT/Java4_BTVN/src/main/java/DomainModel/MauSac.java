@@ -7,9 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name="MauSac")
 public class MauSac {
@@ -23,30 +29,6 @@ public class MauSac {
 
     @Column(name="Ten")
     private String Ten;
-
-    public UUID getId() {
-        return Id;
-    }
-
-    public void setId(UUID id) {
-        Id = id;
-    }
-
-    public String getMa() {
-        return Ma;
-    }
-
-    public void setMa(String ma) {
-        Ma = ma;
-    }
-
-    public String getTen() {
-        return Ten;
-    }
-
-    public void setTen(String ten) {
-        Ten = ten;
-    }
 
     public MauSac() {
     }

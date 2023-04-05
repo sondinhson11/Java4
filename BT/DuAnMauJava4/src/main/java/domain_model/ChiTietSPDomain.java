@@ -1,25 +1,49 @@
 package domain_model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import java.util.UUID;
+
 
 @Entity
 @Table(name="ChiTietSP")
 public class ChiTietSPDomain {
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID Id;
-    @Column(name="IdSP")
-    private String IdSP;
-    @Column(name="IdNsx")
-    private String IdNsx;
-    @Column(name="IdMauSac")
-    private String IdMauSac;
-    @Column(name="IdDongSP")
-    private String IdDongSP;
+    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
+    @GeneratedValue(generator = "generator")
+    @Column(name = "Id" , columnDefinition="uniqueidentifier")
+    private String Id;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdSP",
+            referencedColumnName = "Id"
+    )
+    private SanPhamDomain sp;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdNsx",
+            referencedColumnName = "Id"
+    )
+    private NSXDomain nsx;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdMauSac",
+            referencedColumnName = "Id"
+    )
+    private MauSacDomain ms;
+
+    @ManyToOne()
+    @JoinColumn(
+            name = "IdDongSP",
+            referencedColumnName = "Id"
+    )
+    private DongSPDomain dsp;
+
     @Column(name="NamBH")
     private String NamBH;
     @Column(name="MoTa")
@@ -31,15 +55,16 @@ public class ChiTietSPDomain {
     @Column(name="GiaBan")
     private String GiaBan;
 
+
     public ChiTietSPDomain() {
     }
 
-    public ChiTietSPDomain(UUID id, String idSP, String idNsx, String idMauSac, String idDongSP, String namBH, String moTa, String soLuongTon, String giaNhap, String giaBan) {
+    public ChiTietSPDomain(String id, SanPhamDomain sp, NSXDomain nsx, MauSacDomain ms, DongSPDomain dsp, String namBH, String moTa, String soLuongTon, String giaNhap, String giaBan) {
         Id = id;
-        IdSP = idSP;
-        IdNsx = idNsx;
-        IdMauSac = idMauSac;
-        IdDongSP = idDongSP;
+        this.sp = sp;
+        this.nsx = nsx;
+        this.ms = ms;
+        this.dsp = dsp;
         NamBH = namBH;
         MoTa = moTa;
         SoLuongTon = soLuongTon;
@@ -47,44 +72,44 @@ public class ChiTietSPDomain {
         GiaBan = giaBan;
     }
 
-    public UUID getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String     id) {
         Id = id;
     }
 
-    public String getIdSP() {
-        return IdSP;
+    public SanPhamDomain getSp() {
+        return sp;
     }
 
-    public void setIdSP(String idSP) {
-        IdSP = idSP;
+    public void setSp(SanPhamDomain sp) {
+        this.sp = sp;
     }
 
-    public String getIdNsx() {
-        return IdNsx;
+    public NSXDomain getNsx() {
+        return nsx;
     }
 
-    public void setIdNsx(String idNsx) {
-        IdNsx = idNsx;
+    public void setNsx(NSXDomain nsx) {
+        this.nsx = nsx;
     }
 
-    public String getIdMauSac() {
-        return IdMauSac;
+    public MauSacDomain getMs() {
+        return ms;
     }
 
-    public void setIdMauSac(String idMauSac) {
-        IdMauSac = idMauSac;
+    public void setMs(MauSacDomain ms) {
+        this.ms = ms;
     }
 
-    public String getIdDongSP() {
-        return IdDongSP;
+    public DongSPDomain getDsp() {
+        return dsp;
     }
 
-    public void setIdDongSP(String idDongSP) {
-        IdDongSP = idDongSP;
+    public void setDsp(DongSPDomain dsp) {
+        this.dsp = dsp;
     }
 
     public String getNamBH() {

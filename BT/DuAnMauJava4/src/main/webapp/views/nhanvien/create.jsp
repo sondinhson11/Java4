@@ -98,7 +98,7 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID cửa hàng</label>
-                        <select class="form-select" name="c" aria-label="Default select example">
+                        <select class="form-select" name="idCH" aria-label="Default select example">
                             <c:forEach items="${ dsch }" var="ch">
                                 <option value="${ch.id}">${ch.ten}</option>
                             </c:forEach>
@@ -110,7 +110,7 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID Chức Vụ</label>
-                        <select name="cv" class="form-select">
+                        <select name="idCV" class="form-select">
                             <c:forEach items="${ dscv }" var="cv">
                                 <option value="${cv.id}">${cv.ten}</option>
                             </c:forEach>
@@ -121,8 +121,8 @@
                     <div>
                         <label class="form-label">Trạng Thái</label>
                         <select class="form-select" name="trangThai" aria-label="Default select example">
-                            <option value="Còn Làm"selected >Còn Làm</option>
-                            <option value="Nghỉ">Nghỉ</option>
+                            <option value="0"selected >Còn Làm</option>
+                            <option value="1">Nghỉ</option>
                         </select>
                     </div>
                 </div>

@@ -2,9 +2,15 @@ package DomainModel;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
 
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name="NSX")
 public class NSX {
@@ -19,29 +25,6 @@ public class NSX {
     @Column(name="Ten")
     private String Ten;
 
-    public UUID getId() {
-        return Id;
-    }
-
-    public void setId(UUID id) {
-        Id = id;
-    }
-
-    public String getMa() {
-        return Ma;
-    }
-
-    public void setMa(String ma) {
-        Ma = ma;
-    }
-
-    public String getTen() {
-        return Ten;
-    }
-
-    public void setTen(String ten) {
-        Ten = ten;
-    }
 
     public NSX() {
     }

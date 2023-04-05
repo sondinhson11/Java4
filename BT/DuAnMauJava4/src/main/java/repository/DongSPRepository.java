@@ -1,11 +1,13 @@
 package repository;
 
+import domain_model.ChucVuDomain;
 import domain_model.DongSPDomain;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
 import java.util.List;
+import java.util.UUID;
 
 public class DongSPRepository {
     private Session hsession;
@@ -48,6 +50,9 @@ public class DongSPRepository {
             e.printStackTrace();
             transaction.rollback();
         }
+    }
+    public DongSPDomain findById(UUID id) {
+        return this.hsession.find(DongSPDomain.class,id);
     }
 
     public List<DongSPDomain> findAll(){

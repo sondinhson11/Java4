@@ -1,10 +1,12 @@
 package repository;
 import domain_model.NSXDomain;
+import domain_model.SanPhamDomain;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
 import org.hibernate.Session;
 import java.util.List;
+import java.util.UUID;
 
 public class NsxRepository {
     private Session hsession;
@@ -49,7 +51,9 @@ public class NsxRepository {
             transaction.rollback();
         }
     }
-
+    public NSXDomain findById(UUID id) {
+        return this.hsession.find(NSXDomain.class,id);
+    }
     public List<NSXDomain> findAll(){
         String hql="SELECT obj FROM NSXDomain obj";
         TypedQuery<NSXDomain> query = this.hsession.createQuery(hql,NSXDomain.class);

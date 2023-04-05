@@ -10,7 +10,7 @@
     <h1><%= "Bảng" %>
     </h1>
     <br/>
-    <a href="/DuAnMauJava4_war_exploded/khachhang/index">Layout</a>
+    <a href="/DuAnMauJava4_war_exploded/login">Login</a>
 </center>
 </body>
 </html>

@@ -4,14 +4,15 @@ package domain_model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "DongSP")
 public class DongSPDomain {
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char") // Sử dụng kiểu dữ liệu UUID
     private UUID id;
 
     @Column(name="Ma")
@@ -20,13 +21,20 @@ public class DongSPDomain {
     @Column(name="Ten")
     private  String Ten;
 
+    @OneToMany(
+            mappedBy = "dsp",
+            fetch = FetchType.LAZY
+    )
+    private List<ChiTietSPDomain> listCTSP;
+
     public DongSPDomain() {
     }
 
-    public DongSPDomain(UUID id, String ma, String ten) {
+    public DongSPDomain(UUID id, String ma, String ten, List<ChiTietSPDomain> listCTSP) {
         this.id = id;
         Ma = ma;
         Ten = ten;
+        this.listCTSP = listCTSP;
     }
 
     public UUID getId() {
@@ -51,5 +59,13 @@ public class DongSPDomain {
 
     public void setTen(String ten) {
         Ten = ten;
+    }
+
+    public List<ChiTietSPDomain> getListCTSP() {
+        return listCTSP;
+    }
+
+    public void setListCTSP(List<ChiTietSPDomain> listCTSP) {
+        this.listCTSP = listCTSP;
     }
 }

@@ -16,7 +16,7 @@
             <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #192041;color: white">
                 <div class="container">
                     <a class="navbar-brand" href="#!/">
-                        <img style="height: 80px" src="../img/logo.png" alt=""/>
+                        <img style="height: 80px" src="/DuAnMauJava4_war_exploded/img/logo.png" alt=""/>
                     </a>
                     <button
                             class="navbar-toggler"
@@ -72,7 +72,7 @@
         </header>
         <div class="row mt-10" style="min-height: 500px;">
             <div class="col-3">
-                <img src="../img/siderbar.png" style="width: 105%;height: 100%">
+                <img src="/DuAnMauJava4_war_exploded/img/siderbar.png" style="width: 105%;height: 100%">
             </div>
             <div class="col-9" style="background: white">
                 <jsp:include page="${ view }"/>
@@ -84,7 +84,7 @@
                     <div class="row mt-3">
                         <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
                             <h6 class="text-uppercase fw-bold mb-4">
-                                <img src="../img/logo2.png" height="80px"/>
+                                <img src="/DuAnMauJava4_war_exploded/img/logo2.png" height="80px"/>
                             </h6>
                         </div>
 

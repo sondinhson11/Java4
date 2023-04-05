@@ -121,8 +121,8 @@
                     <div>
                         <label class="form-label">Trạng Thái</label>
                         <select class="form-select" name="trangThai" aria-label="Default select example">
-                            <option value="Còn Làm"selected >Còn Làm</option>
-                            <option value="Nghỉ">Nghỉ</option>
+                            <option value="0"selected >Còn Làm</option>
+                            <option value="1">Nghỉ</option>
                         </select>
                     </div>
                 </div>

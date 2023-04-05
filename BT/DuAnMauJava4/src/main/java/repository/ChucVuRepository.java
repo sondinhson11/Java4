@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ChucVuRepository {
     private Session hsession;
@@ -50,6 +51,9 @@ public class ChucVuRepository {
             e.printStackTrace();
             transaction.rollback();
         }
+    }
+    public ChucVuDomain findById(UUID id) {
+        return this.hsession.find(ChucVuDomain.class,id);
     }
 
     public List<ChucVuDomain> findAll() {

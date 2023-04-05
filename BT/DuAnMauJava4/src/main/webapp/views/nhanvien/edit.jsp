@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Tên Đệm</label>
-                        <input type="text" class="form-control" name="tenDem" value="${ nv.tendem }">
+                        <input type="text" class="form-control" name="tenDem" value="${ nv.tenDem }">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -53,15 +53,15 @@
                 <div class="col-md-6">
                     <label>Giới Tính </label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gioitinh"
-                               value="Nam"${ nv.gioitinh == "Nam" ? "checked" : ""  }>
+                        <input class="form-check-input" type="radio" name="gioiTinh"
+                               value="Nam"${ nv.gioiTinh == "Nam" ? "checked" : ""  }>
                         <label class="form-check-label" >
                             Nam
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gioitinh"
-                               value="Nữ"${ nv.gioitinh == "Nữ" ? "checked" : ""  } >
+                        <input class="form-check-input" type="radio" name="gioiTinh"
+                               value="Nữ"${ nv.gioiTinh == "Nữ" ? "checked" : ""  } >
                         <label class="form-check-label" >
                             Nữ
                         </label>
@@ -70,7 +70,7 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Ngày Sinh</label>
-                        <input type="date" class="form-control" name="ngaySinh" value="${ nv.ngaysinh }">
+                        <input type="date" class="form-control" name="ngaySinh" value="${ nv.ngaySinh }">
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" name="diaChi" value="${ nv.diachi }">
+                        <input type="text" class="form-control" name="diaChi" value="${ nv.diaChi }">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -93,15 +93,15 @@
                 <div class="col-md-6">
                     <div>
                         <label for="inputPassword" class="form-label">Mật khẩu</label>
-                        <input type="password" name="matKhau" value="${ nv.mk }" class="form-control" id="inputPassword">
+                        <input type="password" name="matKhau" value="${ nv.matKhau }" class="form-control" id="inputPassword">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID cửa hàng</label>
-                        <select class="form-select" name="ch" aria-label="Default select example">
+                        <select class="form-select" name="idCH" aria-label="Default select example">
                             <c:forEach items="${ dsch }" var="ch">
-                                <option value="${ch.ma}" ${ch.ma == nv.ch ? "selected" :"" }>${ch.ten}</option>
+                                <option value="${ch.id}" ${ch.id == nv.cuaHang ? "selected" :"" }>${ch.ten}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -111,9 +111,9 @@
                 <div class="col-md-6">
                     <div>
                         <label class="form-label">ID Chức Vụ</label>
-                        <select class="form-select" name="cv" aria-label="Default select example">
+                        <select class="form-select" name="idCV" aria-label="Default select example">
                             <c:forEach items="${ dscv }" var="cv">
-                                <option value="${cv.ma}" ${cv.ma == nv.cv ? "selected" :"" }>${cv.ten}</option>
+                                <option value="${cv.id}" ${cv.id == nv.cv ? "selected" :"" }>${cv.ten}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -123,8 +123,8 @@
                         <label class="form-label">Trạng Thái</label>
                         <select class="form-select" name="trangThai" aria-label="Default select example">
                             <option selected></option>
-                            <option value="Còn Làm" ${ nv.trangThai == "Còn Làm" ? "selected" : "" }>Còn Làm</option>
-                            <option value="Nghỉ" ${ nv.trangThai == "Nghỉ" ? "selected" : "" }>Nghỉ</option>
+                            <option value="0" ${ nv.trangThai == "0" ? "selected" : "" }>Còn Làm</option>
+                            <option value="1" ${ nv.trangThai == "1" ? "selected" : "" }>Nghỉ</option>
 
                         </select>
                     </div>

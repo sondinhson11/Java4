@@ -1,13 +1,14 @@
 package repository;
 
+import domain_model.DongSPDomain;
 import domain_model.MauSacDomain;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
-import viewmodel.QLMauSac;
 
 import java.util.List;
+import java.util.UUID;
 
 public class MauSacRepository {
     private Session hsession;
@@ -51,18 +52,18 @@ public class MauSacRepository {
             transaction.rollback();
         }
     }
-
-    public List<MauSacDomain> findAll() {
-        String hql = "SELECT obj FROM MauSacDomain obj";
-        TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql, MauSacDomain.class);
-        return query.getResultList();
+    public MauSacDomain findById(UUID id) {
+        return this.hsession.find(MauSacDomain.class,id);
     }
-
-    public MauSacDomain findByMa(String ma) {
-        String hql = "SELECT obj FROM MauSacDomain obj where obj.Ma=?1";
-        TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql, MauSacDomain.class);
-        query.setParameter(1, ma);
-        return query.getSingleResult();
+    public List<MauSacDomain> findAll(){
+        String hql="SELECT obj FROM MauSacDomain obj";
+        TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql,MauSacDomain.class);
+        return query.getResultList();    }
+    public MauSacDomain findByMa(String ma){
+        String hql =" SELECT obj FROM MauSacDomain obj where obj.Ma=?1";
+        TypedQuery<MauSacDomain> query=this.hsession.createQuery(hql,MauSacDomain.class);
+        query.setParameter(1,ma);
+        return  query.getSingleResult();
     }
 
 }

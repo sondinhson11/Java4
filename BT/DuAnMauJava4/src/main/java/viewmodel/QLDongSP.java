@@ -2,30 +2,30 @@ package viewmodel;
 
 
 public class QLDongSP {
-    private String ma;
-    private String ten;
+    private String Ma;
+    private String Ten;
 
     public QLDongSP() {
     }
 
     public QLDongSP(String ma, String ten) {
-        this.ma = ma;
-        this.ten = ten;
+        this.Ma = ma;
+        this.Ten = ten;
     }
 
     public String getMa() {
-        return ma;
+        return Ma;
     }
 
     public void setMa(String ma) {
-        this.ma = ma;
+        this.Ma = ma;
     }
 
     public String getTen() {
-        return ten;
+        return Ten;
     }
 
     public void setTen(String ten) {
-        this.ten = ten;
+        this.Ten = ten;
     }
 }

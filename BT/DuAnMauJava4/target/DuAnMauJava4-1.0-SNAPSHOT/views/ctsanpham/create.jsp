@@ -1,10 +1,4 @@
-S<%--
-  Created by IntelliJ IDEA.
-  User: ThisPC
-  Date: 3/9/2023
-  Time: 5:28 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="f" uri="jakarta.tags.functions" %>
@@ -23,15 +17,11 @@ S<%--
         <form  method="POST"
                action="/DuAnMauJava4_war_exploded/ctsanpham/store">
             <div class="row mt-3">
-                <div class="col-6">
-                    <label>Mã</label>
-                    <input type="text" name="ma" class="form-control" />
-                </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label>idSP</label>
                     <select name="idSP" class="form-select">
                         <c:forEach items="${ dssp }" var="sp">
-                            <option value="${sp.ma}">${sp.ten}</option>
+                            <option value="${sp.id}">${sp.ten}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -41,7 +31,7 @@ S<%--
                     <label>idNsx</label>
                     <select name="idNsx" class="form-select">
                         <c:forEach items="${ dsnxs }" var="nxs">
-                            <option value="${nxs.ma}">${nxs.ten}</option>
+                            <option value="${nxs.id}">${nxs.ten}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -49,7 +39,7 @@ S<%--
                     <label>idMauSac</label>
                     <select name="idMauSac" class="form-select">
                         <c:forEach items="${ dsms }" var="ms">
-                            <option value="${ms.ma}">${ms.ten}</option>
+                            <option value="${ms.id}">${ms.ten}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -59,7 +49,7 @@ S<%--
                     <label>idDongSP</label>
                     <select name="idDongSP" class="form-select">
                         <c:forEach items="${ dsdsp }" var="dsp">
-                            <option value="${dsp.ma}">${dsp.ten}</option>
+                            <option value="${dsp.id}">${dsp.ten}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -75,7 +65,7 @@ S<%--
                 </div>
                 <div class="col-6">
                     <label>soLuongTon</label>
-                    <input type="password" name="soLuongTon" class="form-control" />
+                    <input type="text" name="soLuongTon" class="form-control" />
                 </div>
             </div>
             <div class="row mt-3">

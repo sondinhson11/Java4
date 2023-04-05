@@ -31,7 +31,7 @@
         <table class="table table-striped mt-3">
             <thead class="table-primary">
             <tr>
-                <th>Ma</th>
+                <th>ID</th>
                 <th>IdSP</th>
                 <th>IdNsx</th>
                 <th>IdMauSac</th>
@@ -48,11 +48,11 @@
 
             <c:forEach items="${ DSCTSP }" var="ct">
                 <tr>
-                    <td>${ ct.ma }</td>
-                    <td>${ ct.idSP }</td>
-                    <td>${ ct.idNsx }</td>
-                    <td>${ ct.idMauSac }</td>
-                    <td>${ ct.idDongSP }</td>
+                    <td>${ ct.id }</td>
+                    <td>${ ct.sp.ten }</td>
+                    <td>${ ct.nsx.ten }</td>
+                    <td>${ ct.ms.ten }</td>
+                    <td>${ ct.dsp.ten }</td>
                     <td>${ ct.namBH }</td>
                     <td>${ ct.moTa }</td>
                     <td>${ ct.soLuongTon }</td>
@@ -60,13 +60,13 @@
                     <td>${ ct.giaBan }</td>
                     <td>
                         <a class="btn btn-primary"
-                           href="/DuAnMauJava4_war_exploded/ctsanpham/edit?ma=${ ct.ma }">
+                           href="/DuAnMauJava4_war_exploded/ctsanpham/edit?ma=${ ct.id }">
                             Cập nhật
                         </a>
                     </td>
                     <td>
                         <a class="btn btn-danger"
-                           href="/DuAnMauJava4_war_exploded/ctsanpham/delete?ma=${ ct.ma }">
+                           href="/DuAnMauJava4_war_exploded/ctsanpham/delete?ma=${ ct.id }">
                             Xóa
                         </a>
                     </td>

@@ -1,9 +1,15 @@
 package DomainModel;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
-
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name="CuaHang")
 public class CuaHang {
@@ -27,63 +33,19 @@ public class CuaHang {
     @Column(name="QuocGia")
     private String QuocGia;
 
-    public UUID getId() {
-        return Id;
-    }
-
-    public void setId(UUID id) {
-        Id = id;
-    }
-
-    public String getMa() {
-        return Ma;
-    }
-
-    public void setMa(String ma) {
-        Ma = ma;
-    }
-
-    public String getTen() {
-        return Ten;
-    }
-
-    public void setTen(String ten) {
-        Ten = ten;
-    }
-
-    public String getDiaChi() {
-        return DiaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
-    }
-
-    public String getThanhPho() {
-        return ThanhPho;
-    }
-
-    public void setThanhPho(String thanhPho) {
-        ThanhPho = thanhPho;
-    }
-
-    public String getQuocGia() {
-        return QuocGia;
-    }
-
-    public void setQuocGia(String quocGia) {
-        QuocGia = quocGia;
-    }
-
+    @OneToMany(mappedBy = "ch",fetch = FetchType.EAGER)
+    private List<NhanVien> listNV;
     public CuaHang() {
     }
 
-    public CuaHang(UUID id, String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+
+    public CuaHang(UUID id, String ma, String ten, String diaChi, String thanhPho, String quocGia, List<NhanVien> listNV) {
         Id = id;
         Ma = ma;
         Ten = ten;
         DiaChi = diaChi;
         ThanhPho = thanhPho;
         QuocGia = quocGia;
+        this.listNV = listNV;
     }
 }

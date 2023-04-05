@@ -34,8 +34,8 @@
                 <th>Giới Tính</th>
                 <th>Số Điện Thoại</th>
                 <th>Địa Chỉ</th>
-                <th>Mật Khẩu</th>
                 <th>Trạng Thái</th>
+                <th>Ch</th>
                 <th colspan="2">Thao tác</th>
             </tr>
             </thead>
@@ -44,15 +44,15 @@
                 <tr>
                     <td>${ nv.ma }</td>
                     <td>${ nv.ho }</td>
-                    <td>${ nv.ten_dem }</td>
+                    <td>${ nv.tenDem }</td>
                     <td>${ nv.ten }</td>
-                    <td>${ nv.ngay_sinh  }</td>
-                    <td>${ nv.gioi_tinh ? "Nam" : "Nữ"}</td>
+                    <td>${ nv.ngaySinh}</td>
+                    <td>${ nv.gioiTinh }</td>
                     <td>${ nv.sdt }</td>
-                    <td>${ nv.dia_chi }</td>
-                    <td>${ nv.mat_khau }</td>
-                    <td>${ nv.trang_thai == 1 ? "Đang Làm" : "Đã Nghỉ"  }</td>
-
+                    <td>${ nv.diaChi }</td>
+                    <td>${ nv.trangThai == 0 ? "Đang Làm" : "Đã Nghỉ"  }</td>
+                    <td>${ nv.cv.ten }</td>
+                    <td>${ nv.ch.ten }</td>
                     <td>
                         <a class="btn btn-primary" href="/Java4_BTVN_war_exploded/nhan-vien/edit?ma=${nv.ma}" >Cập nhật </a>
                     </td>

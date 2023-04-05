@@ -2,20 +2,27 @@ package domain_model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "ChucVu")
 public class ChucVuDomain {
     @Id
-    @GenericGenerator(name = "generator", strategy = "guid", parameters = {})
-    @GeneratedValue(generator = "generator")
-    @Column(name = "Id" , columnDefinition="uniqueidentifier")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char") // Sử dụng kiểu dữ liệu UUID
+    private UUID id;
 
     @Column(name="Ma")
     private String Ma;
@@ -32,11 +39,11 @@ public class ChucVuDomain {
     public ChucVuDomain() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

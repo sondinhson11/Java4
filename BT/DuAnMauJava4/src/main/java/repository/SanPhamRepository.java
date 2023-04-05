@@ -1,11 +1,13 @@
 package repository;
 
+import domain_model.MauSacDomain;
 import domain_model.SanPhamDomain;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtil;
 import java.util.List;
+import java.util.UUID;
 
 public class SanPhamRepository {
     private Session hsession;
@@ -50,7 +52,9 @@ public class SanPhamRepository {
             transaction.rollback();
         }
     }
-
+    public SanPhamDomain findById(UUID id) {
+        return this.hsession.find(SanPhamDomain.class,id);
+    }
     public List<SanPhamDomain> findAll(){
         String hql="SELECT obj FROM SanPhamDomain obj";
         TypedQuery<SanPhamDomain> query = this.hsession.createQuery(hql,SanPhamDomain.class);

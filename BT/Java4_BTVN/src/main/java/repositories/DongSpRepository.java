@@ -1,45 +1,63 @@
 package repositories;
 
-import ViewModel.DongSP;
+import DomainModel.DongSP;
+import Utils.HibernateUtil;
+import jakarta.persistence.TypedQuery;
+import org.hibernate.Session;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 
 public class DongSpRepository {
-    private ArrayList<DongSP> list = new ArrayList<>();
+    private Session hSession;
     public DongSpRepository(){
-        this.list=new ArrayList<>();
+        this.hSession = HibernateUtil.getFACTORY().openSession();
     }
-    public void insert(DongSP dsp ){
-        this.list.add(dsp);
-    }
-    public void update(DongSP dsp){
-        for (int i =0 ;i< this.list.size();i++){
-            DongSP dsps = this.list.get(i);
-        if(dsps.getMa().equals(dsp.getMa())){
-            this.list.set(i,dsp);
-        }
-        }
-    }
-    public void delete(DongSP dsp){
-        for (int i =0 ;i< this.list.size();i++){
-            DongSP dsps = this.list.get(i);
-            if(dsps.getMa().equals(dsp.getMa())){
-                this.list.remove(i);
-            }
+    public void insert(DongSP dongSP){
+        try {
+            this.hSession.getTransaction().begin();
+            this.hSession.persist(dongSP);
+            this.hSession.getTransaction().commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            this.hSession.getTransaction().rollback();
         }
     }
-    public ArrayList<DongSP> findALL(){
-       return this.list;
-    }
-    public DongSP findMa(String ma){
-        for (int i =0 ;i< this.list.size();i++){
-            DongSP dsps = this.list.get(i);
-            if(dsps.getMa().equals(ma)){
-                return dsps;
-            }
+    public void update(DongSP dongSP){
+        try {
+            this.hSession.getTransaction().begin();
+            this.hSession.merge(dongSP);
+            this.hSession.getTransaction().commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            this.hSession.getTransaction().rollback();
         }
-        return null;
     }
-
-
+    public void delete(DongSP dongSP){
+        try {
+            this.hSession.getTransaction().begin();
+            this.hSession.delete(dongSP);
+            this.hSession.getTransaction().commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            this.hSession.getTransaction().rollback();
+        }
+    }
+    public DongSP findByID(UUID id){
+        return this.hSession.find(DongSP.class,id);
+    }
+    public DongSP findByMa(String ma){
+        String hql ="SELECT dspObj FROM DongSP dspObj where  dspObj.Ma=?1";
+        TypedQuery<DongSP> query =
+                this.hSession.createQuery(hql,DongSP.class);
+        query.setParameter(1,ma);
+        return query.getSingleResult();
+    }
+    public List<DongSP> findALL(){
+        String hql = "SELECT dspObj FROM DongSP dspObj order by dspObj.Ma asc";
+        TypedQuery<DongSP> query =
+                this.hSession.createQuery(hql,DongSP.class);
+        return query.getResultList();
+    }
 }

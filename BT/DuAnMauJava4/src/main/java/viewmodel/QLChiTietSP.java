@@ -1,110 +1,110 @@
 package viewmodel;
 
 public class QLChiTietSP {
-    private String ma;
-    private String idSP;
-    private String idNsx;
-    private String idMauSac;
-    private String idDongSP;
-    private String namBH;
-    private String moTa;
-    private int soLuongTon;
-    private double giaNhap;
-    private double giaBan;
+    private String Ma;
+    private String IdSP;
+    private String IdNsx;
+    private String IdMauSac;
+    private String IdDongSP;
+    private String NamBH;
+    private String MoTa;
+    private int SoLuongTon;
+    private double GiaNhap;
+    private double GiaBan;
 
     public QLChiTietSP() {
     }
 
-    public QLChiTietSP(String ma, String idSP, String idNsx, String idMauSac, String idDongSP, String namBH, String moTa, int soLuongTon, double giaNhap, double giaBan) {
-        this.ma = ma;
-        this.idSP = idSP;
-        this.idNsx = idNsx;
-        this.idMauSac = idMauSac;
-        this.idDongSP = idDongSP;
-        this.namBH = namBH;
-        this.moTa = moTa;
-        this.soLuongTon = soLuongTon;
-        this.giaNhap = giaNhap;
-        this.giaBan = giaBan;
+    public QLChiTietSP(String Ma, String idSP, String idNsx, String idMauSac, String idDongSP, String namBH, String moTa, int soLuongTon, double giaNhap, double giaBan) {
+        this.Ma = Ma;
+        IdSP = idSP;
+        IdNsx = idNsx;
+        IdMauSac = idMauSac;
+        IdDongSP = idDongSP;
+        NamBH = namBH;
+        MoTa = moTa;
+        SoLuongTon = soLuongTon;
+        GiaNhap = giaNhap;
+        GiaBan = giaBan;
     }
 
-    public String getMa() {
-        return ma;
+    public String getMMa() {
+        return Ma;
     }
 
-    public void setMa(String ma) {
-        this.ma = ma;
+    public void setMMa(String MMa) {
+        this.Ma = MMa;
     }
 
     public String getIdSP() {
-        return idSP;
+        return IdSP;
     }
 
     public void setIdSP(String idSP) {
-        this.idSP = idSP;
+        IdSP = idSP;
     }
 
     public String getIdNsx() {
-        return idNsx;
+        return IdNsx;
     }
 
     public void setIdNsx(String idNsx) {
-        this.idNsx = idNsx;
+        IdNsx = idNsx;
     }
 
     public String getIdMauSac() {
-        return idMauSac;
+        return IdMauSac;
     }
 
     public void setIdMauSac(String idMauSac) {
-        this.idMauSac = idMauSac;
+        IdMauSac = idMauSac;
     }
 
     public String getIdDongSP() {
-        return idDongSP;
+        return IdDongSP;
     }
 
     public void setIdDongSP(String idDongSP) {
-        this.idDongSP = idDongSP;
+        IdDongSP = idDongSP;
     }
 
     public String getNamBH() {
-        return namBH;
+        return NamBH;
     }
 
     public void setNamBH(String namBH) {
-        this.namBH = namBH;
+        NamBH = namBH;
     }
 
     public String getMoTa() {
-        return moTa;
+        return MoTa;
     }
 
     public void setMoTa(String moTa) {
-        this.moTa = moTa;
+        MoTa = moTa;
     }
 
     public int getSoLuongTon() {
-        return soLuongTon;
+        return SoLuongTon;
     }
 
     public void setSoLuongTon(int soLuongTon) {
-        this.soLuongTon = soLuongTon;
+        SoLuongTon = soLuongTon;
     }
 
     public double getGiaNhap() {
-        return giaNhap;
+        return GiaNhap;
     }
 
     public void setGiaNhap(double giaNhap) {
-        this.giaNhap = giaNhap;
+        GiaNhap = giaNhap;
     }
 
     public double getGiaBan() {
-        return giaBan;
+        return GiaBan;
     }
 
     public void setGiaBan(double giaBan) {
-        this.giaBan = giaBan;
+        GiaBan = giaBan;
     }
 }

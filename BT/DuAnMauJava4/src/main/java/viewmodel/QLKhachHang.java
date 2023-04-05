@@ -2,110 +2,110 @@ package viewmodel;
 
 
 public class QLKhachHang {
-    private String ma;
-    private String ho;
-    private String ten_dem;
-    private String ten;
-    private String dia_chi;
-    private String sdt;
-    private String mat_khau;
-    private String thanh_pho;
-    private String quoc_gia;
-    private String ngay_sinh;
+    private String Ma;
+    private String Ho;
+    private String TenDem;
+    private String Ten;
+    private String DiaChi;
+    private String Sdt;
+    private String MatKhau;
+    private String ThanhPho;
+    private String QuocGia;
+    private String NgaySinh;
 
     public QLKhachHang() {
     }
 
-    public QLKhachHang(String ma, String ho, String ten_dem, String ten, String dia_chi, String sdt, String mat_khau, String thanh_pho, String quoc_gia, String ngay_sinh) {
-        this.ma = ma;
-        this.ho = ho;
-        this.ten_dem = ten_dem;
-        this.ten = ten;
-        this.dia_chi = dia_chi;
-        this.sdt = sdt;
-        this.mat_khau = mat_khau;
-        this.thanh_pho = thanh_pho;
-        this.quoc_gia = quoc_gia;
-        this.ngay_sinh = ngay_sinh;
+    public QLKhachHang(String ma, String ho, String tenDem, String ten, String diaChi, String sdt, String matKhau, String thanhPho, String quocGia, String ngaySinh) {
+        Ma = ma;
+        Ho = ho;
+        TenDem = tenDem;
+        Ten = ten;
+        DiaChi = diaChi;
+        Sdt = sdt;
+        MatKhau = matKhau;
+        ThanhPho = thanhPho;
+        QuocGia = quocGia;
+        NgaySinh = ngaySinh;
     }
 
     public String getMa() {
-        return ma;
+        return Ma;
     }
 
     public void setMa(String ma) {
-        this.ma = ma;
+        Ma = ma;
     }
 
     public String getHo() {
-        return ho;
+        return Ho;
     }
 
     public void setHo(String ho) {
-        this.ho = ho;
+        Ho = ho;
     }
 
-    public String getTen_dem() {
-        return ten_dem;
+    public String getTenDem() {
+        return TenDem;
     }
 
-    public void setTen_dem(String ten_dem) {
-        this.ten_dem = ten_dem;
+    public void setTenDem(String tenDem) {
+        TenDem = tenDem;
     }
 
     public String getTen() {
-        return ten;
+        return Ten;
     }
 
     public void setTen(String ten) {
-        this.ten = ten;
+        Ten = ten;
     }
 
-    public String getDia_chi() {
-        return dia_chi;
+    public String getDiaChi() {
+        return DiaChi;
     }
 
-    public void setDia_chi(String dia_chi) {
-        this.dia_chi = dia_chi;
+    public void setDiaChi(String diaChi) {
+        DiaChi = diaChi;
     }
 
     public String getSdt() {
-        return sdt;
+        return Sdt;
     }
 
     public void setSdt(String sdt) {
-        this.sdt = sdt;
+        Sdt = sdt;
     }
 
-    public String getMat_khau() {
-        return mat_khau;
+    public String getMatKhau() {
+        return MatKhau;
     }
 
-    public void setMat_khau(String mat_khau) {
-        this.mat_khau = mat_khau;
+    public void setMatKhau(String matKhau) {
+        MatKhau = matKhau;
     }
 
-    public String getThanh_pho() {
-        return thanh_pho;
+    public String getThanhPho() {
+        return ThanhPho;
     }
 
-    public void setThanh_pho(String thanh_pho) {
-        this.thanh_pho = thanh_pho;
+    public void setThanhPho(String thanhPho) {
+        ThanhPho = thanhPho;
     }
 
-    public String getQuoc_gia() {
-        return quoc_gia;
+    public String getQuocGia() {
+        return QuocGia;
     }
 
-    public void setQuoc_gia(String quoc_gia) {
-        this.quoc_gia = quoc_gia;
+    public void setQuocGia(String quocGia) {
+        QuocGia = quocGia;
     }
 
-    public String getNgay_sinh() {
-        return ngay_sinh;
+    public String getNgaySinh() {
+        return NgaySinh;
     }
 
-    public void setNgay_sinh(String ngay_sinh) {
-        this.ngay_sinh = ngay_sinh;
+    public void setNgaySinh(String ngaySinh) {
+        NgaySinh = ngaySinh;
     }
 }

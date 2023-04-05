@@ -26,7 +26,7 @@
         <div class="row mt-3">
             <div class="col-6">
                 <label>Tên đệm</label>
-                <input type="text" name="ten_dem" class="form-control"value="${nv.ten_dem}" />
+                <input type="text" name="tenDem" class="form-control"value="${nv.tenDem}" />
             </div>
             <div class="col-6">
                 <label>Tên</label>
@@ -36,24 +36,24 @@
         <div class="row mt-3">
             <div class="col-6">
                 <label>Ngày sinh</label>
-                <input type="date" name="ngay_sinh" class="form-control" value="${nv.ngay_sinh}"/>
+                <input type="date" name="ngaySinh" class="form-control" value="${nv.ngaySinh}"/>
             </div>
             <div class="col-6" style="margin-top: 30px">
                 <label>Giới Tính</label>
-                <input type="radio" name="gioi_tinh"  id="nam" value="true" ${nv.gioi_tinh=="true"?"checked":"" }>Nam
-                <input type="radio" name="gioi_tinh" id="nu" value="false" ${nv.gioi_tinh=="false"?"checked":""}>Nữ
+                <input type="radio" name="gioiTinh"  id="nam" value="Nam" ${nv.gioiTinh=="Nam"?"checked":"" }>Nam
+                <input type="radio" name="gioiTinh" id="nu" value="Nữ" ${nv.gioiTinh=="Nữ"?"checked":""}>Nữ
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
                 <label>Địa chỉ</label>
-                <input type="text" name="dia_chi" class="form-control" value="${nv.dia_chi}"/>
+                <input type="text" name="diaChi" class="form-control" value="${nv.diaChi}"/>
             </div>
             <div class="col-6">
             <label>Trạng thái</label>
-            <select name="trang_thai" class="form-select">
-                <option value="1" ${nv.trang_thai==1?"selected":""}>Đang làm</option>
-                <option value="2" ${nv.trang_thai==2?"selected":""}  >Đã nghỉ</option>
+            <select name="trangThai" class="form-select">
+                <option value="0" ${nv.trangThai==0?"selected":""}>Đang làm</option>
+                <option value="1" ${nv.trangThai==1?"selected":""}  >Đã nghỉ</option>
             </select>
             </div>
         </div>
@@ -66,14 +66,31 @@
             </div>
             <div class="col-6">
                 <label>Mật Khẩu</label>
-                <input type="text" name="mat_khau" class="form-control" />
+                <input type="text" name="matKhau" class="form-control" />
             </div>
-        </div><div class="row mt-3">
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <label> Cửa Hàng</label>
+                <select name="cuaHang" class="form-select" >
+                    <c:forEach items="${dsch}" var="chs">
+                        <option ${nv.ch.id == ch.id ? "selected" : "" } value="${chs.id}">${ch.ten} </option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="col-6">
+                <label>Chức Vụ</label>
+                <select name="chucVu" class="form-select"  >
+                    <c:forEach items="${dscv}" var="cvs">
+                        <option ${nv.cv.id == cv.id ? "selected" : "" } value="${cvs.id}">${cvs.ten} </option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
         <div class="col-6">
             <button class="btn btn-primary">Cập Nhật</button>
         </div>
         <div class="col-6"></div>
-    </div>
     </form>
 </div>
 

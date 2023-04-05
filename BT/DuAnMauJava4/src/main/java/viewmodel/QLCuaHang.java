@@ -1,59 +1,60 @@
 package viewmodel;
 public class QLCuaHang {
-    private String ma;
-    private String ten;
-    private String dia_chi;
-    private String thanh_pho;
-    private String quoc_gia;
+    private String Ma;
+    private String Ten;
+    private String DiaChi;
+    private String ThanhPho;
+    private String QuocGia;
 
     public QLCuaHang() {
     }
 
-    public QLCuaHang(String ma, String ten, String dia_chi, String thanh_pho, String quoc_gia) {
-        this.ma = ma;
-        this.ten = ten;
-        this.dia_chi = dia_chi;
-        this.thanh_pho = thanh_pho;
-        this.quoc_gia = quoc_gia;
+    public QLCuaHang(String ma, String ten, String diaChi, String thanhPho, String quocGia) {
+        Ma = ma;
+        Ten = ten;
+        DiaChi = diaChi;
+        ThanhPho = thanhPho;
+        QuocGia = quocGia;
     }
 
     public String getMa() {
-        return ma;
+        return Ma;
     }
 
     public void setMa(String ma) {
-        this.ma = ma;
+        Ma = ma;
     }
 
     public String getTen() {
-        return ten;
+        return Ten;
     }
 
     public void setTen(String ten) {
-        this.ten = ten;
+        Ten = ten;
     }
 
-    public String getDia_chi() {
-        return dia_chi;
+    public String getDiaChi() {
+        return DiaChi;
     }
 
-    public void setDia_chi(String dia_chi) {
-        this.dia_chi = dia_chi;
+    public void setDiaChi(String diaChi) {
+        DiaChi = diaChi;
     }
 
-    public String getThanh_pho() {
-        return thanh_pho;
+    public String getThanhPho() {
+        return ThanhPho;
     }
 
-    public void setThanh_pho(String thanh_pho) {
-        this.thanh_pho = thanh_pho;
+    public void setThanhPho(String thanhPho) {
+        ThanhPho = thanhPho;
     }
 
-    public String getQuoc_gia() {
-        return quoc_gia;
+    public String getQuocGia() {
+        return QuocGia;
     }
 
-    public void setQuoc_gia(String quoc_gia) {
-        this.quoc_gia = quoc_gia;
+    public void setQuocGia(String quocGia) {
+        QuocGia = quocGia;
     }
 }
+

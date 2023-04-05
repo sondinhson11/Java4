@@ -67,6 +67,23 @@ public class NhanVienDomain {
     public NhanVienDomain() {
     }
 
+    public NhanVienDomain(String id, String ma, String ho, String tenDem, String ten, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String matKhau, ChucVuDomain cv, CuaHangDomain cuaHang, UUID idGuiBC, Integer trangThai) {
+        this.id = id;
+        this.ma = ma;
+        this.ho = ho;
+        this.tenDem = tenDem;
+        this.ten = ten;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.sdt = sdt;
+        this.matKhau = matKhau;
+        this.cv = cv;
+        this.cuaHang = cuaHang;
+        this.idGuiBC = idGuiBC;
+        this.trangThai = trangThai;
+    }
+
     public String getId() {
         return id;
     }

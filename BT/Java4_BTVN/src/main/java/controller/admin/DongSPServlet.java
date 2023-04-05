@@ -1,5 +1,6 @@
 package controller.admin;
 
+import DomainModel.DongSP;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import repositories.DongSpRepository;
-import ViewModel.DongSP;
+
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -24,8 +25,6 @@ public class DongSPServlet extends HttpServlet {
     private DongSpRepository dsp;
    public DongSPServlet(){
        dsp = new DongSpRepository();
-       this.dsp.insert(new DongSP("PH1", "Ng"));
-       this.dsp.insert(new DongSP("PH2", "Tran"));
 
    }
     @Override
@@ -68,13 +67,13 @@ public class DongSPServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        DongSP ds = this.dsp.findMa(ma);
+        DongSP domainDSP = this.dsp.findByMa(ma);
 
-        if(ds == null){
+        if(domainDSP == null){
             System.out.println("khong tin thay");
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }else{
-            this.dsp.delete(ds);
+            this.dsp.delete(domainDSP);
             System.out.println("M di !");
             response.sendRedirect("/Java4_BTVN_war_exploded/dong-sp/index");
         }
@@ -84,7 +83,7 @@ public class DongSPServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        DongSP ds = this.dsp.findMa(ma);
+        DongSP ds = this.dsp.findByMa(ma);
         request.setAttribute("dsp",ds);
         request.setAttribute("view","/views/dong_sp/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp")
@@ -125,10 +124,11 @@ public class DongSPServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
-        DongSP dsps = new DongSP();
+        String ma = request.getParameter("ma");
+        DongSP domainDSP = this.dsp.findByMa(ma);
         try {
-            BeanUtils.populate(dsps, request.getParameterMap());
-            this.dsp.update(dsps);
+            BeanUtils.populate(domainDSP, request.getParameterMap());
+            this.dsp.update(domainDSP);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

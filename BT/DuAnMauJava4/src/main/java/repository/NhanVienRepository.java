@@ -2,6 +2,7 @@ package repository;
 
 
 import domain_model.NhanVienDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -51,6 +52,20 @@ public class NhanVienRepository {
     public NhanVienDomain findById(String id){
         return this.hss.find(NhanVienDomain.class,id);
 
+    }
+    public NhanVienDomain login(String ma, String matKhau)
+    {
+        String hql = "SELECT nv FROM NhanVienDomain nv WHERE nv.ma = ?1 AND nv.matKhau = ?2";
+        TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql, NhanVienDomain.class);
+        query.setParameter(1, ma);
+        query.setParameter(2, matKhau);
+        try {
+            NhanVienDomain nv = query.getSingleResult();
+            return nv;
+        } catch (NoResultException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     public List<NhanVienDomain> findAll(){
         String hql = "SELECT obj FROM NhanVienDomain obj";

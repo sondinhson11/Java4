@@ -5,33 +5,32 @@ import java.sql.Date;
 
 public class QLNhanVien {
     private String ma;
-    private String ten;
-    private String tendem;
     private String ho;
-    private String gioitinh;
-    private Date ngaysinh;
-    private String diachi;
+    private String tenDem;
+    private String ten;
+    private String gioiTinh;
+    private Date ngaySinh;
+    private String diaChi;
     private String sdt;
-    private String mk;
-    private String idCH ;
-    private String idCV ;
-    private String idGuiBC ;
-    private Integer trangThai ;
+    private String matKhau;
+    private String idCH;
+    private String idCV;
+    private String idGuiBC;
+    private Integer trangThai;
 
     public QLNhanVien() {
-
     }
 
-    public QLNhanVien(String ma, String ten, String tendem, String ho, String gioitinh, Date ngaysinh, String diachi, String sdt, String mk, String idCH, String idCV, String idGuiBC, Integer trangThai) {
+    public QLNhanVien(String ma, String ho, String tenDem, String ten, String gioiTinh, Date ngaySinh, String diaChi, String sdt, String matKhau, String idCH, String idCV, String idGuiBC, Integer trangThai) {
         this.ma = ma;
-        this.ten = ten;
-        this.tendem = tendem;
         this.ho = ho;
-        this.gioitinh = gioitinh;
-        this.ngaysinh = ngaysinh;
-        this.diachi = diachi;
+        this.tenDem = tenDem;
+        this.ten = ten;
+        this.gioiTinh = gioiTinh;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
         this.sdt = sdt;
-        this.mk = mk;
+        this.matKhau = matKhau;
         this.idCH = idCH;
         this.idCV = idCV;
         this.idGuiBC = idGuiBC;
@@ -46,22 +45,6 @@ public class QLNhanVien {
         this.ma = ma;
     }
 
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public String getTendem() {
-        return tendem;
-    }
-
-    public void setTendem(String tendem) {
-        this.tendem = tendem;
-    }
-
     public String getHo() {
         return ho;
     }
@@ -70,28 +53,44 @@ public class QLNhanVien {
         this.ho = ho;
     }
 
-    public String getGioitinh() {
-        return gioitinh;
+    public String getTenDem() {
+        return tenDem;
     }
 
-    public void setGioitinh(String gioitinh) {
-        this.gioitinh = gioitinh;
+    public void setTenDem(String tenDem) {
+        this.tenDem = tenDem;
     }
 
-    public Date getNgaysinh() {
-        return ngaysinh;
+    public String getTen() {
+        return ten;
     }
 
-    public void setNgaysinh(Date ngaysinh) {
-        this.ngaysinh = ngaysinh;
+    public void setTen(String ten) {
+        this.ten = ten;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
+    }
+
+    public Date getNgaySinh() {
+        return ngaySinh;
+    }
+
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
     public String getSdt() {
@@ -102,12 +101,12 @@ public class QLNhanVien {
         this.sdt = sdt;
     }
 
-    public String getMk() {
-        return mk;
+    public String getMatKhau() {
+        return matKhau;
     }
 
-    public void setMk(String mk) {
-        this.mk = mk;
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public String getIdCH() {

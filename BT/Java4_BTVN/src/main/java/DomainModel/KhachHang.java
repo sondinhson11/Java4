@@ -1,9 +1,16 @@
 package DomainModel;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 import java.util.UUID;
 
+@Builder
+@Getter
+@Setter
 @Entity
 @Table(name="KhachHang")
 public class KhachHang {
@@ -59,97 +66,6 @@ public class KhachHang {
 
     public KhachHang() {
     }
-
-    public UUID getId() {
-        return Id;
-    }
-
-    public void setId(UUID id) {
-        Id = id;
-    }
-
-    public String getMa() {
-        return Ma;
-    }
-
-    public void setMa(String ma) {
-        Ma = ma;
-    }
-
-    public String getTen() {
-        return Ten;
-    }
-
-    public void setTen(String ten) {
-        Ten = ten;
-    }
-
-    public String getTenDem() {
-        return TenDem;
-    }
-
-    public void setTenDem(String tenDem) {
-        TenDem = tenDem;
-    }
-
-    public String getHo() {
-        return Ho;
-    }
-
-    public void setHo(String ho) {
-        Ho = ho;
-    }
-
-    public Date getNgaySinh() {
-        return NgaySinh;
-    }
-
-    public void setNgaySinh(Date ngaySinh) {
-        NgaySinh = ngaySinh;
-    }
-
-    public String getSdt() {
-        return Sdt;
-    }
-
-    public void setSdt(String sdt) {
-        Sdt = sdt;
-    }
-
-    public String getDiaChi() {
-        return DiaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        DiaChi = diaChi;
-    }
-
-    public String getThanhPho() {
-        return ThanhPho;
-    }
-
-    public void setThanhPho(String thanhPho) {
-        ThanhPho = thanhPho;
-    }
-
-    public String getQuocGia() {
-        return QuocGia;
-    }
-
-    public void setQuocGia(String quocGia) {
-        QuocGia = quocGia;
-    }
-
-    public String getMatKhau() {
-        return MatKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        MatKhau = matKhau;
-    }
-
-
-
 
 
 }

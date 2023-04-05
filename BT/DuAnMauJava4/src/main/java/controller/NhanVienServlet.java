@@ -1,5 +1,7 @@
 package controller;
 
+import domain_model.ChucVuDomain;
+import domain_model.CuaHangDomain;
 import domain_model.NhanVienDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -8,8 +10,11 @@ import org.apache.commons.beanutils.BeanUtils;
 import repository.ChucVuRepository;
 import repository.CuaHangRepository;
 import repository.NhanVienRepository;
+import viewmodel.QLNhanVien;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.UUID;
 
 @WebServlet(name = "NhanViennServlet",value = {
         "/nhanvien/index", //GET
@@ -83,10 +88,34 @@ public class NhanVienServlet extends HttpServlet {
         }
     }
     protected void store(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        QLNhanVien nv = new QLNhanVien();
         try {
-            NhanVienDomain nv = new NhanVienDomain();
-            BeanUtils.populate(nv,request.getParameterMap());
-            nhanVienRepository.insert(nv);
+            BeanUtils.populate(nv, request.getParameterMap());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        NhanVienDomain DomainModelNv = new NhanVienDomain();
+        String maCv = request.getParameter("idCV");
+        String maCh = request.getParameter("idCH");
+        UUID idCV = UUID.fromString(maCv);
+        UUID idCH = UUID.fromString(maCh);
+        ChucVuDomain DomainModelCv = this.chucVuRepository.findById(idCV);
+        CuaHangDomain DomainModelCh = this.cuaHangRepository.findById(idCH);
+
+        DomainModelNv.setMa(nv.getMa());
+        DomainModelNv.setTen(nv.getTen());
+        DomainModelNv.setTenDem(nv.getTenDem());
+        DomainModelNv.setHo(nv.getHo());
+        DomainModelNv.setGioiTinh(nv.getGioiTinh());
+        DomainModelNv.setNgaySinh(nv.getNgaySinh());
+        DomainModelNv.setDiaChi(nv.getDiaChi());
+        DomainModelNv.setSdt(nv.getSdt());
+        DomainModelNv.setMatKhau(nv.getMatKhau());
+        DomainModelNv.setCuaHang(DomainModelCh);
+        DomainModelNv.setCv(DomainModelCv);
+        DomainModelNv.setTrangThai(nv.getTrangThai());
+        try {
+            this.nhanVienRepository.insert(DomainModelNv);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,14 +123,22 @@ public class NhanVienServlet extends HttpServlet {
 
     }
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        NhanVienDomain nv = this.nhanVienRepository.findByMa(ma);
         try {
-            String ma = request.getParameter("ma");
-            NhanVienDomain nv = this.nhanVienRepository.findByMa(ma);
             BeanUtils.populate(nv,request.getParameterMap());
-            nhanVienRepository.update(nv);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String maCv = request.getParameter("idCV");
+        String maCh = request.getParameter("idCH");
+        UUID idCV = UUID.fromString(maCv);
+        UUID idCH = UUID.fromString(maCh);
+        ChucVuDomain DomainModelCv = this.chucVuRepository.findById(idCV);
+        CuaHangDomain DomainModelCh = this.cuaHangRepository.findById(idCH);
+        nv.setCv(DomainModelCv);
+        nv.setCuaHang(DomainModelCh);
+        nhanVienRepository.update(nv);
         response.sendRedirect("/DuAnMauJava4_war_exploded/nhanvien/index");
     }
 }

@@ -1,5 +1,6 @@
 package repository;
 
+import domain_model.ChucVuDomain;
 import domain_model.CuaHangDomain;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -7,6 +8,7 @@ import org.hibernate.Transaction;
 import utils.HibernateUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CuaHangRepository {
     private Session hsession;
@@ -50,6 +52,9 @@ public class CuaHangRepository {
             e.printStackTrace();
             transaction.rollback();
         }
+    }
+    public CuaHangDomain findById(UUID id) {
+        return this.hsession.find(CuaHangDomain.class,id);
     }
 
     public List<CuaHangDomain> findAll(){

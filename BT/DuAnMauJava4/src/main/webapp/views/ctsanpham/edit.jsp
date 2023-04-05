@@ -1,77 +1,78 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: tiennh
-  Date: 3/11/23
-  Time: 14:41
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="f" uri="jakarta.tags.functions" %>
 <div class="col-8 offset-2">
     <form method="POST"
-          action="/DuAnMauJava4_war_exploded/khachhang/update?ma=${kh.ma}">
+          action="/DuAnMauJava4_war_exploded/ctsanpham/update?ma=${kh.id}">
         <div class="row mt-3">
             <div class="col-6">
                 <label>Mã</label>
-                <input type="text" name="ma" class="form-control" value="${ kh.ma }" disabled />
+                <input type="text" name="id" class="form-control" value="${ kh.id }" disabled/>
             </div>
             <div class="col-6">
-                <label>Họ</label>
-                <input type="text" name="ho" class="form-control" value="${ kh.ho }" />
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <label>Tên đệm</label>
-                <input type="text" name="tenDem" class="form-control" value="${ kh.tenDem }" />
-            </div>
-            <div class="col-6">
-                <label>Tên</label>
-                <input type="text" name="ten" class="form-control" value="${ kh.ten }" />
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <label>Ngày sinh</label>
-                <input type="date" name="ngaySinh" class="form-control" value="${ kh.ngaySinh }"/>
-            </div>
-            <div class="col-6">
-                <label>SDT</label>
-                <input type="tel" name="sdt" class="form-control" value="${ kh.sdt }"/>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <label>Địa chỉ</label>
-                <input type="text" name="diaChi" class="form-control" value="${ kh.diaChi }"/>
-            </div>
-            <div class="col-6">
-                <label>Mật khẩu</label>
-                <input type="password" name="matKhau" class="form-control" value="${ kh.matKhau }"/>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-6">
-                <label>Thành phố</label>
-                <select name="thanhPho" class="form-select">
-                    <option value="Hà Nội"${ kh.thanhPho == "Hà Nội" ? "selected" : "" }>Hà Nội</option>
-                    <option value="Thanh Hóa"${ kh.thanhPho == "Thanh Hóa" ? "selected" : "" }>Thanh Hóa</option>
-                </select>
-            </div>
-            <div class="col-6">
-                <label>Quốc gia</label>
-                <select name="quocGia" class="form-select">
-                    <option value="Việt Nam" ${ kh.quocGia == "Việt Nam" ? "selected" : "" }>Việt Nam</option>
-                    <option value="Mỹ" ${ kh.quocGia == "Mỹ" ? "selected" : "" }>Mỹ</option>
+                <label>idSP</label>
+                <select name="idSP" class="form-select">
+                    <c:forEach items="${ dssp }" var="sp2">
+                        <option value="${sp2.id}" ${sp2.id == kh.sp.id ? "selected" :"" }>${sp2.ten}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-6">
-                <button class="btn btn-primary">Sửa</button>
+                <label>idNsx</label>
+                <select name="idNsx" class="form-select">
+                    <c:forEach items="${ dsnxs }" var="nxs2">
+                        <option value="${nxs2.id}" ${nxs2.id == kh.nsx.id ? "selected" :"" }>${nxs2.ten}</option>
+                    </c:forEach>
+                </select>
             </div>
-            <div class="col-6"></div>
+            <div class="col-6">
+                <label>idMauSac</label>
+                <select name="idMauSac" class="form-select">
+                    <c:forEach items="${ dsms }" var="ms2">
+                        <option value="${ms2.id}" ${ms2.id == kh.ms.id ? "selected" :"" }>${ms2.ten}</option>
+                    </c:forEach>
+                </select>
+            </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <label>idDongSP</label>
+                <select name="idDongSP" class="form-select">
+                    <c:forEach items="${ dsdsp }" var="dsp2">
+                        <option value="${dsp2.id}" ${dsp2.id == kh.dsp.id ? "selected" :"" }>${dsp2.ten}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="col-6">
+                <label>namBH</label>
+                <input type="text" name="namBH" value="${ kh.namBH }" class="form-control" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <label>moTa</label>
+                <input type="text" name="moTa" value="${ kh.moTa }" class="form-control" />
+            </div>
+            <div class="col-6">
+                <label>soLuongTon</label>
+                <input type="text" name="soLuongTon" value="${ kh.soLuongTon }" class="form-control" />
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <label>giaNhap</label>
+                <input type="number" name="giaNhap" value="${ kh.giaNhap }" class="form-control" />
+            </div>
+            <div class="col-6">
+                <label>giaBan</label>
+                <input type="number" name="giaBan" value="${ kh.giaBan }" class="form-control" />
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Sửa</button>
+
     </form>
 </div>
 <script src="/DuAnMauJava4_war_exploded/js/bootstrap.min.js"></script>

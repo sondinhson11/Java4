@@ -21,9 +21,7 @@ import java.io.IOException;
 })
 public class MauSacServlet extends HttpServlet {
     MauSacRepository mauSacRepository;
-    String error ;
-    String errorTen;
-    String errorMa;
+
     public MauSacServlet(){
         mauSacRepository = new MauSacRepository();
 

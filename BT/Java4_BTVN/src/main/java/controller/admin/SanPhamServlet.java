@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import repositories.SanPhamRepository;
-import ViewModel.SanPham;
+import DomainModel.SanPham;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -21,12 +21,11 @@ import java.lang.reflect.InvocationTargetException;
         "/san-pham/update",   // POST
         "/san-pham/delete",   // GET
 })
-public class SanPhamServlet extends HttpServlet {
+public class   SanPhamServlet extends HttpServlet {
     private SanPhamRepository sprp ;
     public SanPhamServlet(){
         sprp = new SanPhamRepository();
-        this.sprp.insert(new SanPham("SP1", "Ao 3 lo "));
-        this.sprp.insert(new SanPham("Sp2", "Ao 4 lo"));
+
     }
 
 
@@ -72,13 +71,13 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        SanPham qlnv = this.sprp.findMa(ma);
+        SanPham domainSP = this.sprp.findByMa(ma);
 
-        if(qlnv == null){
+        if(domainSP == null){
             System.out.println("khong tin thay");
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }else{
-            this.sprp.delete(qlnv);
+            this.sprp.delete(domainSP);
             System.out.println("M di !");
             response.sendRedirect("/Java4_BTVN_war_exploded/san-pham/index");
         }
@@ -88,8 +87,8 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         String ma = request.getParameter("ma");
-        SanPham qlnv = this.sprp.findMa(ma);
-        request.setAttribute("sp",qlnv);
+        SanPham domainSP = this.sprp.findByMa(ma);
+        request.setAttribute("sp",domainSP);
         request.setAttribute("view","/views/san_pham/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp")
                 .forward(request, response);
@@ -131,10 +130,11 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
 
-        SanPham sp = new SanPham();
+        String ma = request.getParameter("ma");
+        SanPham domainSP = this.sprp.findByMa(ma);
         try {
-            BeanUtils.populate(sp, request.getParameterMap());
-            this.sprp.update(sp);
+            BeanUtils.populate(domainSP, request.getParameterMap());
+            this.sprp.update(domainSP);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

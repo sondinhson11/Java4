@@ -109,15 +109,17 @@ public class MauSacServlet extends HttpServlet {
             HttpServletResponse response
     ) throws ServletException, IOException {
         MauSac domainMS = new MauSac();
-        try {
-            BeanUtils.populate(domainMS,request.getParameterMap());
-            this.mauSacRepository.insert(domainMS);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        response.sendRedirect("/Java4_BTVN_war_exploded/mau-sac/index");
+            try {
+                BeanUtils.populate(domainMS, request.getParameterMap());
+                this.mauSacRepository.insert(domainMS);
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            response.sendRedirect("/Java4_BTVN_war_exploded/mau-sac/index");
+
     }
     protected void update(
             HttpServletRequest request,
