@@ -57,7 +57,7 @@ public class MauSacRepository {
         return this.hsession.find(MauSacDomain.class,id);
     }
     public List<MauSacDomain> findAll(){
-        String hql="SELECT obj FROM MauSacDomain obj";
+        String hql="SELECT obj FROM MauSacDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<MauSacDomain> query = this.hsession.createQuery(hql,MauSacDomain.class);
         return query.getResultList();    }
     public MauSacDomain findByMa(String ma){

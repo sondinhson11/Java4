@@ -55,7 +55,7 @@ public class NhanVienRepository {
     }
     public NhanVienDomain login(String ma, String matKhau)
     {
-        String hql = "SELECT nv FROM NhanVienDomain nv WHERE nv.ma = ?1 AND nv.matKhau = ?2";
+        String hql = "SELECT nv FROM NhanVienDomain nv WHERE nv.ma = ?1 AND nv.matKhau = ?2" ;
         TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql, NhanVienDomain.class);
         query.setParameter(1, ma);
         query.setParameter(2, matKhau);
@@ -68,7 +68,7 @@ public class NhanVienRepository {
         }
     }
     public List<NhanVienDomain> findAll(){
-        String hql = "SELECT obj FROM NhanVienDomain obj";
+        String hql = "SELECT obj FROM NhanVienDomain obj  ORDER BY obj.ma asc ";
         TypedQuery<NhanVienDomain> query = this.hss.createQuery(hql,NhanVienDomain.class);
         List<NhanVienDomain> list = query.getResultList();
         return list;

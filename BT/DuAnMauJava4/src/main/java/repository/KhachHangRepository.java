@@ -52,7 +52,7 @@ public class KhachHangRepository {
         }
     }
     public List<KhachHangDomain> findAll(){
-        String hql = "SELECT obj FROM KhachHangDomain obj";
+        String hql = "SELECT obj FROM KhachHangDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<KhachHangDomain> query = this.hSession.createQuery(hql, KhachHangDomain.class);
         return query.getResultList();
     }

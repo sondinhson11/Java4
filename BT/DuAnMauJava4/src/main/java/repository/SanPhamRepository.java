@@ -56,7 +56,7 @@ public class SanPhamRepository {
         return this.hsession.find(SanPhamDomain.class,id);
     }
     public List<SanPhamDomain> findAll(){
-        String hql="SELECT obj FROM SanPhamDomain obj";
+        String hql="SELECT obj FROM SanPhamDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<SanPhamDomain> query = this.hsession.createQuery(hql,SanPhamDomain.class);
         return query.getResultList();    }
     public SanPhamDomain findByMa(String ma){

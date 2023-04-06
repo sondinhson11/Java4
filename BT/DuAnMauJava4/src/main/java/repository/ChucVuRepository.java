@@ -59,7 +59,7 @@ public class ChucVuRepository {
     }
 
     public List<ChucVuDomain> findAll() {
-        String hql = "SELECT obj FROM ChucVuDomain obj";
+        String hql = "SELECT obj FROM ChucVuDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<ChucVuDomain> query = this.hsession.createQuery(hql, ChucVuDomain.class);
         return query.getResultList();
     }

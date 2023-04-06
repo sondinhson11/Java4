@@ -57,7 +57,7 @@ public class DongSPRepository {
     }
 
     public List<DongSPDomain> findAll(){
-        String hql="SELECT obj FROM DongSPDomain obj";
+        String hql="SELECT obj FROM DongSPDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<DongSPDomain> query = this.hsession.createQuery(hql,DongSPDomain.class);
         return query.getResultList();    }
     public DongSPDomain findByMa(String ma){

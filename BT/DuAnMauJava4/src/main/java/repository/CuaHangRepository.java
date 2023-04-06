@@ -58,7 +58,7 @@ public class CuaHangRepository {
     }
 
     public List<CuaHangDomain> findAll(){
-        String hql="SELECT obj FROM CuaHangDomain obj";
+        String hql="SELECT obj FROM CuaHangDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<CuaHangDomain> query = this.hsession.createQuery(hql,CuaHangDomain.class);
         return query.getResultList();    }
     public CuaHangDomain findByMa(String ma){

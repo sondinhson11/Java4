@@ -58,12 +58,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/DuAnMauJava4_war_exploded/ctsanpham/index">Chi Tiết Sản Phẩm</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/DuAnMauJava4_war_exploded/hoadon/index">Hóa Đơn</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/DuAnMauJava4_war_exploded/hoadonct/index">Hóa Đơn Chi Tiết</a>
-                            </li>
+<%--                            <li class="nav-item">--%>
+<%--                                <a class="nav-link" href="/DuAnMauJava4_war_exploded/hoadon/index">Hóa Đơn</a>--%>
+<%--                            </li>--%>
+<%--                            <li class="nav-item">--%>
+<%--                                <a class="nav-link" href="/DuAnMauJava4_war_exploded/hoadonct/index">Hóa Đơn Chi Tiết</a>--%>
+<%--                            </li>--%>
 
                         </ul>
                     </div>

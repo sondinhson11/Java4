@@ -57,7 +57,7 @@ public class NsxRepository {
     }
 
     public List<NSXDomain> findAll(){
-        String hql="SELECT obj FROM NSXDomain obj";
+        String hql="SELECT obj FROM NSXDomain obj ORDER BY obj.Ma asc ";
         TypedQuery<NSXDomain> query = this.hsession.createQuery(hql,NSXDomain.class);
         return query.getResultList();
     }
