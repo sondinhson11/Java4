@@ -2,11 +2,13 @@ package controller;
 
 import domain_model.CuaHangDomain;
 import domain_model.NSXDomain;
+import domain_model.SanPhamDomain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.CuaHangRepository;
+import utils.CheckString;
 
 import java.io.IOException;
 
@@ -23,6 +25,8 @@ public class CuaHangServlet extends HttpServlet {
     String error ;
     String errorTen;
     String errorMa;
+    String errorDiaChi;
+
 
     public CuaHangServlet(){
         cuaHangRepository = new CuaHangRepository();
@@ -45,6 +49,7 @@ public class CuaHangServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
         request.setAttribute("DSCuaHang",this.cuaHangRepository.findAll());
         request.setAttribute("view", "/views/cuahang/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -55,6 +60,10 @@ public class CuaHangServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
+        request.setAttribute("checkten", errorTen);
+        request.setAttribute("checkma", errorMa);
+        request.setAttribute("errorDiaChi", errorDiaChi);
         request.setAttribute("view", "/views/cuahang/create.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
@@ -63,6 +72,9 @@ public class CuaHangServlet extends HttpServlet {
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ma = request.getParameter("ma");
         CuaHangDomain cuaHang = this.cuaHangRepository.findByMa(ma);
+        request.setAttribute("checkten", errorTen);
+        request.setAttribute("checkma", errorMa);
+        request.setAttribute("errorDiaChi", errorDiaChi);
         request.setAttribute("ch", cuaHang);
         request.setAttribute("view", "/views/cuahang/edit.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -95,25 +107,52 @@ public class CuaHangServlet extends HttpServlet {
     }
 
     protected void store(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        CuaHangDomain vm = new CuaHangDomain();
+
         try{
-            CuaHangDomain vm = new CuaHangDomain();
             BeanUtils.populate(vm,request.getParameterMap());
-            this.cuaHangRepository.insert(vm);
         }catch (Exception e){
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        errorDiaChi = CheckString.checkValues(vm.getMa(),"địa chỉ");
+
+        CuaHangDomain cv = cuaHangRepository.findByMa(vm.getMa());
+        if (cv!=null){
+            error="Trùng mã";
+            response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/create");
+            return;
+        }else{
+            error="";
+        }
+
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/create");
+            return;
+        }
+
+        this.cuaHangRepository.insert(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/index");
     }
 
     protected void update(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException{
+        String ma = request.getParameter("ma");
+        CuaHangDomain vm = this.cuaHangRepository.findByMa(ma);
         try{
-            String ma = request.getParameter("ma");
-            CuaHangDomain vm = this.cuaHangRepository.findByMa(ma);
             BeanUtils.populate(vm,request.getParameterMap());
-            this.cuaHangRepository.update(vm);
         }catch (Exception e){
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        errorDiaChi = CheckString.checkValues(vm.getDiaChi(),"địa chỉ");
+
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()||!errorDiaChi.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/edit?ma="+vm.getMa());
+            return;
+        }
+        this.cuaHangRepository.update(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/cuahang/index");
     }
 }

@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.MauSacDomain;
 import domain_model.SanPhamDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -63,6 +64,11 @@ public class SanPhamRepository {
         String hql =" SELECT obj FROM SanPhamDomain obj where obj.Ma=?1";
         TypedQuery<SanPhamDomain> query=this.hsession.createQuery(hql,SanPhamDomain.class);
         query.setParameter(1,ma);
-        return  query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

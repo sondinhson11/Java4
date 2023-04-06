@@ -19,6 +19,8 @@ import java.io.IOException;
         "/hoadonct/*",
         "/giohang/*",
         "/dongSP/*",
+        "/cuahang/*",
+        "/chucvu/*",
 })
 public class AuthenFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {

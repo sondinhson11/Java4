@@ -175,7 +175,6 @@ public class KhachHangServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        errorMa = CheckString.checkValues(vm.getMa(),"mã");
         errorHo = CheckString.checkValues(vm.getHo(),"họ");
         errorTenDem = CheckString.checkValues(vm.getTenDem(),"tên đệm");
         errorTen = CheckString.checkValues(vm.getTen(),"tên");
@@ -184,8 +183,8 @@ public class KhachHangServlet extends HttpServlet {
         errorSDT = CheckString.checkValues(vm.getSdt(),"sđt");
         errorMK = CheckString.checkValues(vm.getMatKhau(),"mật khẩu");
 
-        if (!errorMa.isEmpty()||!errorHo.isEmpty()||!errorTenDem.isEmpty()||!errorTen.isEmpty()||!errorNgaySinh.isEmpty()||!errorDiaChi.isEmpty()||!errorSDT.isEmpty()||!errorMK.isEmpty()){
-            response.sendRedirect("/DuAnMauJava4_war_exploded/khachhang/create");
+        if (!errorHo.isEmpty()||!errorTenDem.isEmpty()||!errorTen.isEmpty()||!errorNgaySinh.isEmpty()||!errorDiaChi.isEmpty()||!errorSDT.isEmpty()||!errorMK.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/khachhang/edit?ma="+vm.getMa());
             return;
         }
 

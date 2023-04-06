@@ -1,5 +1,6 @@
 package controller;
 
+import domain_model.ChucVuDomain;
 import domain_model.SanPhamDomain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import repository.SanPhamRepository;
+import utils.CheckString;
+
 import java.io.IOException;
 
 @WebServlet(name = "SanPhamServlet", value = {
@@ -43,6 +46,7 @@ public class SanPhamServlet extends HttpServlet {
     }
 
     protected void index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("trungMa",error);
         request.setAttribute("DSSanPham", this.sanPhamRepository.findAll());
         request.setAttribute("view", "/views/sanpham/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
@@ -50,10 +54,14 @@ public class SanPhamServlet extends HttpServlet {
 
     protected void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("view", "/views/sanpham/create.jsp");
+        request.setAttribute("trungMa",error);
+        request.setAttribute("checkten", errorTen);
+        request.setAttribute("checkma", errorMa);
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
 
     protected void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("checkten", errorTen);
         String ma = request.getParameter("ma");
         SanPhamDomain sp = this.sanPhamRepository.findByMa(ma);
         request.setAttribute("sp", sp);
@@ -85,13 +93,28 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
+        SanPhamDomain vm = new SanPhamDomain();
         try {
-            SanPhamDomain vm = new SanPhamDomain();
             BeanUtils.populate(vm, request.getParameterMap());
-            this.sanPhamRepository.insert(vm);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        SanPhamDomain cv = sanPhamRepository.findByMa(vm.getMa());
+        if (cv!=null){
+            error="Trùng mã";
+            response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/create");
+            return;
+        }else{
+            error="";
+        }
+
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/create");
+            return;
+        }
+        this.sanPhamRepository.insert(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/index");
     }
 
@@ -99,14 +122,20 @@ public class SanPhamServlet extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws ServletException, IOException {
+        String ma = request.getParameter("ma");
+        SanPhamDomain vm = this.sanPhamRepository.findByMa(ma);
         try {
-            String ma = request.getParameter("ma");
-            SanPhamDomain vm = this.sanPhamRepository.findByMa(ma);
             BeanUtils.populate(vm, request.getParameterMap());
-            this.sanPhamRepository.update(vm);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        errorTen = CheckString.checkValues(vm.getTen(),"tên");
+        errorMa = CheckString.checkValues(vm.getMa(),"mã");
+        if (!errorTen.isEmpty()||!errorMa.isEmpty()){
+            response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/edit?ma="+vm.getMa());
+            return;
+        }
+        this.sanPhamRepository.update(vm);
         response.sendRedirect("/DuAnMauJava4_war_exploded/sanpham/index");
     }
 }

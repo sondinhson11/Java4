@@ -25,49 +25,49 @@
                 <div class="col-6">
                     <label>Mã</label>
                     <input type="text" name="ma" class="form-control" />
-                    <div class="error mt-2"><p>${trungMa}</p></div>
-                    <div class="error mt-2"><p>${errorMa}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${trungMa}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorMa}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Họ</label>
                     <input type="text" name="ho" class="form-control" />
-                    <div class="error mt-2"><p>${errorHo}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorHo}</p></div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Tên đệm</label>
                     <input type="text" name="tenDem" class="form-control" />
-                    <div class="error mt-2"><p>${errorTenDem}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorTenDem}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Tên</label>
                     <input type="text" name="ten" class="form-control" />
-                    <div class="error mt-2"><p>${errorTen}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorTen}</p></div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Ngày sinh</label>
                     <input type="date" name="ngaySinh" value="2023-01-01" class="form-control" />
-                    <div class="error mt-2"><p>${errorNgaySinh}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorNgaySinh}</p></div>
                 </div>
                 <div class="col-6">
                     <label>SDT</label>
                     <input type="tel" name="sdt" class="form-control" />
-                    <div class="error mt-2"><p>${errorSDT}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorSDT}</p></div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Địa chỉ</label>
                     <input type="text" name="diaChi" class="form-control" />
-                    <div class="error mt-2"><p>${errorDiaChi}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorDiaChi}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Mật khẩu</label>
                     <input type="password" name="matKhau" class="form-control" />
-                    <div class="error mt-2"><p>${errorMK}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${errorMK}</p></div>
                 </div>
             </div>
             <div class="row mt-3">

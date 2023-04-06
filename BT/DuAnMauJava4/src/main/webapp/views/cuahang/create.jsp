@@ -25,16 +25,20 @@
                 <div class="col-6">
                     <label>Mã</label>
                     <input type="text" name="ma" class="form-control" />
+                    <div class="error mt-2" style="color: red"><p>${checkma}</p></div>
+                    <div class="error mt-2" style="color: red"><p>${trungMa}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Tên</label>
                     <input type="text" name="ten" class="form-control" />
+                    <div class="error mt-2" style="color: red"><p>${checkten}</p></div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-6">
                     <label>Địa Chỉ</label>
                     <input type="text" name="diaChi" class="form-control" />
+                    <div class="error mt-2" style="color: red"><p>${errorDiaChi}</p></div>
                 </div>
                 <div class="col-6">
                     <label>Thành phố</label>

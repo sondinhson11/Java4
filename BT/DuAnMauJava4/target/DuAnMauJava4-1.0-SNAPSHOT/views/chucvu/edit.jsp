@@ -29,7 +29,7 @@
                 <div class="col-6">
                     <label>Tên</label>
                     <input type="text" name="ten" class="form-control"  value="${ cv.ten }" />
-                    <div class="col error mt-2"><p>${checkten}</p></div>
+                    <div class="col error mt-2"  style="color: red"><p>${checkten}</p></div>
                 </div>
             </div>
             <br>

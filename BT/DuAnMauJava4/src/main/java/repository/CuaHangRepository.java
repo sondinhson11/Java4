@@ -2,6 +2,7 @@ package repository;
 
 import domain_model.ChucVuDomain;
 import domain_model.CuaHangDomain;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -65,6 +66,11 @@ public class CuaHangRepository {
         String hql =" SELECT obj FROM CuaHangDomain obj where obj.Ma=?1";
         TypedQuery<CuaHangDomain> query=this.hsession.createQuery(hql,CuaHangDomain.class);
         query.setParameter(1,ma);
-        return  query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (NoResultException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

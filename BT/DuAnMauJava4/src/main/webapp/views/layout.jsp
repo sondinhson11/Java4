@@ -15,7 +15,7 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #192041;color: white">
                 <div class="container">
-                    <a class="navbar-brand" href="#!/">
+                    <a class="navbar-brand" href="/DuAnMauJava4_war_exploded/khachhang/index">
                         <img style="height: 80px" src="/DuAnMauJava4_war_exploded/img/logo.png" alt=""/>
                     </a>
                     <button
